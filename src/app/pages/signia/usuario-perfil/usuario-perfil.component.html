@@ -1,0 +1,75 @@
+<div class="row">
+    <div class="col-md-4">
+        <div class="card ">
+            <div class="card-header ">
+                <h5 class="card-title">Perfiles</h5>
+                <p class="card-category">Seleccione un perfil para visualizar los usuarios</p>
+            </div>
+            <div class="card-body ">
+                <p-table #ptablePerfiles [value]="lstPerfiles" [(selection)]="perfilSelected" [rowHover]="true"
+                    [globalFilterFields]="['nombre']" [scrollable]="true" scrollHeight="400px" [sortOrder]="-1"
+                    sortField="cantidad" selectionMode="single" dataKey="id" (onRowSelect)="onSelect_FilaPerfil()"
+                    styleClass="cssPtable">
+                    <ng-template pTemplate="caption" styleClass="cssEncabezado">
+                        <div class="ui-table-globalfilter-container" style="text-align: right;">
+                            <input pInputText type="text"
+                                (input)="ptablePerfiles.filterGlobal($event.target.value, 'contains')"
+                                placeholder="Buscar" style="width: 20%;" class="cssInputBuscar" />
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr class="cssFontCuerpo">
+                            <th pSortableColumn="id" style="width: 20%;text-align: center;">id&nbsp;<p-sortIcon
+                                    field="id">
+                                </p-sortIcon>
+                            </th>
+                            <th pSortableColumn="nombre">Perfil&nbsp;
+                                <p-sortIcon field="nombre"></p-sortIcon>
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowData>
+                        <tr [pSelectableRow]="rowData" class="cssFontCuerpo">
+                            <td style="width: 20%;text-align: right;">{{rowData.id}}</td>
+                            <td>{{rowData.nombre}}</td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                        <tr style="font-size: 11px;">
+                            <td colspan="2" style="text-align:left">Ningún registro encontrado.</td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="summary">
+                        Se encontraron {{lstPerfiles?.length}} registros
+                    </ng-template>
+                </p-table>
+            </div>
+            <div class="card-footer ">
+                <hr />
+                <div class="stats">
+                    <i class="fa fa-calendar"></i> Actualizado
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="card card-chart">
+            <div class="card-header">
+                <h5 class="card-title">Listado de Usuarios</h5>
+                <p class="card-category">Usuarios según el perfil seleccionado</p>
+            </div>
+            <div class="card-body">
+            </div>
+            <div class="card-footer">
+                <div class="chart-legend">
+                    <i class="fa fa-circle text-info"></i> Tesla Model S
+                    <i class="fa fa-circle text-warning"></i> BMW 5 Series
+                </div>
+                <hr />
+                <div class="card-stats">
+                    <i class="fa fa-check"></i> Data information certified
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
