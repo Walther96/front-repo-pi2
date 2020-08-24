@@ -7,6 +7,7 @@ import { Table } from 'primeng/table';
 import Swal from 'sweetalert2';
 import { screenConstant } from 'app/constants/screenConstant';
 import { notifyConstant } from 'app/constants/notifyconstant';
+import { Usuario } from 'app/server/models/usuario';
 
 @Component({
   selector: 'app-usuario-perfil',
@@ -17,7 +18,10 @@ export class UsuarioPerfilComponent implements OnInit {
 
   @ViewChild('ptablePerfiles') ptablePerfiles: Table;
 
+  perfilSelected: Perfil;
+
   lstPerfiles: Perfil[];
+  lstUsuarios: Usuario[];
 
   constructor(
     private usuarioservice: UsuarioService,
@@ -26,6 +30,7 @@ export class UsuarioPerfilComponent implements OnInit {
 
   ngOnInit(): void {
     this.lstPerfiles = [];
+    this.lstUsuarios = [];
 
     this.cargaData_Perfiles();
   }
@@ -50,5 +55,11 @@ export class UsuarioPerfilComponent implements OnInit {
       }, () => Swal.close()
     );
   }
+
+  onSelect_FilaPerfil() {
+    this.lstUsuarios = [];
+    this.lstUsuarios = this.perfilSelected.usuarios;
+  }
+
 
 }
