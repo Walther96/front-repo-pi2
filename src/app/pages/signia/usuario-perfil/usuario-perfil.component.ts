@@ -19,6 +19,7 @@ export class UsuarioPerfilComponent implements OnInit {
   @ViewChild('ptablePerfiles') ptablePerfiles: Table;
 
   perfilSelected: Perfil;
+  usuarioSelected:Usuario;
 
   lstPerfiles: Perfil[];
   lstUsuarios: Usuario[];
