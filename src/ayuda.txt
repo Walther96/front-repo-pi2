@@ -1,5 +1,22 @@
 
+systemctl status signia-eureka.service
+systemctl status signia-microservicios.service
+systemctl status signia-usuarios
+systemctl status signia-zuul.service
+
+systemctl start signia-eureka.service
+systemctl start signia-microservicios.service
+systemctl start signia-usuarios
+systemctl start signia-zuul.service
+
+
+cd /home/signia/repofrontendsigniaweb
+
 git reset --hard HEAD
 git pull
 
-ng build --prod --base-href /var/www/html/
+ng build --prod --output-path=/var/www/html/
+
+SERVIDOR DIGITALOCEAN Adrián:
+Signia: 
+104.248.60.94
