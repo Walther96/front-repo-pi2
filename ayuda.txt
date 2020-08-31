@@ -37,3 +37,4 @@ ng build --prod --output-path=/var/www/html/
 SERVIDOR DIGITALOCEAN Adrián:
 Signia: 
 104.248.60.94
+http://104.248.60.94/

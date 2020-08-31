@@ -8,7 +8,8 @@
                 <p class="card-category"> Listado de los requerimientos de salida pendientes por aprobar</p>
             </div>
             <div class="card-body">
-                <button pButton pRipple type="button" label="Actualizar búsqueda" class="p-button-rounded" icon="pi pi-refresh" (click)="listarSalidasPorAutorizar()"></button>
+                <button pButton pRipple type="button" label="Actualizar búsqueda" class="p-button-rounded"
+                    icon="pi pi-refresh" (click)="listarSalidasPorAutorizar()"></button>
                 <p-table #ptableSalidas [value]="lstSalidas" [(selection)]="salidaSelected" [rowHover]="true"
                     [globalFilterFields]="['nombreresguardocabina']" [scrollable]="true" scrollHeight="400px"
                     [sortOrder]="1" styleClass="cssPtable">
@@ -83,7 +84,10 @@
                                 {{rowData.empresaresguardo.nombre}}</td>
                             <td width="{{columnWidth.comentarios}}">{{rowData.comentarios}}</td>
                             <td width="{{columnWidth.acciones}}">
-                                <button pButton pRipple type="button" label="Autorizar" class="p-button-rounded" (click)="confirm1(rowData)"></button>
+                                <button pButton pRipple type="button" label="Autorizar" class="p-button-rounded"
+                                    (click)="confirm1(rowData)"></button>
+                                <button pButton pRipple type="button" label="Denegar"
+                                    class="p-button-rounded p-button-danger"></button>
                             </td>
                         </tr>
                     </ng-template>

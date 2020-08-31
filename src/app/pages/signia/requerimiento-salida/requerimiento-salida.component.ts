@@ -41,7 +41,7 @@ export class RequerimientoSalidaComponent implements OnInit {
       empresatransporte_ruc: '20%',
       empresaresguardo_ruc: '10%',
       comentarios: '10%',
-      acciones: '5%'
+      acciones: '15%'
     };
 
     this.lstSalidas = [];
