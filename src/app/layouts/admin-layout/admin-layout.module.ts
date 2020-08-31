@@ -16,8 +16,11 @@ import { UpgradeComponent } from '../../pages/upgrade/upgrade.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UsuarioPerfilComponent } from 'app/pages/signia/usuario-perfil/usuario-perfil.component';
+import { RequerimientoSalidaComponent } from 'app/pages/signia/requerimiento-salida/requerimiento-salida.component';
 
 import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @NgModule({
   imports: [
@@ -25,7 +28,9 @@ import { TableModule } from 'primeng/table';
     RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
     NgbModule,
-    TableModule
+    TableModule,
+    ButtonModule,
+    ConfirmDialogModule
   ],
   declarations: [
     DashboardComponent,
@@ -36,7 +41,8 @@ import { TableModule } from 'primeng/table';
     IconsComponent,
     MapsComponent,
     NotificationsComponent,
-    UsuarioPerfilComponent
+    UsuarioPerfilComponent,
+    RequerimientoSalidaComponent
   ]
 })
 

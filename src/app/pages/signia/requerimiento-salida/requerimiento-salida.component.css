@@ -1,0 +1,17 @@
+:host ::ng-deep .cssPtable *{
+    font-size: 12px;
+}
+
+:host ::ng-deep  .p-datatable .p-datatable-header {
+    background: none !important;
+    border: none !important;
+    padding: 4px;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-thead > tr > th{
+    padding: 8px;;
+}
+
+.cssFontCuerpo  > td{
+    padding: 8px;
+}

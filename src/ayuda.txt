@@ -1,12 +1,29 @@
 
+cd /etc/systemd/system
+sudo nano signia-eureka.service
+sudo nano signia-microservicios.service
+sudo nano signia-reqsalida.service
+sudo nano signia-usuarios.service
+sudo nano signia-zuul.service
+
+systemctl daemon-reload
+
 systemctl status signia-eureka.service
 systemctl status signia-microservicios.service
-systemctl status signia-usuarios
+systemctl status signia-reqsalida.service
+systemctl status signia-usuarios.service
 systemctl status signia-zuul.service
+
+systemctl stop signia-eureka.service
+systemctl stop signia-microservicios.service
+systemctl stop signia-reqsalida.service
+systemctl stop signia-usuarios.service
+systemctl stop signia-zuul.service
 
 systemctl start signia-eureka.service
 systemctl start signia-microservicios.service
-systemctl start signia-usuarios
+systemctl start signia-reqsalida.service
+systemctl start signia-usuarios.service
 systemctl start signia-zuul.service
 
 

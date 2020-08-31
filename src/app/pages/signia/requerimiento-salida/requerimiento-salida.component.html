@@ -1,0 +1,102 @@
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title"> Requerimientos de salida</h4>
+                <p class="card-category"> Listado de los requerimientos de salida pendientes por aprobar</p>
+            </div>
+            <div class="card-body">
+                <button pButton pRipple type="button" label="Actualizar búsqueda" class="p-button-rounded" icon="pi pi-refresh" (click)="listarSalidasPorAutorizar()"></button>
+                <p-table #ptableSalidas [value]="lstSalidas" [(selection)]="salidaSelected" [rowHover]="true"
+                    [globalFilterFields]="['nombreresguardocabina']" [scrollable]="true" scrollHeight="400px"
+                    [sortOrder]="1" styleClass="cssPtable">
+                    <ng-template pTemplate="caption" styleClass="cssEncabezado">
+                        <div class="ui-table-globalfilter-container" style="text-align: right;">
+                            <input pInputText type="text"
+                                (input)="ptableSalidas.filterGlobal($event.target.value, 'contains')"
+                                placeholder="Buscar" style="width: 20%;" class="cssInputBuscar" />
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr class="cssFontCuerpo">
+                            <th pSortableColumn="id" width="{{columnWidth.id}}">
+                                Id
+                                <p-sortIcon field="id">
+                                </p-sortIcon>
+                            </th>
+                            <th pSortableColumn="rowData.basepartida.nombre" width="{{columnWidth.basepartida}}">
+                                Base Partida
+                                <p-sortIcon field="rowData.basepartida.nombre">
+                                </p-sortIcon>
+                            </th>
+                            <th pSortableColumn="placa" width="{{columnWidth.placa}}">
+                                Placa
+                                <p-sortIcon field="placa">
+                                </p-sortIcon>
+                            </th>
+                            <th width="{{columnWidth.nombreconductor}}">
+                                Conductor
+                            </th>
+                            <th pSortableColumn="destino.ruc" width="{{columnWidth.destino_ruc}}">
+                                Destino
+                                <p-sortIcon field="destino.ruc">
+                                </p-sortIcon>
+                            </th>
+                            <th pSortableColumn="cantidadbultos" width="{{columnWidth.cantidadbultos}}">
+                                Cant Bultos
+                                <p-sortIcon field="cantidadbultos">
+                                </p-sortIcon>
+                            </th>
+                            <th pSortableColumn="empresatransporte.ruc" width="{{columnWidth.empresatransporte_ruc}}">
+                                Emp Transp
+                                <p-sortIcon field="empresatransporte.ruc">
+                                </p-sortIcon>
+                            </th>
+                            <th pSortableColumn="empresaresguardo.ruc" width="{{columnWidth.empresaresguardo_ruc}}">
+                                Emp Resguardo
+                                <p-sortIcon field="empresaresguardo.ruc">
+                                </p-sortIcon>
+                            </th>
+                            <th pSortableColumn="comentarios" width="{{columnWidth.comentarios}}">
+                                Comentarios
+                                <p-sortIcon field="comentarios">
+                                </p-sortIcon>
+                            </th>
+                            <th width="{{columnWidth.acciones}}">&nbsp;</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowData>
+                        <tr [pSelectableRow]="rowData" class="cssFontCuerpo">
+                            <td width="{{columnWidth.id}}">{{rowData.id}}</td>
+                            <td width="{{columnWidth.basepartida}}">{{rowData.basepartida.nombre}}</td>
+                            <td width="{{columnWidth.placa}}">{{rowData.placa}}</td>
+                            <td width="{{columnWidth.nombreconductor}}">{{rowData.conductor.dni}} -
+                                {{rowData.conductor.apellidos}},&nbsp;{{rowData.conductor.nombres}}</td>
+                            <td width="{{columnWidth.destino_ruc}}">{{rowData.destino.ruc}} - {{rowData.destino.nombre}}
+                            </td>
+                            <td width="{{columnWidth.cantidadbultos}}">{{rowData.cantidadbultos}}</td>
+                            <td width="{{columnWidth.empresatransporte_ruc}}">{{rowData.empresatransporte.ruc}} -
+                                {{rowData.empresatransporte.nombre}}</td>
+                            <td width="{{columnWidth.empresaresguardo_ruc}}">{{rowData.empresaresguardo.ruc}} -
+                                {{rowData.empresaresguardo.nombre}}</td>
+                            <td width="{{columnWidth.comentarios}}">{{rowData.comentarios}}</td>
+                            <td width="{{columnWidth.acciones}}">
+                                <button pButton pRipple type="button" label="Autorizar" class="p-button-rounded" (click)="confirm1(rowData)"></button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                        <tr style="font-size: 11px;">
+                            <td colspan="2" style="text-align:left">Ningún registro encontrado.</td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="summary">
+                        Se encontraron {{lstSalidas?.length}} registros
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+</div>
