@@ -1,7 +1,7 @@
 <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-6">
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title"> Requerimientos de salida</h4>
@@ -12,7 +12,7 @@
                     icon="pi pi-refresh" (click)="listarSalidasPorAutorizar()"></button>
                 <p-table #ptableSalidas [value]="lstSalidas" [(selection)]="salidaSelected" [rowHover]="true"
                     [globalFilterFields]="['nombreresguardocabina']" [scrollable]="true" scrollHeight="400px"
-                    [sortOrder]="1" styleClass="cssPtable">
+                    [sortOrder]="1" styleClass="cssPtable" selectionMode="single" dataKey="id">
                     <ng-template pTemplate="caption" styleClass="cssEncabezado">
                         <div class="ui-table-globalfilter-container" style="text-align: right;">
                             <input pInputText type="text"
@@ -32,63 +32,31 @@
                                 <p-sortIcon field="rowData.basepartida.nombre">
                                 </p-sortIcon>
                             </th>
-                            <th pSortableColumn="placa" width="{{columnWidth.placa}}">
-                                Placa
-                                <p-sortIcon field="placa">
-                                </p-sortIcon>
-                            </th>
-                            <th width="{{columnWidth.nombreconductor}}">
-                                Conductor
-                            </th>
                             <th pSortableColumn="destino.ruc" width="{{columnWidth.destino_ruc}}">
                                 Destino
                                 <p-sortIcon field="destino.ruc">
                                 </p-sortIcon>
                             </th>
-                            <th pSortableColumn="cantidadbultos" width="{{columnWidth.cantidadbultos}}">
-                                Cant Bultos
-                                <p-sortIcon field="cantidadbultos">
+                            <th pSortableColumn="hojaruta" width="{{columnWidth.hojaruta}}">
+                                Hoja de ruta
+                                <p-sortIcon field="hojaruta">
                                 </p-sortIcon>
                             </th>
-                            <th pSortableColumn="empresatransporte.ruc" width="{{columnWidth.empresatransporte_ruc}}">
-                                Emp Transp
-                                <p-sortIcon field="empresatransporte.ruc">
+                            <th pSortableColumn="placa" width="{{columnWidth.placa}}">
+                                Placa
+                                <p-sortIcon field="placa">
                                 </p-sortIcon>
                             </th>
-                            <th pSortableColumn="empresaresguardo.ruc" width="{{columnWidth.empresaresguardo_ruc}}">
-                                Emp Resguardo
-                                <p-sortIcon field="empresaresguardo.ruc">
-                                </p-sortIcon>
-                            </th>
-                            <th pSortableColumn="comentarios" width="{{columnWidth.comentarios}}">
-                                Comentarios
-                                <p-sortIcon field="comentarios">
-                                </p-sortIcon>
-                            </th>
-                            <th width="{{columnWidth.acciones}}">&nbsp;</th>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-rowData>
                         <tr [pSelectableRow]="rowData" class="cssFontCuerpo">
                             <td width="{{columnWidth.id}}">{{rowData.id}}</td>
                             <td width="{{columnWidth.basepartida}}">{{rowData.basepartida.nombre}}</td>
-                            <td width="{{columnWidth.placa}}">{{rowData.placa}}</td>
-                            <td width="{{columnWidth.nombreconductor}}">{{rowData.conductor.dni}} -
-                                {{rowData.conductor.apellidos}},&nbsp;{{rowData.conductor.nombres}}</td>
                             <td width="{{columnWidth.destino_ruc}}">{{rowData.destino.ruc}} - {{rowData.destino.nombre}}
                             </td>
-                            <td width="{{columnWidth.cantidadbultos}}">{{rowData.cantidadbultos}}</td>
-                            <td width="{{columnWidth.empresatransporte_ruc}}">{{rowData.empresatransporte.ruc}} -
-                                {{rowData.empresatransporte.nombre}}</td>
-                            <td width="{{columnWidth.empresaresguardo_ruc}}">{{rowData.empresaresguardo.ruc}} -
-                                {{rowData.empresaresguardo.nombre}}</td>
-                            <td width="{{columnWidth.comentarios}}">{{rowData.comentarios}}</td>
-                            <td width="{{columnWidth.acciones}}">
-                                <button pButton pRipple type="button" label="Autorizar" class="p-button-rounded"
-                                    (click)="confirm1(rowData)"></button>
-                                <button pButton pRipple type="button" label="Denegar"
-                                    class="p-button-rounded p-button-danger"></button>
-                            </td>
+                            <td width="{{columnWidth.hojaruta}}">{{rowData.hojaruta}}</td>
+                            <td width="{{columnWidth.placa}}">{{rowData.placa}}</td>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="emptymessage">
@@ -100,6 +68,132 @@
                         Se encontraron {{lstSalidas?.length}} registros
                     </ng-template>
                 </p-table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title"> Detalle de Requerimiento de Salida</h4>
+                <p class="card-category"> En este detalle puede Autorizar o Denegar el requerimiento registrado.</p>
+            </div>
+            <div class="card-body">
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col">
+                        <label for="id">Id</label>
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-key"></i>
+                            <input id="id" pInputText type="text" [(ngModel)]="salidaSelected && salidaSelected.id"
+                                [disabled]="disabled">
+                        </span>
+                    </div>
+                    <div class="p-field p-col">
+                        <label for="origen">Origen</label>
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-home"></i>
+                            <input id="origen" pInputText type="text"
+                                [(ngModel)]="salidaSelected && salidaSelected.basepartida.nombre" [disabled]="disabled">
+                        </span>
+
+                    </div>
+                    <div class="p-field p-col">
+                        <label for="destino">Destino</label>
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-map-marker"></i>
+                            <input id="destino" pInputText type="text"
+                                [(ngModel)]="salidaSelected && salidaSelected.destino.nombre" [disabled]="disabled">
+                        </span>
+
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <!-- Segunda Linea -->
+                    <div class="p-field p-col">
+                        <label for="id">Hoja de ruta</label>
+                        <input id="id" pInputText type="text" placeholder="hoja de ruta"
+                            [(ngModel)]="salidaSelected && salidaSelected.hojaruta" [disabled]="disabled">
+                    </div>
+                    <div class="p-field p-col">
+                        <label for="placa">Placa</label>
+                        <input id="placa" pInputText type="text" placeholder="placa"
+                            [(ngModel)]="salidaSelected && salidaSelected.placa" [disabled]="disabled">
+                    </div>
+                    <div class="p-field p-col">
+                        <label for="bultos">Cantidad de bultos</label>
+                        <input id="bultos" pInputText type="text" placeholder="cant bultos"
+                            [(ngModel)]="salidaSelected && salidaSelected.cantidadbultos" [disabled]="disabled">
+                    </div>
+
+                </div>
+                <hr />
+                <h5>Personal</h5>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col">
+                        <label for="conductor">Conductor</label>
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-user"></i>
+                            <input id="conductor" type="text" pInputText
+                                [(ngModel)]="salidaSelected && salidaSelected.dniconductor">
+                        </span>
+
+                    </div>
+                    <div class="p-field p-col">
+                        <label for="aux1">Auxiliar 1</label>
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-user"></i>
+                            <input id="aux1" type="text" pInputText
+                                [(ngModel)]="salidaSelected && salidaSelected.dniauxiliar1">
+                        </span>
+
+                    </div>
+                    <div class="p-field p-col">
+                        <label for="aux2">Auxiliar 2</label>
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-user"></i>
+                            <input id="aux2" type="text" pInputText
+                                [(ngModel)]="salidaSelected && salidaSelected.dniauxiliar2">
+                        </span>
+
+                    </div>
+                </div>
+                <hr />
+                <h5>Resguardo</h5>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col p-md-8">
+                        <label for="rucempresaresguardo">Empresa de resguardo (ruc)</label>
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-paperclip"></i>
+                            <input id="rucempresaresguardo" pInputText type="text" placeholder="ruc empresa resguardo"
+                                [(ngModel)]="salidaSelected && salidaSelected.rucempresaresguardo"
+                                [disabled]="disabled">
+                        </span>
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col">
+                        <label for="cabina">Cabina</label>
+                        <input id="cabina" type="text" pInputText
+                            [(ngModel)]="salidaSelected && salidaSelected.nombreresguardocabina">
+                    </div>
+                    <div class="p-field p-col">
+                        <label for="escolta">Escolta</label>
+                        <input id="escolta" type="text" pInputText
+                            [(ngModel)]="salidaSelected && salidaSelected.nombreresguardoescolta">
+                    </div>
+                    <div class="p-field p-col">
+                        <label for="copiloto">Copiloto</label>
+                        <input id="copiloto" type="text" pInputText
+                            [(ngModel)]="salidaSelected && salidaSelected.nombreresguardocopiloto">
+                    </div>
+                </div>
+                <hr />
+                <span style="padding-left: 32%;">
+                    <button pButton pRipple label="Autorizar" icon="pi pi-check" class="p-button-rounded"
+                        (click)="click_btnAutorizar()"></button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <button pButton pRipple label="&nbsp;&nbsp;&nbsp;Denegar&nbsp;&nbsp;&nbsp;" icon="pi pi-trash"
+                        class="p-button-rounded p-button-danger" (click)="click_btnDenegar()"></button>
+                </span>
             </div>
         </div>
     </div>

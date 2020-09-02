@@ -8,6 +8,7 @@ export class RequerimientoSalida {
     id: number;
     basepartida: BasePartida;
     placa: string;
+    hojaruta: string;
     conductor: Empleado;
     auxiliar1: Empleado;
     auxiliar2: Empleado;
@@ -19,4 +20,10 @@ export class RequerimientoSalida {
     nombreresguardoescolta: string;
     nombreresguardocopiloto: string;
     comentarios: string;
+
+    dniconductor: string;
+    dniauxiliar1: string;
+    dniauxiliar2: string;
+
+    rucempresaresguardo: string;
 }

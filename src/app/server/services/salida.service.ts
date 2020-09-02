@@ -18,7 +18,11 @@ export class SalidaService {
     }
 
     autorizar(id: number) {
-        return this.http.put(environment.apiurl + "reqsalida/" + id + "/autorizar", null);
+        return this.http.post(environment.apiurl + "reqsalida/" + id + "/autorizar", null);
+    }
+
+    denegar(id: number) {
+        return this.http.post(environment.apiurl + "reqsalida/" + id + "/denegar", null);
     }
 
 }

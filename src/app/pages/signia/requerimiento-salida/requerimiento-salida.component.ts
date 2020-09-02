@@ -34,14 +34,9 @@ export class RequerimientoSalidaComponent implements OnInit {
     {
       id: '5%',
       basepartida: '6%',
-      placa: '5%',
-      nombreconductor: '15%',
       destino_ruc: '20%',
-      cantidadbultos: '5%',
-      empresatransporte_ruc: '20%',
-      empresaresguardo_ruc: '10%',
-      comentarios: '10%',
-      acciones: '15%'
+      hojaruta: '5%',
+      placa: '5%'
     };
 
     this.lstSalidas = [];
@@ -67,13 +62,22 @@ export class RequerimientoSalidaComponent implements OnInit {
     );
   }
 
-  confirm1(objsalida: RequerimientoSalida) {
+  click_btnAutorizar() {
+    if (this.salidaSelected == undefined) {
+      this.toastr.warning(
+        notifyConstant.messages.debeSeleccionarRegistro,
+        notifyConstant.titleWarning,
+        notifyConstant.optionsWarning
+      );
+      return false;
+    }
+
     this.confirmationService.confirm({
       message: 'Seguro de proceder con la autorización de Requerimiento de Salida?',
       header: 'Confirmar Salida',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.salidaservicio.autorizar(objsalida.id).subscribe(
+        this.salidaservicio.autorizar(this.salidaSelected.id).subscribe(
           (data: any) => {
             Swal.close();
             this.toastr.success(
@@ -81,6 +85,49 @@ export class RequerimientoSalidaComponent implements OnInit {
               notifyConstant.titleSuccesss,
               notifyConstant.optionsSuccess
             );
+            this.salidaSelected = undefined;
+            this.listarSalidasPorAutorizar();
+          }, (err) => {
+            Swal.close();
+            this.toastr.warning(
+              err.error.message,
+              notifyConstant.titleError,
+              notifyConstant.optionsError
+            );
+          }
+        );
+      },
+      reject: () => {
+        //this.msgs = [{ severity: 'info', summary: 'Rejected', detail: 'You have rejected' }];
+      }
+    });
+  }
+
+  click_btnDenegar() {
+
+    if (this.salidaSelected == undefined) {
+      this.toastr.warning(
+        notifyConstant.messages.debeSeleccionarRegistro,
+        notifyConstant.titleWarning,
+        notifyConstant.optionsWarning
+      );
+      return false;
+    }
+
+    this.confirmationService.confirm({
+      message: 'Va a Denegar la solicitud de Requerimiento de Salida, desea continuar?',
+      header: 'Anular Requerimiento de Salida',
+      icon: 'pi pi-ban',
+      accept: () => {
+        this.salidaservicio.denegar(this.salidaSelected.id).subscribe(
+          (data: any) => {
+            Swal.close();
+            this.toastr.success(
+              notifyConstant.messages.success,
+              notifyConstant.titleSuccesss,
+              notifyConstant.optionsSuccess
+            );
+            this.salidaSelected = undefined;
             this.listarSalidasPorAutorizar();
           }, (err) => {
             Swal.close();

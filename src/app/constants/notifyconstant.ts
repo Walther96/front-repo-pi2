@@ -44,7 +44,8 @@ export const notifyConstant = {
     messages: {
         success: '<span data-notify="icon" class="nc-icon nc-bell-55"></span><span data-notify="message">Correcto <b>registro/actualización</b> - se realizó de forma satisfactoria.</span>',
         sinregistrosparaprocesar: '<span data-notify="icon" class="nc-icon nc-bell-55"></span><span data-notify="message">Alerta <b>Sin registros para procesar</b> - No se cuenta con registros para procesar, por favor seleccione y/o especifique los datos que desa sean procesados.</span>',
-        desdeMayorQueHasta: '<span data-notify="icon" class="nc-icon nc-bell-55"></span><span data-notify="message">Alerta <b>Periodos incorrectos</b> - El periodo de inicio no puede ser mayor que el periodo fin</span>'
+        desdeMayorQueHasta: '<span data-notify="icon" class="nc-icon nc-bell-55"></span><span data-notify="message">Alerta <b>Periodos incorrectos</b> - El periodo de inicio no puede ser mayor que el periodo fin</span>',
+        debeSeleccionarRegistro: '<span data-notify="icon" class="nc-icon nc-bell-55"></span><span data-notify="message">Alerta <b>debe serleccionar un registro</b> - para proceder con el tratamiento respecivo..</span>',
     }
 
 }

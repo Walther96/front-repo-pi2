@@ -21,6 +21,7 @@ import { RequerimientoSalidaComponent } from 'app/pages/signia/requerimiento-sal
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { InputTextModule } from 'primeng/inputtext';
 
 @NgModule({
   imports: [
@@ -30,7 +31,8 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     NgbModule,
     TableModule,
     ButtonModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    InputTextModule
   ],
   declarations: [
     DashboardComponent,
