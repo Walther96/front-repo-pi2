@@ -6,6 +6,9 @@ import Swal from 'sweetalert2';
 import { screenConstant } from 'app/constants/screenConstant';
 import { notifyConstant } from 'app/constants/notifyconstant';
 
+declare var jsPDF: any;
+declare var $: any;
+
 @Component({
   selector: 'app-historico-salidas',
   templateUrl: './historico-salidas.component.html',
@@ -22,6 +25,8 @@ export class HistoricoSalidasComponent implements OnInit {
   lstSalidas: any[];
   cols: any[];
   exportColumns: any[];
+
+
 
   constructor(
     private toastr: ToastrService,
@@ -54,9 +59,11 @@ export class HistoricoSalidasComponent implements OnInit {
 
     this.cols = [
       { field: 'id', header: 'Id' },
-      { field: 'basepartida', header: 'Base partida' },
+      { field: 'base', header: 'Base partida' },
       { field: 'destino', header: 'Destino' },
-      { field: 'placa', header: 'Placa' }
+      { field: 'placa', header: 'Placa' },
+      { field: 'hojaruta', header: 'Hoja de Ruta' },
+      { field: 'estado', header: 'Estado' },
     ];
     this.exportColumns = this.cols.map(col => ({ title: col.header, dataKey: col.field }));
 
@@ -86,22 +93,52 @@ export class HistoricoSalidasComponent implements OnInit {
   }
 
   exportPdf() {
+
+    let lstPdf: any[];
+    lstPdf = [];
+    this.lstSalidas.forEach(element => {
+      let item = {
+        id: element.id,
+        base: element.basepartida.nombre,
+        destino: element.destino.nombre,
+        placa: element.placa,
+        hojaruta: element.hojaruta,
+        estado: element.descripcionestado
+      };
+      lstPdf.push(item);
+    });
+
     import("jspdf").then(jsPDF => {
       import("jspdf-autotable").then(x => {
         const doc = new jsPDF.default(0, 0);
 
-        doc.autoTable(this.exportColumns, this.lstSalidas);
-        doc.save('products.pdf');
+        doc.autoTable(this.exportColumns, lstPdf);
+        doc.save('Requerimientos_salida_export.pdf');
       })
     })
   }
 
   exportExcel() {
+
+    let lstExcel: any[];
+    lstExcel = [];
+    this.lstSalidas.forEach(element => {
+      let item = {
+        id: element.id,
+        base: element.basepartida.nombre,
+        destino: element.destino.nombre,
+        placa: element.placa,
+        hojaruta: element.hojaruta,
+        estado: element.descripcionestado
+      };
+      lstExcel.push(item);
+    });
+
     import("xlsx").then(xlsx => {
-      const worksheet = xlsx.utils.json_to_sheet(this.lstSalidas);
+      const worksheet = xlsx.utils.json_to_sheet(lstExcel);
       const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
       const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
-      this.saveAsExcelFile(excelBuffer, "products");
+      this.saveAsExcelFile(excelBuffer, "Requerimientos_salida");
     });
   }
 
