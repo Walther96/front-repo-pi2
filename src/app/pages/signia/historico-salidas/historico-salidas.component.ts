@@ -15,6 +15,8 @@ export class HistoricoSalidasComponent implements OnInit {
 
   columnWidth: any;
   salidaSelected: RequerimientoSalida;
+  fechainicio: Date;
+  fechafin: Date;
 
   rangeDates: Date[];
   lstSalidas: any[];
@@ -40,8 +42,13 @@ export class HistoricoSalidasComponent implements OnInit {
 
     this.lstSalidas = [];
     this.rangeDates = [];
-    this.rangeDates.push(new Date());
-    this.rangeDates.push(new Date());
+
+    this.fechafin = new Date();
+    this.fechainicio = new Date();
+    this.fechainicio.setDate(this.fechafin.getDate() - 3);
+
+    this.rangeDates.push(this.fechainicio);
+    this.rangeDates.push(this.fechafin);
 
     this.cargarListaSalidas();
 
