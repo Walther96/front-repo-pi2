@@ -14,6 +14,7 @@ import { notifyConstant } from 'app/constants/notifyconstant';
 export class HistoricoSalidasComponent implements OnInit {
 
   columnWidth: any;
+  salidaSelected: RequerimientoSalida;
 
   rangeDates: Date[];
   lstSalidas: any[];
@@ -81,7 +82,7 @@ export class HistoricoSalidasComponent implements OnInit {
     import("jspdf").then(jsPDF => {
       import("jspdf-autotable").then(x => {
         const doc = new jsPDF.default(0, 0);
-        
+
         doc.autoTable(this.exportColumns, this.lstSalidas);
         doc.save('products.pdf');
       })
