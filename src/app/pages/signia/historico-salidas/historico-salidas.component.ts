@@ -99,8 +99,8 @@ export class HistoricoSalidasComponent implements OnInit {
     this.lstSalidas.forEach(element => {
       let item = {
         id: element.id,
-        base: element.basepartida.nombre,
-        destino: element.destino.nombre,
+        base: element.basepartida.nombre + ' ' + element.detallebase,
+        destino: element.destino.nombre + ' ' + element.detalledestino,
         placa: element.placa,
         hojaruta: element.hojaruta,
         estado: element.descripcionestado
