@@ -17,6 +17,10 @@ export class SalidaService {
         return this.http.get<any[]>(environment.apiurl + "reqsalida/porautorizar");
     }
 
+    findPorFechaCreacion(desde: string, hasta: string) {
+        return this.http.get<any[]>(environment.apiurl + "reqsalida/" + desde + "/" + hasta);
+    }
+
     autorizar(id: number) {
         return this.http.post(environment.apiurl + "reqsalida/" + id + "/autorizar", null);
     }

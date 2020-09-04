@@ -17,11 +17,13 @@ import { UpgradeComponent } from '../../pages/upgrade/upgrade.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UsuarioPerfilComponent } from 'app/pages/signia/usuario-perfil/usuario-perfil.component';
 import { RequerimientoSalidaComponent } from 'app/pages/signia/requerimiento-salida/requerimiento-salida.component';
+import { HistoricoSalidasComponent } from 'app/pages/signia/historico-salidas/historico-salidas.component';
 
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { InputTextModule } from 'primeng/inputtext';
+import { CalendarModule } from 'primeng/calendar';
 
 @NgModule({
   imports: [
@@ -32,7 +34,8 @@ import { InputTextModule } from 'primeng/inputtext';
     TableModule,
     ButtonModule,
     ConfirmDialogModule,
-    InputTextModule
+    InputTextModule,
+    CalendarModule
   ],
   declarations: [
     DashboardComponent,
@@ -44,7 +47,8 @@ import { InputTextModule } from 'primeng/inputtext';
     MapsComponent,
     NotificationsComponent,
     UsuarioPerfilComponent,
-    RequerimientoSalidaComponent
+    RequerimientoSalidaComponent,
+    HistoricoSalidasComponent
   ]
 })
 

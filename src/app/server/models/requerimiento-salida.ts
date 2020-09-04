@@ -26,4 +26,10 @@ export class RequerimientoSalida {
     dniauxiliar2: string;
 
     rucempresaresguardo: string;
+
+    detallebase: string;
+    detalledestino: string;
+
+    fechacreacion: Date;
+    fechacierre: Date;
 }

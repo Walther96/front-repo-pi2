@@ -10,6 +10,7 @@ import { NotificationsComponent } from '../../pages/notifications/notifications.
 import { UpgradeComponent } from '../../pages/upgrade/upgrade.component';
 import { UsuarioPerfilComponent } from 'app/pages/signia/usuario-perfil/usuario-perfil.component';
 import { RequerimientoSalidaComponent } from 'app/pages/signia/requerimiento-salida/requerimiento-salida.component';
+import { HistoricoSalidasComponent } from 'app/pages/signia/historico-salidas/historico-salidas.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard', component: DashboardComponent },
@@ -21,5 +22,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'notifications', component: NotificationsComponent },
     { path: 'upgrade', component: UpgradeComponent },
     { path: 'usuarioperfil', component: UsuarioPerfilComponent },
-    { path: 'requerimientosalida', component: RequerimientoSalidaComponent }
+    { path: 'requerimientosalida', component: RequerimientoSalidaComponent },
+    { path: 'historicosalidas', component: HistoricoSalidasComponent }
 ];

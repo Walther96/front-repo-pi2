@@ -1,4 +1,6 @@
 
+ssh root@104.248.60.94
+
 cd /etc/systemd/system
 sudo nano signia-eureka.service
 sudo nano signia-microservicios.service
@@ -26,6 +28,18 @@ systemctl start signia-reqsalida.service
 systemctl start signia-usuarios.service
 systemctl start signia-zuul.service
 
+systemctl restart signia-eureka.service
+systemctl restart signia-microservicios.service
+systemctl restart signia-reqsalida.service
+systemctl restart signia-usuarios.service
+systemctl restart signia-zuul.service
+
+### Para ver el log de cada servicio ####
+journalctl -u signia-eureka.service
+journalctl -u signia-microservicios.service
+journalctl -u signia-reqsalida.service
+journalctl -u signia-usuarios.service
+journalctl -u signia-zuul.service
 
 cd /home/signia/repofrontendsigniaweb
 

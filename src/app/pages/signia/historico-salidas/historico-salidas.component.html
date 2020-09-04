@@ -1,0 +1,142 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title"> Historial de Salidas</h4>
+                <p class="card-category"> Listado de los requerimientos de salida</p>
+            </div>
+            <div class="card-body">
+                <div class="p-field p-col-12 p-md-4">
+                    <label for="range">Range</label>
+                    <p-calendar [(ngModel)]="rangeDates" selectionMode="range" [readonlyInput]="true" inputId="range">
+                    </p-calendar>
+                </div>
+                <button pButton pRipple type="button" label="Actualizar búsqueda" class="p-button-rounded"
+                    icon="pi pi-refresh" (click)="cargarListaSalidas()"></button>
+                <p-table #ptableSalidas [value]="lstSalidas" [(selection)]="salidaSelected" [rowHover]="true"
+                    [globalFilterFields]="['nombreresguardocabina']" [scrollable]="true" scrollHeight="400px"
+                    [sortOrder]="1" styleClass="cssPtable" dataKey="id">
+                    <ng-template pTemplate="caption" styleClass="cssEncabezado">
+                        <div class="ui-table-globalfilter-container" style="text-align: right;">
+                            <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()"
+                                class="p-button-success p-mr-2" pTooltip="XLS" tooltipPosition="bottom"></button>
+                            <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()"
+                                class="p-button-warning p-mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
+                                
+                            <input pInputText type="text"
+                                (input)="ptableSalidas.filterGlobal($event.target.value, 'contains')"
+                                placeholder="Buscar" style="width: 20%;" class="cssInputBuscar" />
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr class="cssFontCuerpo">
+                            <th width="{{columnWidth.expand}}"></th>
+                            <th pSortableColumn="id" width="{{columnWidth.id}}">
+                                Id
+                                <p-sortIcon field="id">
+                                </p-sortIcon>
+                            </th>
+                            <th pSortableColumn="rowData.basepartida.nombre" width="{{columnWidth.basepartida}}">
+                                Base Partida
+                                <p-sortIcon field="rowData.basepartida.nombre">
+                                </p-sortIcon>
+                            </th>
+                            <th pSortableColumn="destino.ruc" width="{{columnWidth.destino_ruc}}">
+                                Destino
+                                <p-sortIcon field="destino.ruc">
+                                </p-sortIcon>
+                            </th>
+                            <th pSortableColumn="placa" width="{{columnWidth.placa}}">
+                                Placa
+                                <p-sortIcon field="placa">
+                                </p-sortIcon>
+                            </th>
+                            <th pSortableColumn="hojaruta" width="{{columnWidth.hojaruta}}">
+                                Hoja de ruta
+                                <p-sortIcon field="hojaruta">
+                                </p-sortIcon>
+                            </th>
+                            <th pSortableColumn="estado" width="{{columnWidth.estado}}">
+                                Estado
+                                <p-sortIcon field="estado">
+                                </p-sortIcon>
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowData let-expanded="expanded">
+                        <tr [pSelectableRow]="rowData" class="cssFontCuerpo">
+                            <td width="{{columnWidth.expand}}">
+                                <button type="button" pButton pRipple [pRowToggler]="rowData"
+                                    class="p-button-text p-button-rounded p-button-plain"
+                                    [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                            </td>
+                            <td width="{{columnWidth.id}}">{{rowData.id}}</td>
+                            <td width="{{columnWidth.basepartida}}">{{rowData.basepartida.nombre}}</td>
+                            <td width="{{columnWidth.destino_ruc}}">{{rowData.destino.ruc}} - {{rowData.destino.nombre}}
+                            </td>
+                            <td width="{{columnWidth.placa}}">{{rowData.placa}}</td>
+                            <td width="{{columnWidth.hojaruta}}">{{rowData.hojaruta}}</td>
+                            <td width="{{columnWidth.estado}}" style="text-align: center;">
+                                <span
+                                    [class]="'p-tag p-tag-rounded ' + (rowData.estado==1?'':(rowData.estado==2?'p-tag-success':'p-tag-danger'))">{{rowData.descripcionestado}}</span>
+                            </td>
+                        </tr>
+                    </ng-template>
+
+                    <ng-template pTemplate="rowexpansion" let-rowData>
+                        <tr>
+                            <td colspan="3">
+                                <div class="p-p-3">
+                                    Conductor:
+                                    {{rowData.dniconductor}}
+                                </div>
+                                <div class="p-p-3">
+                                    Cant. Bultos:
+                                    {{rowData.cantidadbultos}}
+                                </div>
+                            </td>
+                            <td colspan="2">
+                                <div class="p-p-3">
+                                    Resguardo:
+                                    {{rowData.rucempresaresguardo}}
+                                </div>
+                                <div class="p-p-3">
+                                    Resguardo cabina:
+                                    {{rowData.nombreresguardocabina}}
+                                </div>
+                                <div class="p-p-3">
+                                    Resguardo copiloto:
+                                    {{rowData.nombreresguardocopiloto}}
+                                </div>
+                                <div class="p-p-3">
+                                    Resguardo escolta:
+                                    {{rowData.nombreresguardoescolta}}
+                                </div>
+
+                            </td>
+                            <td colspan="2">
+                                <div class="p-p-3">
+                                    Fecha de registro:
+                                    {{rowData.fechacreacion | date:'dd/MM/yyyy HH:mm' }}
+                                </div>
+                                <div class="p-p-3">
+                                    Fecha de aprobación/rechazo:
+                                    {{rowData.fechacierre | date:'dd/MM/yyyy HH:mm' }}
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+
+                    <ng-template pTemplate="emptymessage">
+                        <tr style="font-size: 11px;">
+                            <td colspan="2" style="text-align:left">Ningún registro encontrado.</td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="summary">
+                        Se encontraron {{lstSalidas?.length}} registros
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+</div>
