@@ -1,4 +1,5 @@
 import { Perfil } from './perfil';
+import { BasePartida } from './base-partida';
 
 export class Usuario {
     id: number;
@@ -8,4 +9,5 @@ export class Usuario {
     apellidos: string;
 
     perfil: Perfil;
+    base: BasePartida;
 }

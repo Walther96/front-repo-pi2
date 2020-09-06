@@ -59,9 +59,16 @@
                 <p class="card-category">Usuarios según el perfil seleccionado</p>
             </div>
             <div class="card-body">
+                <button pButton pRipple type="button" label="Nuevo usuario" class="p-button-rounded" icon="pi pi-plus"
+                    (click)="click_btnNuevoUsuario()"></button>
+                &nbsp;
+                &nbsp;
+                <button pButton pRipple type="button" label="Editar usuario" class="p-button-rounded p-button-success"
+                    icon="pi pi-pencil" (click)="click_btnEditarUsuario()"></button>
                 <p-table #ptableUsuario [value]="lstUsuarios" [(selection)]="usuarioSelected" [rowHover]="true"
-                    [globalFilterFields]="['nombres','apellidos','dni','usuario']" [scrollable]="true" scrollHeight="400px" [sortOrder]="1"
-                    sortField="usuario" styleClass="cssPtable">
+                    [globalFilterFields]="['nombres','apellidos','dni','usuario']" [scrollable]="true"
+                    scrollHeight="400px" [sortOrder]="1" sortField="usuario" styleClass="cssPtable"
+                    selectionMode="single" dataKey="id">
                     <ng-template pTemplate="caption" styleClass="cssEncabezado">
                         <div class="ui-table-globalfilter-container" style="text-align: right;">
                             <input pInputText type="text"
@@ -86,7 +93,7 @@
                     </ng-template>
                     <ng-template pTemplate="body" let-rowData>
                         <tr [pSelectableRow]="rowData" class="cssFontCuerpo">
-                            <td style="width: 20%;text-align: right;">{{rowData.id}}</td>
+                            <td style=" width: 20%;text-align: right;">{{rowData.id}}</td>
                             <td>{{rowData.usuario}}</td>
                             <td>{{rowData.dni}}</td>
                             <td>{{rowData.nombres}}</td>
@@ -116,3 +123,67 @@
         </div>
     </div>
 </div>
+
+<p-dialog header="Usuario" [(visible)]="boolShowModalUsuario" [modal]="true" [style]="{width: '30vw'}"
+    [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+    <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col p-md-4 cssSinPadding">
+            <label for="idusuario">Id</label>
+            <span class="p-input-icon-left">
+                <i class="pi pi-lock"></i>
+                <input id="idusuario" type="text" class="p-inputtext-sm" pInputText
+                    [(ngModel)]="usuarioSelected && usuarioSelected.id" [disabled]="true" />
+            </span>
+        </div>
+        <div class="p-field p-col p-md-4">
+            <label for="codusuario">Cód Usuario</label>
+            <span class="p-input-icon-left">
+                <i class="pi pi-user"></i>
+                <input id="codusuario" type="text" pInputText class="p-inputtext-sm"
+                    [(ngModel)]="usuarioSelected && usuarioSelected.usuario" />
+            </span>
+        </div>
+    </div>
+    <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col p-md-4">
+            <label for="docidentidad">Doc Identidad</label>
+            <span class="p-input-icon-left">
+                <i class="pi pi-id-card"></i>
+                <input id="docidentidad" type="text" pInputText class="p-inputtext-sm"
+                    [(ngModel)]="usuarioSelected && usuarioSelected.dni" />
+            </span>
+        </div>
+    </div>
+    <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col p-md-12">
+            <label for="txtnombres">Nombres</label>
+            <span class="p-input-icon-left">
+                <i class="pi pi-tag"></i>
+                <input id="txtnombres" type="text" pInputText class="p-inputtext-sm"
+                    [(ngModel)]="usuarioSelected && usuarioSelected.nombres" />
+            </span>
+        </div>
+    </div>
+    <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col">
+            <label for="txtapellidos">Apellidos</label>
+            <span class="p-input-icon-left">
+                <i class="pi pi-tags"></i>
+                <input id="txtapellidos" type="text" pInputText class="p-inputtext-sm"
+                    [(ngModel)]="usuarioSelected && usuarioSelected.apellidos" />
+            </span>
+        </div>
+    </div>
+    <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col">
+            <label for="ddlbases">Base</label>
+            <p-dropdown id="ddlbases" [options]="lstBases" optionLabel="nombre"
+                [(ngModel)]="usuarioSelected && usuarioSelected.base">
+            </p-dropdown>
+        </div>
+    </div>
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" (click)="displayModal=false" label="Yes" class="p-button-text"></p-button>
+        <p-button icon="pi pi-times" (click)="displayModal=false" label="No"></p-button>
+    </ng-template>
+</p-dialog>

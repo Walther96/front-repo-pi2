@@ -8,6 +8,8 @@ import Swal from 'sweetalert2';
 import { screenConstant } from 'app/constants/screenConstant';
 import { notifyConstant } from 'app/constants/notifyconstant';
 import { Usuario } from 'app/server/models/usuario';
+import { GeneralService } from 'app/server/services/general.service';
+import { BasePartida } from 'app/server/models/base-partida';
 
 @Component({
   selector: 'app-usuario-perfil',
@@ -20,16 +22,20 @@ export class UsuarioPerfilComponent implements OnInit {
 
   perfilSelected: Perfil;
   usuarioSelected: Usuario;
+  boolShowModalUsuario: boolean;
 
   lstPerfiles: Perfil[];
   lstUsuarios: Usuario[];
+  lstBases: BasePartida[];
 
   constructor(
     private usuarioservice: UsuarioService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private generalservice: GeneralService
   ) { }
 
   ngOnInit(): void {
+    this.lstBases = [];
     this.lstPerfiles = [];
     this.lstUsuarios = [];
 
@@ -38,6 +44,8 @@ export class UsuarioPerfilComponent implements OnInit {
 
   cargaData_Perfiles() {
 
+    this.boolShowModalUsuario = false;
+
     Swal.fire(screenConstant.loading);
     this.lstPerfiles = [];
     this.usuarioservice.findAllPerfiles().subscribe(
@@ -45,9 +53,24 @@ export class UsuarioPerfilComponent implements OnInit {
         this.lstPerfiles = data;
         this.ptablePerfiles.sortOrder = 1;
         this.ptablePerfiles.sortField = 'id';
+        this.cargarListaBases();
         Swal.close();
       }, (err) => {
         Swal.close();
+        this.toastr.warning(
+          err.error.message,
+          notifyConstant.titleError,
+          notifyConstant.optionsError
+        );
+      }, () => Swal.close()
+    );
+  }
+
+  cargarListaBases() {
+    this.generalservice.findAllBases().subscribe(
+      (data: any) => {
+        this.lstBases = data;
+      }, (err) => {
         this.toastr.warning(
           err.error.message,
           notifyConstant.titleError,
@@ -62,5 +85,12 @@ export class UsuarioPerfilComponent implements OnInit {
     this.lstUsuarios = this.perfilSelected.usuarios;
   }
 
+  click_btnNuevoUsuario() {
+    this.boolShowModalUsuario = true;
+  }
+
+  click_btnEditarUsuario() {
+    this.boolShowModalUsuario = true;
+  }
 
 }
