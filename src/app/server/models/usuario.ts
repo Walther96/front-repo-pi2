@@ -7,6 +7,7 @@ export class Usuario {
     dni: string;
     nombres: string;
     apellidos: string;
+    contrasena: string;
 
     perfil: Perfil;
     base: BasePartida;

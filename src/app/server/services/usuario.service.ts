@@ -20,7 +20,11 @@ export class UsuarioService {
     }
 
     saveUsuario(usuario: Usuario) {
-        return this.http.post(environment.apiurl + "usuarios", usuario);
+        return this.http.post(environment.apiurl + "usuarios/registrar", usuario);
+    }
+
+    updateUsuario(id: number, usuario: Usuario) {
+        return this.http.post(environment.apiurl + "usuarios/" + id + "/actualizar", usuario);
     }
 
 }

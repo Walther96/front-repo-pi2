@@ -110,22 +110,12 @@
                     </ng-template>
                 </p-table>
             </div>
-            <div class="card-footer">
-                <div class="chart-legend">
-                    <i class="fa fa-circle text-info"></i> Tesla Model S
-                    <i class="fa fa-circle text-warning"></i> BMW 5 Series
-                </div>
-                <hr />
-                <div class="card-stats">
-                    <i class="fa fa-check"></i> Data information certified
-                </div>
-            </div>
         </div>
     </div>
 </div>
 
 <p-dialog header="Usuario" [(visible)]="boolShowModalUsuario" [modal]="true" [style]="{width: '30vw'}"
-    [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+    [baseZIndex]="10000" [draggable]="false" [resizable]="false" (onHide)="hide_modalUsuario()">
     <div class="p-fluid p-formgrid p-grid">
         <div class="p-field p-col p-md-4 cssSinPadding">
             <label for="idusuario">Id</label>
@@ -140,8 +130,9 @@
             <span class="p-input-icon-left">
                 <i class="pi pi-user"></i>
                 <input id="codusuario" type="text" pInputText class="p-inputtext-sm"
-                    [(ngModel)]="usuarioSelected && usuarioSelected.usuario" />
+                    [(ngModel)]="usuarioSelected && usuarioSelected.usuario" [disabled]="!boolCodUsuarioActivo" />
             </span>
+            <small id="username1-help">Máx 10 caracteres</small>
         </div>
     </div>
     <div class="p-fluid p-formgrid p-grid">
@@ -150,8 +141,23 @@
             <span class="p-input-icon-left">
                 <i class="pi pi-id-card"></i>
                 <input id="docidentidad" type="text" pInputText class="p-inputtext-sm"
-                    [(ngModel)]="usuarioSelected && usuarioSelected.dni" />
+                    [(ngModel)]="usuarioSelected && usuarioSelected.dni" pKeyFilter="int" maxlength="10" />
             </span>
+            <small id="username1-help">Máx 10 caracteres</small>
+        </div>
+    </div>
+    <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col p-md-12">
+            <label for="txtcontrasena">Contraseña</label>
+            <span class="p-input-icon-left">
+                <i class="pi pi-key"></i>
+                <input id="txtcontrasena" type="text" pInputText class="p-inputtext-sm"
+                    [(ngModel)]="usuarioSelected && usuarioSelected.contrasena" />
+            </span>
+            <small id="username1-help">Máx 20 caracteres</small>
+            <br/>
+            <small id="username1-help" *ngIf="!boolNuevoUsuario">Al editar los datos deberá también especificar una
+                nueva contraseña</small>
         </div>
     </div>
     <div class="p-fluid p-formgrid p-grid">
@@ -160,8 +166,9 @@
             <span class="p-input-icon-left">
                 <i class="pi pi-tag"></i>
                 <input id="txtnombres" type="text" pInputText class="p-inputtext-sm"
-                    [(ngModel)]="usuarioSelected && usuarioSelected.nombres" />
+                    [(ngModel)]="usuarioSelected && usuarioSelected.nombres" maxlength="30" />
             </span>
+            <small id="username1-help">Longitud máxima, 30 caracteres</small>
         </div>
     </div>
     <div class="p-fluid p-formgrid p-grid">
@@ -170,8 +177,9 @@
             <span class="p-input-icon-left">
                 <i class="pi pi-tags"></i>
                 <input id="txtapellidos" type="text" pInputText class="p-inputtext-sm"
-                    [(ngModel)]="usuarioSelected && usuarioSelected.apellidos" />
+                    [(ngModel)]="usuarioSelected && usuarioSelected.apellidos" maxlength="50" />
             </span>
+            <small id="username1-help">Longitud máxima, 50 caracteres</small>
         </div>
     </div>
     <div class="p-fluid p-formgrid p-grid">
@@ -183,7 +191,7 @@
         </div>
     </div>
     <ng-template pTemplate="footer">
-        <p-button icon="pi pi-check" (click)="displayModal=false" label="Yes" class="p-button-text"></p-button>
-        <p-button icon="pi pi-times" (click)="displayModal=false" label="No"></p-button>
+        <p-button icon="pi pi-check" (click)="click_btnGrabarUsuario()" label="Grabar" class="p-button-text"></p-button>
+        <p-button icon="pi pi-times" (click)="boolShowModalUsuario=false" label="Cancelar"></p-button>
     </ng-template>
 </p-dialog>

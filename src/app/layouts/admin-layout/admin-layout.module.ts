@@ -26,7 +26,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { CalendarModule } from 'primeng/calendar';
 import { DialogModule } from 'primeng/dialog';
 import { DropdownModule } from 'primeng/dropdown';
-
+import { KeyFilterModule } from 'primeng/keyfilter';
 
 @NgModule({
   imports: [
@@ -40,7 +40,8 @@ import { DropdownModule } from 'primeng/dropdown';
     InputTextModule,
     CalendarModule,
     DialogModule,
-    DropdownModule
+    DropdownModule,
+    KeyFilterModule
   ],
   declarations: [
     DashboardComponent,
