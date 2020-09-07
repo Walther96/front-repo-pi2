@@ -22,11 +22,11 @@ export class SalidaService {
     }
 
     autorizar(id: number) {
-        return this.http.post(environment.apiurl + "reqsalida/" + id + "/autorizar", null);
+        return this.http.get(environment.apiurl + "reqsalida/" + id + "/autorizar");
     }
 
     denegar(id: number) {
-        return this.http.post(environment.apiurl + "reqsalida/" + id + "/denegar", null);
+        return this.http.get(environment.apiurl + "reqsalida/" + id + "/denegar");
     }
 
 }

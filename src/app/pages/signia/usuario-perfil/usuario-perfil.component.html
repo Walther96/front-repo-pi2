@@ -191,7 +191,7 @@
         </div>
     </div>
     <ng-template pTemplate="footer">
-        <p-button icon="pi pi-check" (click)="click_btnGrabarUsuario()" label="Grabar" class="p-button-text"></p-button>
+        <p-button icon="pi pi-check" (click)="click_btnGrabarUsuario()" label="Grabar" class="p-button-text" [disabled]="!boolBtnGuardarActivo"></p-button>
         <p-button icon="pi pi-times" (click)="boolShowModalUsuario=false" label="Cancelar"></p-button>
     </ng-template>
 </p-dialog>

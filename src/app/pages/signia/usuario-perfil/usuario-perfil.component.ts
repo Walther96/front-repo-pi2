@@ -26,6 +26,7 @@ export class UsuarioPerfilComponent implements OnInit {
   boolShowModalUsuario: boolean;
   boolCodUsuarioActivo: boolean;
   boolNuevoUsuario: boolean;
+  boolBtnGuardarActivo: boolean;
 
   lstPerfiles: Perfil[];
   lstUsuarios: Usuario[];
@@ -89,6 +90,7 @@ export class UsuarioPerfilComponent implements OnInit {
   }
 
   click_btnNuevoUsuario() {
+    this.boolBtnGuardarActivo = true;
     if (this.perfilSelected == undefined) {
       this.toastr.warning(
         notifyConstant.messages.debeSeleccionarRegistro + ' Seleccionar Perfil',
@@ -121,6 +123,7 @@ export class UsuarioPerfilComponent implements OnInit {
   }
 
   click_btnGrabarUsuario() {
+    this.boolBtnGuardarActivo = false;
     Swal.fire(screenConstant.loading);
     if (this.boolNuevoUsuario) {
       this.usuarioSelected.perfil = this.perfilSelected;
@@ -142,6 +145,7 @@ export class UsuarioPerfilComponent implements OnInit {
           this.boolShowModalUsuario = false
           Swal.close();
           this.cargaData_Perfiles();
+          this.boolBtnGuardarActivo = true;
         }
       );
     }
@@ -169,6 +173,7 @@ export class UsuarioPerfilComponent implements OnInit {
           this.boolShowModalUsuario = false;
           Swal.close();
           this.cargaData_Perfiles();
+          this.boolBtnGuardarActivo = true;
         }
       );
     }
