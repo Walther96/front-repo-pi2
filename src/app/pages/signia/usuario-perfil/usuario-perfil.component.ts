@@ -107,7 +107,7 @@ export class UsuarioPerfilComponent implements OnInit {
   }
 
   click_btnEditarUsuario() {
-
+    this.boolBtnGuardarActivo = true;
     if (this.usuarioSelected == undefined) {
       this.toastr.warning(
         notifyConstant.messages.debeSeleccionarRegistro + ' Seleccionar Usuario',
