@@ -1,0 +1,113 @@
+<p-toast position="bottom-right"></p-toast>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title"> Empresa de Resguardo</h4>
+                <p class="card-category"> Listado de empresas proveedoras de Servicio de Resguardo</p>
+            </div>
+            <div class="card-body">
+                <p-toolbar>
+                    <ng-template pTemplate="left">
+                        <p-button label="Nuevo" icon="pi pi-plus" class="p-button-success p-mr-2"
+                            styleClass="p-button-sm" (click)="click_btnNuevo()"></p-button>
+                    </ng-template>
+
+                    <ng-template pTemplate="right">
+
+                        <!--<p-button label="Export" icon="pi pi-upload" class="p-button-help" styleClass="p-button-sm"></p-button>-->
+                    </ng-template>
+                </p-toolbar>
+
+                <p-table #dt [value]="lstResguardo" [columns]="cols" [rows]="10" [paginator]="true"
+                    [globalFilterFields]="['nombre']" [(selection)]="resguardoSelected" [rowHover]="true" dataKey="id"
+                    currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+                    [showCurrentPageReport]="true" styleClass="p-datatable-sm">
+                    <ng-template pTemplate="caption">
+                        <div class="p-d-flex p-ai-center p-jc-between">
+                            <h6 class="p-m-0">Gestionar Destinos</h6>
+                            <span class="p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                                    placeholder="Buscar..." class="p-inputtext-sm" />
+                            </span>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th style="width: 3rem">
+                                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                            </th>
+                            <th *ngFor="let col of columns">
+                                {{col.header}}
+                            </th>
+                            <th></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowData let-columns="columns">
+                        <tr>
+                            <td>
+                                <p-tableCheckbox [value]="rowData "></p-tableCheckbox>
+                            </td>
+                            <td *ngFor="let col of columns">
+                                <span *ngIf="!col.esfecha">
+                                    {{rowData[col.field]}}
+                                </span>
+                                <span *ngIf="col.esfecha">
+                                    {{rowData[col.field]| date:'dd/MM/yyyy HH:mm'}}
+                                </span>
+                            </td>
+                            <td>
+                                <button pButton pRipple icon="pi pi-pencil"
+                                    class="p-button-rounded p-button-success p-mr-2"
+                                    (click)="click_btnEditar(rowData )"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+                                    (click)="click_btnEliminar(rowData )"></button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <!--<ng-template pTemplate="summary">
+                        <div class="p-d-flex p-ai-center p-jc-between">
+                            Total de registros {{lstBases ? lstBases.length : 0 }} Registros.
+                        </div>
+                    </ng-template>-->
+                </p-table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-dialog header="Detalle de Base" [(visible)]="boolShowDialog" [focusOnShow]="false" showEffect="fade"
+    [modal]="true" [style]="{width: '400px'}">
+    <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col p-md-12">
+            <label for="id">Id</label><br/>
+            <span class="p-input-icon-left">
+                <i class="pi pi-key"></i>
+                <input id="id" pInputText type="text" [(ngModel)]="resguardoSelected && resguardoSelected.id" [disabled]="true">
+            </span>
+        </div>
+        <div class="p-field p-col p-md-12">
+            <label for="origen">RUC</label><br/>
+            <span class="p-input-icon-left">
+                <i class="pi pi-id-card"></i>
+                <input id="origen" pInputText type="text" [(ngModel)]="resguardoSelected && resguardoSelected.ruc">
+            </span>
+        </div>
+        <div class="p-field p-col p-md-12">
+            <label for="origen">Nombre EMpresa</label>
+            <span class="p-input-icon-left">
+                <i class="pi pi-home"></i>
+                <input id="origen" pInputText type="text" [(ngModel)]="resguardoSelected && resguardoSelected.nombre">
+            </span>
+        </div>
+    </div>
+    <p-footer>
+        <div class="ui-dialog-buttonpane ui-helper-clearfix">
+            <button type="button" pButton icon="pi pi-times" (click)="click_btnCancelar()"
+                label="Cancelar"></button>
+            <button type="button" pButton icon="pi pi-check" (click)="click_btnGrabar()" label="Guardar"></button>
+        </div>
+    </p-footer>
+</p-dialog>

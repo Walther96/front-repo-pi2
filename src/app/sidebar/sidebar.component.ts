@@ -9,6 +9,9 @@ export interface RouteInfo {
 }
 
 export const ROUTES: RouteInfo[] = [
+    { path: '/mantbase', title: 'Mant - Bases', icon: 'nc-bank', class: '' },
+    { path: '/mantdestino', title: 'Mant - Destinos', icon: 'nc-pin-3', class: '' },
+    { path: '/mantresguardo', title: 'Mant - Emp Resguardo', icon: 'nc-circle-10', class: '' },
     //{ path: '/dashboard',     title: 'Dashboard',         icon:'nc-bank',       class: '' },
     //{ path: '/icons',         title: 'Icons',             icon:'nc-diamond',    class: '' },
     //{ path: '/maps',          title: 'Maps',              icon:'nc-pin-3',      class: '' },
@@ -16,9 +19,9 @@ export const ROUTES: RouteInfo[] = [
     //{ path: '/user',          title: 'User Profile',      icon:'nc-single-02',  class: '' },
     //{ path: '/table',         title: 'Table List',        icon:'nc-tile-56',    class: '' },
     //{ path: '/typography',    title: 'Typography',        icon:'nc-caps-small', class: '' },
-    { path: '/usuarioperfil',       title: 'Perfiles - usuarios',    icon:'nc-single-02',  class: '' },
-    { path: '/requerimientosalida',       title: 'Lista de salidas',    icon:'nc-send',  class: '' },
-    { path: '/historicosalidas',       title: 'Historial de salidas',    icon:'nc-paper',  class: '' },
+    { path: '/usuarioperfil', title: 'Perfiles - usuarios', icon: 'nc-single-02', class: '' },
+    { path: '/requerimientosalida', title: 'Lista de salidas', icon: 'nc-send', class: '' },
+    { path: '/historicosalidas', title: 'Historial de salidas', icon: 'nc-paper', class: '' },
     //{ path: '/upgrade',       title: 'Upgrade to PRO',    icon:'nc-spaceship',  class: 'active-pro' },
 ];
 

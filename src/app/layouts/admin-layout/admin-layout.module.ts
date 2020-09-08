@@ -27,6 +27,14 @@ import { CalendarModule } from 'primeng/calendar';
 import { DialogModule } from 'primeng/dialog';
 import { DropdownModule } from 'primeng/dropdown';
 import { KeyFilterModule } from 'primeng/keyfilter';
+import { MantBaseComponent } from 'app/pages/signia/mant-base/mant-base.component';
+import { MantResguardoComponent } from 'app/pages/signia/mant-resguardo/mant-resguardo.component';
+import { MantDestinoComponent } from 'app/pages/signia/mant-destino/mant-destino.component';
+import { ToastrModule } from 'ngx-toastr';
+import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from 'primeng/message';
+import { ToastModule } from 'primeng/toast';
+import { ToolbarModule } from 'primeng/toolbar';
 
 @NgModule({
   imports: [
@@ -41,7 +49,12 @@ import { KeyFilterModule } from 'primeng/keyfilter';
     CalendarModule,
     DialogModule,
     DropdownModule,
-    KeyFilterModule
+    KeyFilterModule,
+    ToastrModule,
+    MessagesModule,
+    MessageModule,
+    ToastModule,
+    ToolbarModule
   ],
   declarations: [
     DashboardComponent,
@@ -54,7 +67,10 @@ import { KeyFilterModule } from 'primeng/keyfilter';
     NotificationsComponent,
     UsuarioPerfilComponent,
     RequerimientoSalidaComponent,
-    HistoricoSalidasComponent
+    HistoricoSalidasComponent,
+    MantBaseComponent,
+    MantResguardoComponent,
+    MantDestinoComponent
   ]
 })
 

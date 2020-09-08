@@ -11,6 +11,9 @@ import { UpgradeComponent } from '../../pages/upgrade/upgrade.component';
 import { UsuarioPerfilComponent } from 'app/pages/signia/usuario-perfil/usuario-perfil.component';
 import { RequerimientoSalidaComponent } from 'app/pages/signia/requerimiento-salida/requerimiento-salida.component';
 import { HistoricoSalidasComponent } from 'app/pages/signia/historico-salidas/historico-salidas.component';
+import { MantBaseComponent } from 'app/pages/signia/mant-base/mant-base.component';
+import { MantDestinoComponent } from 'app/pages/signia/mant-destino/mant-destino.component';
+import { MantResguardoComponent } from 'app/pages/signia/mant-resguardo/mant-resguardo.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard', component: DashboardComponent },
@@ -23,5 +26,8 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'upgrade', component: UpgradeComponent },
     { path: 'usuarioperfil', component: UsuarioPerfilComponent },
     { path: 'requerimientosalida', component: RequerimientoSalidaComponent },
-    { path: 'historicosalidas', component: HistoricoSalidasComponent }
+    { path: 'historicosalidas', component: HistoricoSalidasComponent },
+    { path: 'mantbase', component: MantBaseComponent },
+    { path: 'mantdestino', component: MantDestinoComponent },
+    { path: 'mantresguardo', component: MantResguardoComponent }
 ];
