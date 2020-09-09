@@ -20,7 +20,7 @@
                     </div>
                 </div>
                 <p-table #ptableSalidas [value]="lstSalidas" [(selection)]="salidaSelected" [rowHover]="true"
-                    [globalFilterFields]="['nombreresguardocabina']" [scrollable]="true" scrollHeight="400px"
+                    [globalFilterFields]="['basepartida.nombre']" [scrollable]="true" scrollHeight="400px"
                     [sortOrder]="1" styleClass="cssPtable" dataKey="id">
                     <ng-template pTemplate="caption" styleClass="cssEncabezado">
                         <div class="ui-table-globalfilter-container">
@@ -79,6 +79,18 @@
                                 </p-sortIcon>
                             </th>
                         </tr>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>
+                                <input pInputText type="text" class="p-inputtext-sm"
+                                    (input)="ptableSalidas.filter($event.target.value, 'placa', 'contains')"
+                                    placeholder="Placa" class="p-column-filter">
+                            </th>
+                            <th></th>
+                        </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-rowData let-expanded="expanded">
                         <tr [pSelectableRow]="rowData" class="cssFontCuerpo">
@@ -88,8 +100,11 @@
                                     [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
                             </td>
                             <td width="{{columnWidth.id}}">{{rowData.id}}</td>
-                            <td width="{{columnWidth.basepartida}}">{{rowData.basepartida.nombre}} &nbsp; {{rowData.detallebase}} </td>
-                            <td width="{{columnWidth.destino_ruc}}">{{rowData.destino.ruc}} - {{rowData.destino.nombre}} &nbsp; {{rowData.detalledestino}}
+                            <td width="{{columnWidth.basepartida}}">{{rowData.basepartida.nombre}} &nbsp;
+                                {{rowData.detallebase}} </td>
+                            <td width="{{columnWidth.destino_ruc}}">
+                                {{rowData.destino.ruc}}&nbsp;{{rowData.destino.nombre}} &nbsp;
+                                {{rowData.detalledestino}}
                             </td>
                             <td width="{{columnWidth.placa}}">{{rowData.placa}}</td>
                             <td width="{{columnWidth.hojaruta}}">{{rowData.hojaruta}}</td>
