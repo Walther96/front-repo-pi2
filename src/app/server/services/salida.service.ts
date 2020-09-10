@@ -21,12 +21,12 @@ export class SalidaService {
         return this.http.get<any[]>(environment.apiurl + "reqsalida/" + desde + "/" + hasta);
     }
 
-    autorizar(id: number) {
-        return this.http.get(environment.apiurl + "reqsalida/" + id + "/autorizar");
+    autorizar(id: number, usuario: string) {
+        return this.http.get(environment.apiurl + "reqsalida/" + id + "/" + usuario + "/autorizar");
     }
 
-    denegar(id: number) {
-        return this.http.get(environment.apiurl + "reqsalida/" + id + "/denegar");
+    denegar(id: number, usuario: string) {
+        return this.http.get(environment.apiurl + "reqsalida/" + id + "/" + usuario + "/denegar");
     }
 
 }

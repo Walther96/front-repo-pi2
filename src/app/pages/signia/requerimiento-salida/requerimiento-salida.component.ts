@@ -77,7 +77,7 @@ export class RequerimientoSalidaComponent implements OnInit {
       header: 'Confirmar Salida',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.salidaservicio.autorizar(this.salidaSelected.id).subscribe(
+        this.salidaservicio.autorizar(this.salidaSelected.id, 'usuarioprueba').subscribe(
           (data: any) => {
             Swal.close();
             this.toastr.success(
@@ -119,7 +119,7 @@ export class RequerimientoSalidaComponent implements OnInit {
       header: 'Anular Requerimiento de Salida',
       icon: 'pi pi-ban',
       accept: () => {
-        this.salidaservicio.denegar(this.salidaSelected.id).subscribe(
+        this.salidaservicio.denegar(this.salidaSelected.id, 'usuarioprueba').subscribe(
           (data: any) => {
             Swal.close();
             this.toastr.success(
