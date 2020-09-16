@@ -65,7 +65,7 @@ export class HistoricoSalidasComponent implements OnInit {
       { field: 'hojaruta', header: 'Hoja de Ruta' },
       { field: 'estado', header: 'Estado' },
     ];
-    this.exportColumns = this.cols.map(col => ({ title: col.header, dataKey: col.field }));
+    //this.exportColumns = this.cols.map(col => ({ title: col.header, dataKey: col.field }));
 
   }
 
@@ -94,23 +94,52 @@ export class HistoricoSalidasComponent implements OnInit {
 
   exportPdf() {
 
+    this.exportColumns = [
+      { title: 'id', dataKey: 'id' },
+      { title: 'Fecha Creación', dataKey: 'fechacreacion' },
+      { title: 'Placa', dataKey: 'placa' },
+      { title: 'Conductor', dataKey: 'dniconductor' },
+      { title: 'Tlf Conductor', dataKey: 'telefonoconductor' },
+      { title: 'Auxiliar 1', dataKey: 'dniauxiliar1' },
+      { title: 'Tlf Aux1', dataKey: 'telefonoauxiliar1' },
+      { title: 'Auxiliar 2', dataKey: 'dniauxiliar2' },
+      { title: 'Tlf Aux2', dataKey: 'telefonoauxiliar2' },
+      { title: 'Pto. partida', dataKey: 'basepartida' },
+      { title: 'Pto. llegada', dataKey: 'destino' },
+      { title: 'Cant bultos', dataKey: 'cantidadbultos' },
+      { title: 'Emp Resguardo', dataKey: 'empresaresguardo' },
+      { title: 'Nom Resg Cabina', dataKey: 'nombreresguardocabina' },
+      { title: 'Nom Resg Escolta', dataKey: 'nombreresguardoescolta' },
+      { title: 'Nom Resg Copiloto', dataKey: 'nombreresguardocopiloto' }
+    ];
+
     let lstPdf: any[];
     lstPdf = [];
     this.lstSalidas.forEach(element => {
       let item = {
         id: element.id,
-        base: element.basepartida.nombre + ' ' + element.detallebase,
-        destino: element.destino.nombre + ' ' + element.detalledestino,
+        fechacreacion: element.fechacreacion,
         placa: element.placa,
-        hojaruta: element.hojaruta,
-        estado: element.descripcionestado
+        dniconductor: element.dniconductor,
+        telefonoconductor: element.telefonoconductor,
+        dniauxiliar1: element.dniauxiliar1,
+        telefonoauxiliar1: element.telefonoauxiliar1,
+        dniauxiliar2: element.dniauxiliar2,
+        telefonoauxiliar2: element.telefonoauxiliar2,
+        basepartida: element.basepartida.nombre,
+        destino: element.destino.nombre,
+        cantidadbultos: element.cantidadbultos,
+        empresaresguardo: element.empresaresguardo.nombre,
+        nombreresguardocabina: element.nombreresguardocabina,
+        nombreresguardoescolta: element.nombreresguardoescolta,
+        nombreresguardocopiloto: element.nombreresguardocopiloto
       };
       lstPdf.push(item);
     });
 
     import("jspdf").then(jsPDF => {
       import("jspdf-autotable").then(x => {
-        const doc = new jsPDF.default(0, 0);
+        const doc = new jsPDF.default('landscape', 'mm', 'a3');
 
         doc.autoTable(this.exportColumns, lstPdf);
         doc.save('Requerimientos_salida_export.pdf');
@@ -125,11 +154,21 @@ export class HistoricoSalidasComponent implements OnInit {
     this.lstSalidas.forEach(element => {
       let item = {
         id: element.id,
-        base: element.basepartida.nombre,
-        destino: element.destino.nombre,
+        fechacreacion: element.fechacreacion,
         placa: element.placa,
-        hojaruta: element.hojaruta,
-        estado: element.descripcionestado
+        dniconductor: element.dniconductor,
+        telefonoconductor: element.telefonoconductor,
+        dniauxiliar1: element.dniauxiliar1,
+        telefonoauxiliar1: element.telefonoauxiliar1,
+        dniauxiliar2: element.dniauxiliar2,
+        telefonoauxiliar2: element.telefonoauxiliar2,
+        basepartida: element.basepartida.nombre,
+        destino: element.destino.nombre,
+        cantidadbultos: element.cantidadbultos,
+        empresaresguardo: element.empresaresguardo.nombre,
+        nombreresguardocabina: element.nombreresguardocabina,
+        nombreresguardoescolta: element.nombreresguardoescolta,
+        nombreresguardocopiloto: element.nombreresguardocopiloto
       };
       lstExcel.push(item);
     });

@@ -5,6 +5,7 @@ cd /etc/systemd/system
 sudo nano signia-eureka.service
 sudo nano signia-microservicios.service
 sudo nano signia-reqsalida.service
+sudo nano signia-rutasegura.service
 sudo nano signia-usuarios.service
 sudo nano signia-zuul.service
 
@@ -13,24 +14,28 @@ systemctl daemon-reload
 systemctl status signia-eureka.service
 systemctl status signia-microservicios.service
 systemctl status signia-reqsalida.service
+systemctl status signia-rutasegura.service
 systemctl status signia-usuarios.service
 systemctl status signia-zuul.service
 
 systemctl stop signia-eureka.service
 systemctl stop signia-microservicios.service
 systemctl stop signia-reqsalida.service
+systemctl stop signia-rutasegura.service
 systemctl stop signia-usuarios.service
 systemctl stop signia-zuul.service
 
 systemctl start signia-eureka.service
 systemctl start signia-microservicios.service
 systemctl start signia-reqsalida.service
+systemctl start signia-rutasegura.service
 systemctl start signia-usuarios.service
 systemctl start signia-zuul.service
 
 systemctl restart signia-eureka.service
 systemctl restart signia-microservicios.service
 systemctl restart signia-reqsalida.service
+systemctl restart signia-rutasegura.service
 systemctl restart signia-usuarios.service
 systemctl restart signia-zuul.service
 
@@ -38,6 +43,7 @@ systemctl restart signia-zuul.service
 journalctl -u signia-eureka.service
 journalctl -u signia-microservicios.service
 journalctl -u signia-reqsalida.service
+journalctl -u signia-rutasegura.service
 journalctl -u signia-usuarios.service
 journalctl -u signia-zuul.service
 
