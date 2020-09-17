@@ -58,3 +58,20 @@ SERVIDOR DIGITALOCEAN Adrián:
 Signia: 
 104.248.60.94
 http://104.248.60.94/
+
+
+
+--*********** Carga inicial de menú ***************
+INSERT INTO `dbsignia`.`tbopcionesmenu` (`icon`, `path`, `title`) VALUES ('nc-bank', '/mantbase', 'Mant - Bases');
+INSERT INTO `dbsignia`.`tbopcionesmenu` (`icon`, `path`, `title`) VALUES ('nc-pin-3', '/mantdestino', 'Mant - Destinos');
+INSERT INTO `dbsignia`.`tbopcionesmenu` (`icon`, `path`, `title`) VALUES ('nc-circle-10', '/mantresguardo', 'Mant - Emp Resguardo');
+INSERT INTO `dbsignia`.`tbopcionesmenu` (`icon`, `path`, `title`) VALUES ('nc-bank', '/dashboard', 'Dashboard');
+INSERT INTO `dbsignia`.`tbopcionesmenu` (`icon`, `path`, `title`) VALUES ('nc-diamond', '/icons', 'Icons');
+INSERT INTO `dbsignia`.`tbopcionesmenu` (`icon`, `path`, `title`) VALUES ('nc-pin-3', '/maps', 'Maps');
+INSERT INTO `dbsignia`.`tbopcionesmenu` (`icon`, `path`, `title`) VALUES ('nc-bell-55', '/notifications', 'Notifications');
+INSERT INTO `dbsignia`.`tbopcionesmenu` (`icon`, `path`, `title`) VALUES ('nc-single-02', '/user', 'User Profile');
+INSERT INTO `dbsignia`.`tbopcionesmenu` (`icon`, `path`, `title`) VALUES ('nc-tile-56', '/table', 'Table List');
+INSERT INTO `dbsignia`.`tbopcionesmenu` (`icon`, `path`, `title`) VALUES ('nc-caps-small', '/typography', 'Typography');
+INSERT INTO `dbsignia`.`tbopcionesmenu` (`icon`, `path`, `title`) VALUES ('nc-single-02', '/usuarioperfil', 'Perfiles - usuarios');
+INSERT INTO `dbsignia`.`tbopcionesmenu` (`icon`, `path`, `title`) VALUES ('nc-send', '/requerimientosalida', 'Lista de salidas');
+INSERT INTO `dbsignia`.`tbopcionesmenu` (`icon`, `path`, `title`) VALUES ('nc-paper', '/historicosalidas', 'Historial de salidas');

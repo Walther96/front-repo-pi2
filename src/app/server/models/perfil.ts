@@ -1,3 +1,4 @@
+import { OpcionesMenu } from './opciones-menu';
 import { Usuario } from './usuario';
 
 export class Perfil {
@@ -5,4 +6,5 @@ export class Perfil {
     nombre: string;
 
     usuarios: Usuario[];
+    opcionesmenu: OpcionesMenu[];
 }
