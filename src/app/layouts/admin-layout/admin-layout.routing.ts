@@ -30,4 +30,5 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'mantbase', component: MantBaseComponent },
     { path: 'mantdestino', component: MantDestinoComponent },
     { path: 'mantresguardo', component: MantResguardoComponent }
+
 ];
