@@ -109,7 +109,8 @@ export class HistoricoSalidasComponent implements OnInit {
       { title: 'Nom Resg Cabina', dataKey: 'nombreresguardocabina' },
       { title: 'Nom Resg Escolta', dataKey: 'nombreresguardoescolta' },
       { title: 'Nom Resg Copiloto', dataKey: 'nombreresguardocopiloto' },
-      { title: 'Usuario Cierre', dataKey: 'usuariocierre' }
+      { title: 'Usuario Cierre', dataKey: 'usuariocierre' },
+      { title: 'Fecha Cierre', dataKey: 'fechacierre' }
     ];
 
     let lstPdf: any[];
@@ -168,7 +169,8 @@ export class HistoricoSalidasComponent implements OnInit {
         nombreresguardocabina: element.nombreresguardocabina,
         nombreresguardoescolta: element.nombreresguardoescolta,
         nombreresguardocopiloto: element.nombreresguardocopiloto,
-        usuariocierre: element.usuariocierre
+        usuariocierre: element.usuariocierre,
+        fechacierre: element.fechacierre
       };
       lstExcel.push(item);
     });
