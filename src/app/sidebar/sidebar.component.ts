@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Usuario } from 'app/server/models/usuario';
 
 
 export interface RouteInfo {
@@ -32,8 +33,26 @@ export const ROUTES: RouteInfo[] = [
 })
 
 export class SidebarComponent implements OnInit {
+
     public menuItems: any[];
+    usuario: Usuario;
+    rutas: RouteInfo[];
+
     ngOnInit() {
-        this.menuItems = ROUTES.filter(menuItem => menuItem);
+
+        this.usuario = JSON.parse(localStorage.getItem("usuario"));
+        this.rutas = [];
+        
+        this.usuario.perfil.opcionesmenu.forEach(element => {
+            this.rutas.push({
+                path: element.path.toString(),
+                title: element.title.toString(),
+                icon: element.icon.toString(),
+                class: ''
+            });
+        });
+
+        //this.menuItems = ROUTES.filter(menuItem => menuItem);
+        this.menuItems = this.rutas.filter(menuItem => menuItem);
     }
 }

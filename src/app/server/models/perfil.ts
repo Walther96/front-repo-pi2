@@ -7,4 +7,5 @@ export class Perfil {
 
     usuarios: Usuario[];
     opcionesmenu: OpcionesMenu[];
+
 }

@@ -27,4 +27,16 @@ export class UsuarioService {
         return this.http.post(environment.apiurl + "usuarios/" + id + "/actualizar", usuario);
     }
 
+    /**
+     * Obtiene el dato del LocalStorage
+     */
+    get(): Usuario {
+        try {
+            return JSON.parse(localStorage.getItem("usuario"));
+        } catch (e) {
+            console.error('Error getting data from localStorage', e);
+            return null;
+        }
+    }
+
 }

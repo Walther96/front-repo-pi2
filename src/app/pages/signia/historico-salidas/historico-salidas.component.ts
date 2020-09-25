@@ -26,8 +26,6 @@ export class HistoricoSalidasComponent implements OnInit {
   cols: any[];
   exportColumns: any[];
 
-
-
   constructor(
     private toastr: ToastrService,
     private salidaservice: SalidaService

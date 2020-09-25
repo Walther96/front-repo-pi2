@@ -8,6 +8,7 @@ import { screenConstant } from 'app/constants/screenConstant';
 import { notifyConstant } from 'app/constants/notifyconstant';
 import { RequerimientoSalida } from 'app/server/models/requerimiento-salida';
 import { ConfirmationService } from 'primeng/api';
+import { UsuarioService } from 'app/server/services/usuario.service';
 
 @Component({
   selector: 'app-requerimiento-salida',
@@ -25,7 +26,8 @@ export class RequerimientoSalidaComponent implements OnInit {
   constructor(
     private toastr: ToastrService,
     private salidaservicio: SalidaService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private usuarioservice: UsuarioService
   ) { }
 
   ngOnInit(): void {
@@ -77,7 +79,7 @@ export class RequerimientoSalidaComponent implements OnInit {
       header: 'Confirmar Salida',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.salidaservicio.autorizar(this.salidaSelected.id, 'usuarioprueba').subscribe(
+        this.salidaservicio.autorizar(this.salidaSelected.id, this.usuarioservice.get().usuario).subscribe(
           (data: any) => {
             Swal.close();
             this.toastr.success(
@@ -119,7 +121,7 @@ export class RequerimientoSalidaComponent implements OnInit {
       header: 'Anular Requerimiento de Salida',
       icon: 'pi pi-ban',
       accept: () => {
-        this.salidaservicio.denegar(this.salidaSelected.id, 'usuarioprueba').subscribe(
+        this.salidaservicio.denegar(this.salidaSelected.id, this.usuarioservice.get().usuario).subscribe(
           (data: any) => {
             Swal.close();
             this.toastr.success(
