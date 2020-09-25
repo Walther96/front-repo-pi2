@@ -109,9 +109,9 @@
                             <td width="{{columnWidth.placa}}">{{rowData.placa}}</td>
                             <td width="{{columnWidth.hojaruta}}">{{rowData.hojaruta}}</td>
                             <td width="{{columnWidth.estado}}" style="text-align: center;">
-                                <span *ngIf = "rowData.flagexteriores"
+                                <span *ngIf="rowData.flagexteriores"
                                     [class]="'p-tag p-tag-rounded p-tag-warning'">Exteriores</span>
-                                    &nbsp;
+                                &nbsp;
                                 <span
                                     [class]="'p-tag p-tag-rounded ' + (rowData.estado==1?'':(rowData.estado==2?'p-tag-info':'p-tag-danger'))">{{rowData.descripcionestado}}</span>
                             </td>
@@ -157,6 +157,10 @@
                                 <div class="p-p-3">
                                     Fecha de aprobación/rechazo:
                                     {{rowData.fechacierre | date:'dd/MM/yyyy HH:mm' }}
+                                </div>
+                                <div class="p-p-3">
+                                    Usuario cierre:&nbsp;
+                                    {{rowData.usuariocierre}}
                                 </div>
                             </td>
                         </tr>
