@@ -1,9 +1,11 @@
-
 <div>
-    <div class="wrapper wrapper-full-page " style="background-image: url('./assets/img/fondo/simple-background.jpg');">
+    <div class="wrapper wrapper-full-page " style="background: url('./assets/img/fondo/fondo.jpg') no-repeat center center fixed;-webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover; ">
         <div class="full-page-background" filter-color="black">
             <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
-            <div class="content">
+            <div class="content" style="opacity: 0.9;">
                 <div class="container">
                     <div class="col-lg-4 col-md-6 ml-auto mr-auto" style="padding-top: 15%;">
                         <form class="form" [formGroup]="loginForm" (submit)="iniciarSesion(loginForm.value)">
@@ -33,7 +35,7 @@
                                     <br />
 
                                 </div>
-                                <div class="card-footer ">
+                                <div class="card-footer">
                                     <button class="btn btn-warning btn-round btn-block mb-3">Iniciar Sesión</button>
                                 </div>
                             </div>

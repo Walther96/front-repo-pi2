@@ -26,7 +26,9 @@ export class HistoricoSalidasComponent implements OnInit {
   cols: any[];
   exportColumns: any[];
   nombreEstado: string;
-
+  fechCreacion: string;
+  fechCierre: string;
+  fechSalida: string;
   constructor(
     
     private salidaservice: SalidaService
@@ -128,9 +130,55 @@ export class HistoricoSalidasComponent implements OnInit {
       if(element.estado ==3){
         this.nombreEstado = "Denegado";
         }
+
+        var fecha = new Date(element.fechacreacion);
+        var año = fecha.getFullYear();
+        var mes = fecha.getMonth()+1;
+        var dia = fecha.getDate();
+        var hora = fecha.getHours();
+        var minun = fecha.getMinutes();
+        if(minun<10){
+          var minutos = "0"+minun
+          this.fechCreacion = año+"-"+mes+"-"+dia + " " +hora+":"+minutos ;
+        } else{
+          this.fechCreacion = año+"-"+mes+"-"+dia + " " +hora+":"+minun ;
+
+        }
+
+        var fecha = new Date(element.fechacierre);
+        var año = fecha.getFullYear();
+        var mes = fecha.getMonth()+1;
+        var dia = fecha.getDate();
+        var hora = fecha.getHours();
+        var minun = fecha.getMinutes();
+        if(minun<10){
+          var minutos = "0"+minun
+          this.fechCierre = año+"-"+mes+"-"+dia + " " +hora+":"+minutos ;
+        } else{
+          this.fechCierre = año+"-"+mes+"-"+dia + " " +hora+":"+minun ;
+
+        }
+        if(element.fechasalida){
+          var fecha = new Date(element.fechasalida);
+          var año = fecha.getFullYear();
+          var mes = fecha.getMonth()+1;
+          var dia = fecha.getDate();
+          var hora = fecha.getHours();
+          var minun = fecha.getMinutes();
+          if(minun<10){
+            var minutos = "0"+minun
+            this.fechSalida = año+"-"+mes+"-"+dia + " " +hora+":"+minutos ;
+          } else{
+            this.fechSalida = año+"-"+mes+"-"+dia + " " +hora+":"+minun ;
+  
+          }      
+        }else {
+          this.fechSalida  = '';
+        }
+        
       let item = {
         id: element.id,
-        fechacreacion: element.fechacreacion,
+        fechacreacion: this.fechCreacion,
         placa: element.placa,
         dniconductor: element.dniconductor,
         telefonoconductor: element.telefonoconductor,
@@ -147,8 +195,8 @@ export class HistoricoSalidasComponent implements OnInit {
         nombreresguardoescolta: element.nombreresguardoescolta,
         nombreresguardocopiloto: element.nombreresguardocopiloto,
         usuariocierre: element.usuariocierre,
-        fechacierre: element.fechacierre,
-        fechasalida: element.fechasalida,
+        fechacierre: this.fechCierre,
+        fechasalida: this.fechSalida,
         estado: this.nombreEstado
       };
       lstPdf.push(item);
@@ -169,15 +217,62 @@ export class HistoricoSalidasComponent implements OnInit {
     let lstExcel: any[];
     lstExcel = [];
     this.lstSalidas.forEach(element => {
+
       if(element.estado ==2){
         this.nombreEstado = "Autorizado";
         }
         if(element.estado ==3){
           this.nombreEstado = "Denegado";
           }
+          var fecha = new Date(element.fechacreacion);
+          var año = fecha.getFullYear();
+          var mes = fecha.getMonth()+1;
+          var dia = fecha.getDate();
+          var hora = fecha.getHours();
+          var minun = fecha.getMinutes();
+          if(minun<10){
+            var minutos = "0"+minun
+            this.fechCreacion = año+"-"+mes+"-"+dia + " " +hora+":"+minutos ;
+          } else{
+            this.fechCreacion = año+"-"+mes+"-"+dia + " " +hora+":"+minun ;
+  
+          }
+  
+          var fecha = new Date(element.fechacierre);
+          var año = fecha.getFullYear();
+          var mes = fecha.getMonth()+1;
+          var dia = fecha.getDate();
+          var hora = fecha.getHours();
+          var minun = fecha.getMinutes();
+          if(minun<10){
+            var minutos = "0"+minun
+            this.fechCierre = año+"-"+mes+"-"+dia + " " +hora+":"+minutos ;
+          } else{
+            this.fechCierre = año+"-"+mes+"-"+dia + " " +hora+":"+minun ;
+  
+          }
+          if(element.fechasalida){
+
+            var fecha = new Date(element.fechasalida);
+          var año = fecha.getFullYear();
+          var mes = fecha.getMonth()+1;
+          var dia = fecha.getDate();
+          var hora = fecha.getHours();
+          var minun = fecha.getMinutes();
+          if(minun<10){
+            var minutos = "0"+minun
+            this.fechSalida = año+"-"+mes+"-"+dia + " " +hora+":"+minutos ;
+          } else{
+            this.fechSalida = año+"-"+mes+"-"+dia + " " +hora+":"+minun ;
+  
+          }
+          }else{
+            this.fechSalida = '';
+          }
+          
       let item = {
         id: element.id,
-        fechacreacion: element.fechacreacion,
+        fechacreacion: this.fechCreacion,
         placa: element.placa,
         dniconductor: element.dniconductor,
         telefonoconductor: element.telefonoconductor,
@@ -194,8 +289,8 @@ export class HistoricoSalidasComponent implements OnInit {
         nombreresguardoescolta: element.nombreresguardoescolta,
         nombreresguardocopiloto: element.nombreresguardocopiloto,
         usuariocierre: element.usuariocierre,
-        fechacierre: element.fechacierre,
-        fechasalida: element.fechasalida,
+        fechacierre: this.fechCierre,
+        fechasalida: this.fechSalida,
         estado: this.nombreEstado
 
       };
