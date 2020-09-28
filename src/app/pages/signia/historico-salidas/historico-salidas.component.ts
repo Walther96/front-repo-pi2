@@ -131,6 +131,7 @@ export class HistoricoSalidasComponent implements OnInit {
         telefonoauxiliar2: element.telefonoauxiliar2,
         basepartida: element.basepartida.nombre,
         destino: element.destino.nombre,
+        detalledestino: element.detalledestino,
         cantidadbultos: element.cantidadbultos,
         empresaresguardo: element.empresaresguardo.nombre,
         nombreresguardocabina: element.nombreresguardocabina,

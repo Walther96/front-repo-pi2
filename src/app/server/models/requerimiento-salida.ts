@@ -20,7 +20,9 @@ export class RequerimientoSalida {
     nombreresguardoescolta: string;
     nombreresguardocopiloto: string;
     comentarios: string;
-
+    telefonoconductor: string;
+    telefonoauxiliar1: string;
+    telefonoauxiliar2: string;
     dniconductor: string;
     dniauxiliar1: string;
     dniauxiliar2: string;
