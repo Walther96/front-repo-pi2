@@ -23,12 +23,13 @@ export class LoginComponent implements OnInit {
   private toggleButton;
   private sidebarVisible: boolean;
   private nativeElement: Node;
+  private toastr: ToastrService;
   login: Login;
   usuario: Usuario;
 
   loginForm: FormGroup;
 
-  constructor(private loginservice: LoginService, private fb: FormBuilder, private router: Router, private toastr: ToastrService) {
+  constructor(private loginservice: LoginService, private fb: FormBuilder, private router: Router) {
 
     this.loginForm = this.fb.group({
       user: ['', Validators.compose([])],

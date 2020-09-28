@@ -20,14 +20,14 @@ export class HistoricoSalidasComponent implements OnInit {
   salidaSelected: RequerimientoSalida;
   fechainicio: Date;
   fechafin: Date;
-
+  private toastr: ToastrService;
   rangeDates: Date[];
   lstSalidas: any[];
   cols: any[];
   exportColumns: any[];
 
   constructor(
-    private toastr: ToastrService,
+    
     private salidaservice: SalidaService
   ) { }
 
@@ -111,7 +111,9 @@ export class HistoricoSalidasComponent implements OnInit {
       { title: 'Nom Resg Escolta', dataKey: 'nombreresguardoescolta' },
       { title: 'Nom Resg Copiloto', dataKey: 'nombreresguardocopiloto' },
       { title: 'Usuario Cierre', dataKey: 'usuariocierre' },
-      { title: 'Fecha Cierre', dataKey: 'fechacierre' }
+      { title: 'Fecha Cierre', dataKey: 'fechacierre' },
+      { title: 'Fecha Salida', dataKey: 'fechasalida' }
+
     ];
 
     let lstPdf: any[];
@@ -133,7 +135,10 @@ export class HistoricoSalidasComponent implements OnInit {
         empresaresguardo: element.empresaresguardo.nombre,
         nombreresguardocabina: element.nombreresguardocabina,
         nombreresguardoescolta: element.nombreresguardoescolta,
-        nombreresguardocopiloto: element.nombreresguardocopiloto
+        nombreresguardocopiloto: element.nombreresguardocopiloto,
+        usuariocierre: element.usuariocierre,
+        fechacierre: element.fechacierre,
+        fechasalida: element.fechasalida
       };
       lstPdf.push(item);
     });
@@ -172,7 +177,8 @@ export class HistoricoSalidasComponent implements OnInit {
         nombreresguardoescolta: element.nombreresguardoescolta,
         nombreresguardocopiloto: element.nombreresguardocopiloto,
         usuariocierre: element.usuariocierre,
-        fechacierre: element.fechacierre
+        fechacierre: element.fechacierre,
+        fechasalida: element.fechasalida
       };
       lstExcel.push(item);
     });
