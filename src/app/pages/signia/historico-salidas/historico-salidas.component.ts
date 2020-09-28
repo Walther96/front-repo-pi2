@@ -25,6 +25,7 @@ export class HistoricoSalidasComponent implements OnInit {
   lstSalidas: any[];
   cols: any[];
   exportColumns: any[];
+  nombreEstado: string;
 
   constructor(
     
@@ -112,13 +113,21 @@ export class HistoricoSalidasComponent implements OnInit {
       { title: 'Nom Resg Copiloto', dataKey: 'nombreresguardocopiloto' },
       { title: 'Usuario Cierre', dataKey: 'usuariocierre' },
       { title: 'Fecha Cierre', dataKey: 'fechacierre' },
-      { title: 'Fecha Salida', dataKey: 'fechasalida' }
+      { title: 'Fecha Salida', dataKey: 'fechasalida' },
+      { title: 'Estado', dataKey: 'estado' }
+
 
     ];
 
     let lstPdf: any[];
     lstPdf = [];
     this.lstSalidas.forEach(element => {
+      if(element.estado ==2){
+      this.nombreEstado = "Autorizado";
+      }
+      if(element.estado ==3){
+        this.nombreEstado = "Denegado";
+        }
       let item = {
         id: element.id,
         fechacreacion: element.fechacreacion,
@@ -139,7 +148,8 @@ export class HistoricoSalidasComponent implements OnInit {
         nombreresguardocopiloto: element.nombreresguardocopiloto,
         usuariocierre: element.usuariocierre,
         fechacierre: element.fechacierre,
-        fechasalida: element.fechasalida
+        fechasalida: element.fechasalida,
+        estado: this.nombreEstado
       };
       lstPdf.push(item);
     });
@@ -159,6 +169,12 @@ export class HistoricoSalidasComponent implements OnInit {
     let lstExcel: any[];
     lstExcel = [];
     this.lstSalidas.forEach(element => {
+      if(element.estado ==2){
+        this.nombreEstado = "Autorizado";
+        }
+        if(element.estado ==3){
+          this.nombreEstado = "Denegado";
+          }
       let item = {
         id: element.id,
         fechacreacion: element.fechacreacion,
@@ -179,7 +195,9 @@ export class HistoricoSalidasComponent implements OnInit {
         nombreresguardocopiloto: element.nombreresguardocopiloto,
         usuariocierre: element.usuariocierre,
         fechacierre: element.fechacierre,
-        fechasalida: element.fechasalida
+        fechasalida: element.fechasalida,
+        estado: this.nombreEstado
+
       };
       lstExcel.push(item);
     });

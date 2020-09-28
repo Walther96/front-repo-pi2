@@ -48,7 +48,6 @@ journalctl -u signia-usuarios.service
 journalctl -u signia-zuul.service
 
 cd /home/signia/repofrontendsigniaweb
-
 git reset --hard HEAD
 git pull
 
