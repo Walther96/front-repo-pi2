@@ -98,6 +98,7 @@ export class HistoricoSalidasComponent implements OnInit {
     this.exportColumns = [
       { title: 'id', dataKey: 'id' },
       { title: 'Fecha Creación', dataKey: 'fechacreacion' },
+      { title: 'Hoja Ruta', dataKey: 'hojaruta' },
       { title: 'Placa', dataKey: 'placa' },
       { title: 'Conductor', dataKey: 'dniconductor' },
       { title: 'Tlf Conductor', dataKey: 'telefonoconductor' },
@@ -179,6 +180,7 @@ export class HistoricoSalidasComponent implements OnInit {
       let item = {
         id: element.id,
         fechacreacion: this.fechCreacion,
+        hojaruta: element.hojaruta,
         placa: element.placa,
         dniconductor: element.dniconductor,
         telefonoconductor: element.telefonoconductor,
@@ -273,6 +275,7 @@ export class HistoricoSalidasComponent implements OnInit {
       let item = {
         id: element.id,
         fechacreacion: this.fechCreacion,
+        hojaruta: element.hojaruta,
         placa: element.placa,
         dniconductor: element.dniconductor,
         telefonoconductor: element.telefonoconductor,
