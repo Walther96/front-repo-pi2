@@ -117,7 +117,9 @@ export class HistoricoSalidasComponent implements OnInit {
       { title: 'Usuario Cierre', dataKey: 'usuariocierre' },
       { title: 'Fecha Cierre', dataKey: 'fechacierre' },
       { title: 'Fecha Salida', dataKey: 'fechasalida' },
-      { title: 'Estado', dataKey: 'estado' }
+      { title: 'Estado', dataKey: 'estado' },
+      { title: 'Comentario', dataKey: 'comentarios' }
+
 
 
     ];
@@ -199,7 +201,8 @@ export class HistoricoSalidasComponent implements OnInit {
         usuariocierre: element.usuariocierre,
         fechacierre: this.fechCierre,
         fechasalida: this.fechSalida,
-        estado: this.nombreEstado
+        estado: this.nombreEstado,
+        comentarios: element.comentarios
       };
       lstPdf.push(item);
     });
@@ -294,7 +297,9 @@ export class HistoricoSalidasComponent implements OnInit {
         usuariocierre: element.usuariocierre,
         fechacierre: this.fechCierre,
         fechasalida: this.fechSalida,
-        estado: this.nombreEstado
+        estado: this.nombreEstado,
+        comentarios: element.comentarios
+
 
       };
       lstExcel.push(item);
