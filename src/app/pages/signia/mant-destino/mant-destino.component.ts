@@ -5,7 +5,7 @@ import { screenConstant } from 'app/constants/screenConstant';
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 import { Destino } from 'app/server/models/destino';
-
+import { CheckboxModule } from 'primeng/checkbox';
 
 @Component({
   selector: 'app-mant-destino',
@@ -35,7 +35,8 @@ export class MantDestinoComponent implements OnInit {
       { field: 'id', header: 'Id', esfecha: false },
       { field: 'ruc', header: 'RUC', esfecha: false },
       { field: 'nombre', header: 'Nombre Base', esfecha: false },
-      { field: 'fechacreacion', header: 'Fecha creación', esfecha: true }
+      { field: 'fechacreacion', header: 'Fecha creación', esfecha: true },
+      { field: 'flagvalidaws', header: 'Valida WS', esfecha: false }
     ];
 
     this.cargaDestinos();
@@ -53,6 +54,10 @@ export class MantDestinoComponent implements OnInit {
         this.messageService.add({ severity: 'error', summary: 'Ups! Error!', detail: 'Por favor, comuníquese con el administrador', life: 3000 });
       }, () => Swal.close()
     );
+  }
+
+  click_btnRefrescar(){
+    this.cargaDestinos();
   }
 
   click_btnEditar(destino: Destino) {
