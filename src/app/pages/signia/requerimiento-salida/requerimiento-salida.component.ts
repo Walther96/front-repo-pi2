@@ -20,6 +20,9 @@ export class RequerimientoSalidaComponent implements OnInit {
 
   lstSalidas: any[];
   columnWidth: any;
+  strObservacion: string;
+  displayModal: boolean;
+  displayModalDenegar: boolean;
 
   salidaSelected: RequerimientoSalida;
 
@@ -32,6 +35,8 @@ export class RequerimientoSalidaComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.displayModal = false;
+    this.displayModalDenegar = false;
     this.columnWidth =
     {
       id: '5%',
@@ -74,7 +79,7 @@ export class RequerimientoSalidaComponent implements OnInit {
       return false;
     }
 
-    this.confirmationService.confirm({
+    /*this.confirmationService.confirm({
       message: 'Seguro de proceder con la autorización de Requerimiento de Salida?',
       header: 'Confirmar Salida',
       icon: 'pi pi-exclamation-triangle',
@@ -102,7 +107,38 @@ export class RequerimientoSalidaComponent implements OnInit {
       reject: () => {
         //this.msgs = [{ severity: 'info', summary: 'Rejected', detail: 'You have rejected' }];
       }
-    });
+    });*/
+
+    this.strObservacion = "";
+    this.displayModal = true;
+  }
+
+  click_grabarAutorizacion() {
+    this.salidaservicio.autoriza_comentarios(this.salidaSelected.id, this.strObservacion, this.usuarioservice.get().usuario).subscribe(
+      (data: any) => {
+        Swal.close();
+        this.toastr.success(
+          notifyConstant.messages.success,
+          notifyConstant.titleSuccesss,
+          notifyConstant.optionsSuccess
+        );
+        this.salidaSelected = undefined;
+        this.listarSalidasPorAutorizar();
+
+        this.strObservacion = "";
+        this.displayModal = false;
+      }, (err) => {
+        Swal.close();
+        this.toastr.warning(
+          err.error.message,
+          notifyConstant.titleError,
+          notifyConstant.optionsError
+        );
+
+        this.strObservacion = "";
+        this.displayModal = false;
+      }
+    );
   }
 
   click_btnDenegar() {
@@ -116,7 +152,10 @@ export class RequerimientoSalidaComponent implements OnInit {
       return false;
     }
 
-    this.confirmationService.confirm({
+    this.strObservacion = "";
+    this.displayModalDenegar = true;
+
+    /*this.confirmationService.confirm({
       message: 'Va a Denegar la solicitud de Requerimiento de Salida, desea continuar?',
       header: 'Anular Requerimiento de Salida',
       icon: 'pi pi-ban',
@@ -144,7 +183,38 @@ export class RequerimientoSalidaComponent implements OnInit {
       reject: () => {
         //this.msgs = [{ severity: 'info', summary: 'Rejected', detail: 'You have rejected' }];
       }
-    });
+    });*/
+  }
+
+
+  click_grabarDenegar() {
+    this.salidaservicio.denegar_comentarios(this.salidaSelected.id, this.strObservacion, this.usuarioservice.get().usuario).subscribe(
+      (data: any) => {
+        Swal.close();
+        this.toastr.success(
+          notifyConstant.messages.success,
+          notifyConstant.titleSuccesss,
+          notifyConstant.optionsSuccess
+        );
+        this.salidaSelected = undefined;
+        this.listarSalidasPorAutorizar();
+
+        this.strObservacion = "";
+        this.displayModal = false;
+
+      }, (err) => {
+        Swal.close();
+        this.toastr.warning(
+          err.error.message,
+          notifyConstant.titleError,
+          notifyConstant.optionsError
+        );
+
+        this.strObservacion = "";
+        this.displayModal = false;
+
+      }
+    );
   }
 
 

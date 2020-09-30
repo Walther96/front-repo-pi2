@@ -35,6 +35,8 @@ import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { ToastModule } from 'primeng/toast';
 import { ToolbarModule } from 'primeng/toolbar';
+import { CheckboxModule } from 'primeng/checkbox';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 
 @NgModule({
   imports: [
@@ -54,7 +56,9 @@ import { ToolbarModule } from 'primeng/toolbar';
     MessagesModule,
     MessageModule,
     ToastModule,
-    ToolbarModule
+    ToolbarModule,
+    CheckboxModule,
+    InputTextareaModule
   ],
   declarations: [
     DashboardComponent,

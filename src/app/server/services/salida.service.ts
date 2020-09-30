@@ -25,8 +25,16 @@ export class SalidaService {
         return this.http.get(environment.apiurl + "reqsalida/" + id + "/" + usuario + "/autorizar");
     }
 
+    autoriza_comentarios(id: number, comentarios: string, usuario: string) {
+        return this.http.get(environment.apiurl + "reqsalida/" + id + "/" + usuario + "/autorizar/" + comentarios);
+    }
+
     denegar(id: number, usuario: string) {
         return this.http.get(environment.apiurl + "reqsalida/" + id + "/" + usuario + "/denegar");
+    }
+
+    denegar_comentarios(id: number, comentarios: string, usuario: string) {
+        return this.http.get(environment.apiurl + "reqsalida/" + id + "/" + usuario + "/denegar/" + comentarios);
     }
 
 }
