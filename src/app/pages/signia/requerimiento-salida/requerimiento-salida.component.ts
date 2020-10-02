@@ -9,6 +9,9 @@ import { notifyConstant } from 'app/constants/notifyconstant';
 import { RequerimientoSalida } from 'app/server/models/requerimiento-salida';
 import { ConfirmationService } from 'primeng/api';
 import { UsuarioService } from 'app/server/services/usuario.service';
+import { PushNotificationService } from 'app/server/services/push-notification.service';
+import { PushMensaje } from '../../../server/models/push-mensaje';
+
 
 @Component({
   selector: 'app-requerimiento-salida',
@@ -23,6 +26,7 @@ export class RequerimientoSalidaComponent implements OnInit {
   strObservacion: string;
   displayModal: boolean;
   displayModalDenegar: boolean;
+  data: PushMensaje;
 
   salidaSelected: RequerimientoSalida;
 
@@ -30,7 +34,8 @@ export class RequerimientoSalidaComponent implements OnInit {
     private toastr: ToastrService,
     private salidaservicio: SalidaService,
     private confirmationService: ConfirmationService,
-    private usuarioservice: UsuarioService
+    private usuarioservice: UsuarioService,
+    private pushnotification: PushNotificationService
   ) { }
 
   ngOnInit(): void {
@@ -127,6 +132,13 @@ export class RequerimientoSalidaComponent implements OnInit {
 
         this.strObservacion = "";
         this.displayModal = false;
+        this.data ={
+          app_id: "f1db39ee-06f3-4af8-9ffd-d6e94de8a3bd",
+          included_segments: ["Active Users", "Inactive Users"],
+          headings: {es: "Autorizado", en:"Update"},
+          contents: {es: "Se autorizó un requerimiento de salida", en: "req update"}
+        }
+        this.pushnotification.EnviarPush(this.data);
       }, (err) => {
         Swal.close();
         this.toastr.warning(
@@ -201,7 +213,13 @@ export class RequerimientoSalidaComponent implements OnInit {
 
         this.strObservacion = "";
         this.displayModal = false;
-
+        this.data ={
+          app_id: "f1db39ee-06f3-4af8-9ffd-d6e94de8a3bd",
+          included_segments: ["Active Users", "Inactive Users"],
+          headings: {es: "Denegado", en:"Update"},
+          contents: {es: "Se denegó un requerimiento de salida", en: "req update"}
+        }
+        this.pushnotification.EnviarPush(this.data);
       }, (err) => {
         Swal.close();
         this.toastr.warning(
