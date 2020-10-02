@@ -46,7 +46,8 @@ export class RequerimientoSalidaComponent implements OnInit {
     {
       id: '5%',
       basepartida: '6%',
-      destino_ruc: '20%',
+      destino_ruc: '14%',
+      fechacreacion: '7%',
       hojaruta: '5%',
       placa: '5%'
     };
@@ -220,6 +221,8 @@ export class RequerimientoSalidaComponent implements OnInit {
           contents: {es: "Se denegó un requerimiento de salida", en: "req update"}
         }
         this.pushnotification.EnviarPush(this.data);
+        this.displayModalDenegar = false;
+
       }, (err) => {
         Swal.close();
         this.toastr.warning(

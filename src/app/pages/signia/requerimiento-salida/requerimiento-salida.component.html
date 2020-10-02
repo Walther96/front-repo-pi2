@@ -8,16 +8,11 @@
                 <p class="card-category"> Listado de los requerimientos de salida pendientes por aprobar</p>
             </div>
             <div class="card-body">
-                <button pButton pRipple type="button" label="Actualizar búsqueda" class="p-button-rounded"
-                    icon="pi pi-refresh" (click)="listarSalidasPorAutorizar()"></button>
-                <p-table #ptableSalidas [value]="lstSalidas" [(selection)]="salidaSelected" [rowHover]="true"
-                    [globalFilterFields]="['nombreresguardocabina']" [scrollable]="true" scrollHeight="400px"
-                    [sortOrder]="1" styleClass="cssPtable" selectionMode="single" dataKey="id">
+                <button pButton pRipple type="button" label="Actualizar búsqueda" class="p-button-rounded" icon="pi pi-refresh" (click)="listarSalidasPorAutorizar()"></button>
+                <p-table #ptableSalidas [value]="lstSalidas" [(selection)]="salidaSelected" [rowHover]="true" [globalFilterFields]="['nombreresguardocabina']" [scrollable]="true" scrollHeight="400px" [sortOrder]="1" styleClass="cssPtable" selectionMode="single" dataKey="id">
                     <ng-template pTemplate="caption" styleClass="cssEncabezado">
                         <div class="ui-table-globalfilter-container" style="text-align: right;">
-                            <input pInputText type="text"
-                                (input)="ptableSalidas.filterGlobal($event.target.value, 'contains')"
-                                placeholder="Buscar" style="width: 20%;" class="cssInputBuscar" />
+                            <input pInputText type="text" (input)="ptableSalidas.filterGlobal($event.target.value, 'contains')" placeholder="Buscar" style="width: 20%;" class="cssInputBuscar" />
                         </div>
                     </ng-template>
                     <ng-template pTemplate="header">
@@ -37,6 +32,11 @@
                                 <p-sortIcon field="destino.ruc">
                                 </p-sortIcon>
                             </th>
+                            <th pSortableColumn="fechacreacion" width="{{columnWidth.fechacreacion}}">
+                                Fecha Creacion
+                                <p-sortIcon field="fechacreacion">
+                                </p-sortIcon>
+                            </th>
                             <th pSortableColumn="hojaruta" width="{{columnWidth.hojaruta}}">
                                 Hoja de ruta
                                 <p-sortIcon field="hojaruta">
@@ -53,9 +53,10 @@
                         <tr [pSelectableRow]="rowData" class="cssFontCuerpo">
                             <td width="{{columnWidth.id}}">{{rowData.id}}</td>
                             <td width="{{columnWidth.basepartida}}">{{rowData.basepartida.nombre}}</td>
-                            <td width="{{columnWidth.destino_ruc}}">{{rowData.destino.ruc}} &nbsp;
-                                {{rowData.destino.nombre}} &nbsp; {{rowData.detalledestino}}
+                            <td width="{{columnWidth.destino_ruc}}">{{rowData.destino.ruc}} &nbsp; {{rowData.destino.nombre}} &nbsp; {{rowData.detalledestino}}
                             </td>
+                            <td width="{{columnWidth.fechacreacion}}">{{rowData.fechacreacion | date: 'dd/MM/yyyy'}} {{rowData.fechacreacion | date: 'shortTime'}}</td>
+
                             <td width="{{columnWidth.hojaruta}}">{{rowData.hojaruta}}</td>
                             <td width="{{columnWidth.placa}}">{{rowData.placa}}</td>
                         </tr>
@@ -121,18 +122,15 @@
                     <!-- Segunda Linea -->
                     <div class="p-field p-col">
                         <label for="id">Hoja de ruta</label>
-                        <input id="id" pInputText type="text" placeholder="hoja de ruta"
-                            [(ngModel)]="salidaSelected && salidaSelected.hojaruta" [disabled]="true">
+                        <input id="id" pInputText type="text" placeholder="hoja de ruta" [(ngModel)]="salidaSelected && salidaSelected.hojaruta" [disabled]="true">
                     </div>
                     <div class="p-field p-col">
                         <label for="placa">Placa</label>
-                        <input id="placa" pInputText type="text" placeholder="placa"
-                            [(ngModel)]="salidaSelected && salidaSelected.placa" [disabled]="true">
+                        <input id="placa" pInputText type="text" placeholder="placa" [(ngModel)]="salidaSelected && salidaSelected.placa" [disabled]="true">
                     </div>
                     <div class="p-field p-col">
                         <label for="bultos">Cantidad de bultos</label>
-                        <input id="bultos" pInputText type="text" placeholder="cant bultos"
-                            [(ngModel)]="salidaSelected && salidaSelected.cantidadbultos" [disabled]="true">
+                        <input id="bultos" pInputText type="text" placeholder="cant bultos" [(ngModel)]="salidaSelected && salidaSelected.cantidadbultos" [disabled]="true">
                     </div>
 
                 </div>
@@ -210,18 +208,15 @@
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col">
                         <label for="cabina">Cabina</label>
-                        <input id="cabina" type="text" pInputText
-                            [(ngModel)]="salidaSelected && salidaSelected.nombreresguardocabina" [disabled]="true">
+                        <input id="cabina" type="text" pInputText [(ngModel)]="salidaSelected && salidaSelected.nombreresguardocabina" [disabled]="true">
                     </div>
                     <div class="p-field p-col">
                         <label for="escolta">Escolta</label>
-                        <input id="escolta" type="text" pInputText
-                            [(ngModel)]="salidaSelected && salidaSelected.nombreresguardoescolta" [disabled]="true">
+                        <input id="escolta" type="text" pInputText [(ngModel)]="salidaSelected && salidaSelected.nombreresguardoescolta" [disabled]="true">
                     </div>
                     <div class="p-field p-col">
                         <label for="copiloto">Copiloto</label>
-                        <input id="copiloto" type="text" pInputText
-                            [(ngModel)]="salidaSelected && salidaSelected.nombreresguardocopiloto" [disabled]="true">
+                        <input id="copiloto" type="text" pInputText [(ngModel)]="salidaSelected && salidaSelected.nombreresguardocopiloto" [disabled]="true">
                     </div>
                 </div>
                 <hr />
@@ -237,8 +232,7 @@
     </div>
 </div>
 
-<p-dialog header="Autorizar" [(visible)]="displayModal" [modal]="true" [style]="{width: '20vw'}" [baseZIndex]="10000"
-    [draggable]="false" [resizable]="false">
+<p-dialog header="Autorizar" [(visible)]="displayModal" [modal]="true" [style]="{width: '20vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
 
     <textarea rows="5" cols="30" pInputTextarea [(ngModel)]="strObservacion"></textarea>
 
@@ -248,8 +242,7 @@
     </ng-template>
 </p-dialog>
 
-<p-dialog header="Denegar" [(visible)]="displayModalDenegar" [modal]="true" [style]="{width: '20vw'}"
-    [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+<p-dialog header="Denegar" [(visible)]="displayModalDenegar" [modal]="true" [style]="{width: '20vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
 
     <textarea rows="5" cols="30" pInputTextarea [(ngModel)]="strObservacion"></textarea>
 
