@@ -129,6 +129,14 @@
                                     Cant. Bultos:
                                     {{rowData.cantidadbultos}}
                                 </div>
+                                <div class="p-p-3">
+                                    Comentarios:&nbsp;
+                                    {{rowData.comentarios}}
+                                </div>
+                                <div class="p-p-3">
+                                    Clave salida:&nbsp;
+                                    {{rowData.clavesalida}}
+                                </div>
                             </td>
                             <td colspan="2">
                                 <div class="p-p-3">
@@ -163,8 +171,8 @@
                                     {{rowData.usuariocierre}}
                                 </div>
                                 <div class="p-p-3">
-                                    Comentarios:&nbsp;
-                                    {{rowData.comentarios}}
+                                    Fecha de salida:
+                                    {{rowData.fechasalida | date:'dd/MM/yyyy HH:mm' }}
                                 </div>
                             </td>
                         </tr>
