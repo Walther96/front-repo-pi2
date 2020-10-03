@@ -137,7 +137,9 @@ export class RequerimientoSalidaComponent implements OnInit {
           app_id: "f1db39ee-06f3-4af8-9ffd-d6e94de8a3bd",
           included_segments: ["Active Users", "Inactive Users"],
           headings: {es: "Autorizado", en:"Update"},
-          contents: {es: "Se autorizó un requerimiento de salida", en: "req update"}
+          contents: {es: "Se autorizó un requerimiento de salida", en: "req update"},
+          isAndroid: true,
+          isAnyWeb: false
         }
         this.pushnotification.EnviarPush(this.data);
       }, (err) => {
@@ -218,7 +220,9 @@ export class RequerimientoSalidaComponent implements OnInit {
           app_id: "f1db39ee-06f3-4af8-9ffd-d6e94de8a3bd",
           included_segments: ["Active Users", "Inactive Users"],
           headings: {es: "Denegado", en:"Update"},
-          contents: {es: "Se denegó un requerimiento de salida", en: "req update"}
+          contents: {es: "Se denegó un requerimiento de salida", en: "req update"},
+          isAndroid: true,
+          isAnyWeb: false
         }
         this.pushnotification.EnviarPush(this.data);
         this.displayModalDenegar = false;

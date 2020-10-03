@@ -4,4 +4,6 @@ export class  PushMensaje {
     included_segments: string[];
     contents: PushMensajeDetalle;
     headings: PushMensajeDetalle;
+    isAnyWeb: boolean;
+    isAndroid: boolean;
 }
