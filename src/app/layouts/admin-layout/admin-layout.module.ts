@@ -18,6 +18,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UsuarioPerfilComponent } from 'app/pages/signia/usuario-perfil/usuario-perfil.component';
 import { RequerimientoSalidaComponent } from 'app/pages/signia/requerimiento-salida/requerimiento-salida.component';
 import { HistoricoSalidasComponent } from 'app/pages/signia/historico-salidas/historico-salidas.component';
+import { MantEmpleadoComponent } from '../../pages/signia/mant-empleado/mant-empleado.component';
 
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
@@ -74,7 +75,8 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
     HistoricoSalidasComponent,
     MantBaseComponent,
     MantResguardoComponent,
-    MantDestinoComponent
+    MantDestinoComponent,
+    MantEmpleadoComponent
   ]
 })
 
