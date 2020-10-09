@@ -27,7 +27,9 @@ export class GeneralService {
     findAllEmpleados() {
         return this.http.get<any[]>(environment.apiurl + "general/empleado");
     }
-    
+    EliminarEmpleado(id: number) {
+        return this.http.get<any[]>(environment.apiurl + "general/empleado/"+id+"/eliminar");
+    }
     saveEmpleado(empleado: Empleado) {
         return this.http.post<any>(environment.apiurl + "general/empleado", empleado);
     }

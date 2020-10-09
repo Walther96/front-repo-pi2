@@ -20,8 +20,8 @@
                     </ng-template>
                 </p-toolbar>
 
-                <p-table #dt [value]="lstEmpleados" [columns]="cols" [rows]="10" [paginator]="true" [globalFilterFields]="['nombre']" [(selection)]="empleadoSelected" [rowHover]="true" dataKey="id" currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
-                    [showCurrentPageReport]="true" styleClass="p-datatable-sm">
+                <p-table #dt [value]="lstEmpleados" [columns]="cols" [rows]="10" [globalFilterFields]="['nombres']" [(selection)]="empleadoSelected" [rowHover]="true" dataKey="id" currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros" [showCurrentPageReport]="true"
+                    styleClass="p-datatable-sm">
                     <ng-template pTemplate="caption">
                         <div class="p-d-flex p-ai-center p-jc-between">
                             <h6 class="p-m-0">Gestionar Empleados</h6>
@@ -58,7 +58,7 @@
                             </td>
                             <td>
                                 <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="click_btnEditar(rowData )"></button>
-                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="click_btnEliminar(rowData )"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="click_btnEliminar(rowData)"></button>
                             </td>
                         </tr>
                     </ng-template>

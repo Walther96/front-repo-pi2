@@ -54,14 +54,15 @@ export class MantEmpleadoComponent implements OnInit {
 
           }
         })
+        Swal.close();
 
+console.log(this.lstEmpleados)
 
       }, (err) => {
         Swal.close();
         this.messageService.add({ severity: 'error', summary: 'Ups! Error!', detail: 'Por favor, comuníquese con el administrador', life: 3000 });
       }, () => Swal.close()
     );
-    Swal.close();
 
   }
 
@@ -75,8 +76,33 @@ export class MantEmpleadoComponent implements OnInit {
     this.boolShowDialog = true;
   }
 
-  click_btnEliminar() {
-    this.messageService.add({ severity: 'warn', summary: 'Advertencia!', detail: 'Método aún no implementado', life: 3000 });
+  click_btnEliminar(empleado :Empleado) {
+    Swal.fire({
+      title: '¿Deseas eliminar a este empleado?',
+      text: "Se eliminará el empleado",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Eliminar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.generalservice.EliminarEmpleado(empleado.id).subscribe(
+          (data: any[]) => {
+        
+            this.cargaEmpleados();
+        
+          }, (err) => {
+            Swal.close();
+            this.messageService.add({ severity: 'error', summary: 'Ups! Error!', detail: 'Por favor, comuníquese con el administrador', life: 3000 });
+          }, () => Swal.close()
+        );
+        
+      }
+    })
+
+
+
   }
 
   click_btnNuevo() {
