@@ -15,6 +15,8 @@ import { MantBaseComponent } from 'app/pages/signia/mant-base/mant-base.componen
 import { MantDestinoComponent } from 'app/pages/signia/mant-destino/mant-destino.component';
 import { MantResguardoComponent } from 'app/pages/signia/mant-resguardo/mant-resguardo.component';
 import { MantEmpleadoComponent } from '../../pages/signia/mant-empleado/mant-empleado.component';
+import { CambiorutaComponent } from '../../pages/signia/cambioruta/cambioruta.component';
+
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard', component: DashboardComponent },
@@ -31,7 +33,9 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'mantbase', component: MantBaseComponent },
     { path: 'mantdestino', component: MantDestinoComponent },
     { path: 'mantresguardo', component: MantResguardoComponent },
-    { path: 'mantempleado', component: MantEmpleadoComponent }
+    { path: 'mantempleado', component: MantEmpleadoComponent },
+    { path: 'cambioruta', component: CambiorutaComponent }
+
 
 
 ];

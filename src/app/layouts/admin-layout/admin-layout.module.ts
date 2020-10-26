@@ -19,6 +19,7 @@ import { UsuarioPerfilComponent } from 'app/pages/signia/usuario-perfil/usuario-
 import { RequerimientoSalidaComponent } from 'app/pages/signia/requerimiento-salida/requerimiento-salida.component';
 import { HistoricoSalidasComponent } from 'app/pages/signia/historico-salidas/historico-salidas.component';
 import { MantEmpleadoComponent } from '../../pages/signia/mant-empleado/mant-empleado.component';
+import { CambiorutaComponent } from '../../pages/signia/cambioruta/cambioruta.component';
 
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
@@ -76,7 +77,8 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
     MantBaseComponent,
     MantResguardoComponent,
     MantDestinoComponent,
-    MantEmpleadoComponent
+    MantEmpleadoComponent,
+    CambiorutaComponent
   ]
 })
 

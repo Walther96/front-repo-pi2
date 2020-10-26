@@ -1,0 +1,41 @@
+<p-toast position="bottom-right"></p-toast>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Cambio de Ruta</h4>
+            </div>
+            <div class="card-body">
+
+                <div class="p-fluid p-formgrid p-grid">
+
+                    <div class="p-field p-col p-md-12">
+                        <label for="origen">Placa</label><br />
+                        <select [(ngModel)]="idPlaca" class="browser-default custom-select" (change)="callType($event)">
+                            <option value=0>Escoger una placa</option>
+                        <option *ngFor="let x of placas"  [value]="x.id">{{x.placa}}</option>
+
+                        </select>
+                    </div>
+
+                    <div *ngIf="isrutaactual" class="p-field p-col p-md-12">
+                        <label for="origen">Ruta Actual</label><br />
+                        <input disabled="true" [(ngModel)]="rutaActual" />
+                    </div>
+                    <div class="p-field p-col p-md-12">
+                        <label for="origen">Ruta</label><br />
+                        <select [(ngModel)]="idRuta" class="browser-default custom-select">
+                            <option value=0>Escoger una ruta</option>
+                        <option *ngFor="let x of ruta" [value]="x.id">{{x.nombre}}</option>
+
+                        </select>
+                    </div>
+
+                </div>
+                <p-button icon="pi pi-check" label="Grabar" (click)="CambiarRuta()" class="p-button-text"></p-button>
+
+            </div>
+        </div>
+    </div>
+</div>
