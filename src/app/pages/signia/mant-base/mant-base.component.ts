@@ -48,7 +48,12 @@ export class MantBaseComponent implements OnInit {
     this.lstBases = [];
     this.generalservice.findAllBases().subscribe(
       (data: any) => {
-        this.lstBases = data;
+        data.forEach(element =>{
+          if(element.estado){
+            this.lstBases.push(element);
+
+          }
+        })
         Swal.close();
       }, (err) => {
         Swal.close();
@@ -63,8 +68,30 @@ export class MantBaseComponent implements OnInit {
     this.boolShowBaseDialog = true;
   }
 
-  click_btnEliminarBase() {
-    this.messageService.add({ severity: 'warn', summary: 'Advertencia!', detail: 'Método aún no implementado', life: 3000 });
+  click_btnEliminarBase(base :BasePartida) {
+    Swal.fire({
+      title: '¿Deseas eliminar a esta base?',
+      text: "Se eliminará la base",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Eliminar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.generalservice.EliminarBase(base.id).subscribe(
+          (data: any[]) => {
+        
+            this.cargarBases();
+        
+          }, (err) => {
+            Swal.close();
+            this.messageService.add({ severity: 'error', summary: 'Ups! Error!', detail: 'Por favor, comuníquese con el administrador', life: 3000 });
+          }, () => Swal.close()
+        );
+        
+      }
+    })
   }
 
   click_btnNuevo() {

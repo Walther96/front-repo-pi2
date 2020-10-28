@@ -47,7 +47,12 @@ export class MantDestinoComponent implements OnInit {
     this.lstDestinos = [];
     this.generalservice.findAllDestinos().subscribe(
       (data: any) => {
-        this.lstDestinos = data;
+        data.forEach(element =>{
+          if(element.estado){
+            this.lstDestinos.push(element);
+
+          }
+        })
         Swal.close();
       }, (err) => {
         Swal.close();
@@ -66,8 +71,30 @@ export class MantDestinoComponent implements OnInit {
     this.boolShowDialog = true;
   }
 
-  click_btnEliminar() {
-    this.messageService.add({ severity: 'warn', summary: 'Advertencia!', detail: 'Método aún no implementado', life: 3000 });
+  click_btnEliminar(destino: Destino) {
+    Swal.fire({
+      title: '¿Deseas eliminar este destino?',
+      text: "Se eliminará el destino",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Eliminar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.generalservice.EliminarDestino(destino.id).subscribe(
+          (data: any[]) => {
+        
+            this.cargaDestinos();
+        
+          }, (err) => {
+            Swal.close();
+            this.messageService.add({ severity: 'error', summary: 'Ups! Error!', detail: 'Por favor, comuníquese con el administrador', life: 3000 });
+          }, () => Swal.close()
+        );
+        
+      }
+    })
   }
 
   click_btnNuevo() {

@@ -28,7 +28,16 @@ export class GeneralService {
         return this.http.get<any[]>(environment.apiurl + "general/empleado");
     }
     EliminarEmpleado(id: number) {
-        return this.http.get<any[]>(environment.apiurl + "general/empleado/"+id+"/eliminar");
+        return this.http.get<any[]>(environment.apiurl + "general/empleado/"+id+"/desactivar");
+    }
+    EliminarBase(id: number) {
+        return this.http.get<any[]>(environment.apiurl + "general/base/"+id+"/desactivar");
+    }
+    EliminarDestino(id: number) {
+        return this.http.get<any[]>(environment.apiurl + "general/destino/"+id+"/desactivar");
+    }
+    EliminarEmpresaResguardo(id: number) {
+        return this.http.get<any[]>(environment.apiurl + "general/resguardo/"+id+"/desactivar");
     }
     saveEmpleado(empleado: Empleado) {
         return this.http.post<any>(environment.apiurl + "general/empleado", empleado);

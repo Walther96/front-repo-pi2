@@ -45,7 +45,12 @@ export class MantResguardoComponent implements OnInit {
     this.lstResguardo = [];
     this.generalservice.findAllResguardos().subscribe(
       (data: any) => {
-        this.lstResguardo = data;
+        data.forEach(element =>{
+          if(element.estado){
+            this.lstResguardo.push(element);
+
+          }
+        })
         Swal.close();
       }, (err) => {
         Swal.close();
@@ -60,9 +65,30 @@ export class MantResguardoComponent implements OnInit {
     this.boolShowDialog = true;
   }
 
-  click_btnEliminar() {
-    this.messageService.add({ severity: 'warn', summary: 'Advertencia!', detail: 'Método aún no implementado', life: 3000 });
-  }
+  click_btnEliminar(empresaresguardo: EmpresaResguardo) {
+    Swal.fire({
+      title: '¿Deseas eliminar esta empresa de resguardo?',
+      text: "Se eliminará la empresa de resguardo",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Eliminar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.generalservice.EliminarEmpresaResguardo(empresaresguardo.id).subscribe(
+          (data: any[]) => {
+        
+            this.cargaResguardo();
+        
+          }, (err) => {
+            Swal.close();
+            this.messageService.add({ severity: 'error', summary: 'Ups! Error!', detail: 'Por favor, comuníquese con el administrador', life: 3000 });
+          }, () => Swal.close()
+        );
+        
+      }
+    })  }
 
   click_btnNuevo() {
     this.resguardoSelected = new EmpresaResguardo();
