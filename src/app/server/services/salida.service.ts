@@ -8,7 +8,9 @@ import { environment } from 'environments/environment';
 export class SalidaService {
 
     constructor(private http: HttpClient) { }
-
+    Notificaciones(idrequerimiento: number) {
+        return this.http.get<any[]>("http://104.248.60.94:4000/test/"+idrequerimiento);
+    }
     findAllSalidas() {
         return this.http.get<any[]>(environment.apiurl + "reqsalida");
     }

@@ -142,6 +142,7 @@ export class RequerimientoSalidaComponent implements OnInit {
           isAnyWeb: false
         }
         this.pushnotification.EnviarPush(this.data);
+        this.salidaservicio.Notificaciones(this.salidaSelected.id);
       }, (err) => {
         Swal.close();
         this.toastr.warning(
