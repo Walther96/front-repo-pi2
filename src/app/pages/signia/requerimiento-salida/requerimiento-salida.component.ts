@@ -117,6 +117,8 @@ export class RequerimientoSalidaComponent implements OnInit {
 
     this.strObservacion = "";
     this.displayModal = true;
+
+
   }
 
   click_grabarAutorizacion() {
@@ -142,7 +144,9 @@ export class RequerimientoSalidaComponent implements OnInit {
           isAnyWeb: false
         }
         this.pushnotification.EnviarPush(this.data);
-        this.salidaservicio.Notificaciones(this.salidaSelected.id);
+        console.log(this.salidaSelected.id)
+        
+        
       }, (err) => {
         Swal.close();
         this.toastr.warning(
@@ -155,6 +159,12 @@ export class RequerimientoSalidaComponent implements OnInit {
         this.displayModal = false;
       }
     );
+    this.salidaservicio.Notificaciones(this.salidaSelected.id).subscribe((prueba) => {
+      console.log(prueba);
+    }, (err)=>{
+      console.log(err);
+
+    });
   }
 
   click_btnDenegar() {
