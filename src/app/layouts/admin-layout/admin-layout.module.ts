@@ -32,6 +32,7 @@ import { KeyFilterModule } from 'primeng/keyfilter';
 import { MantBaseComponent } from 'app/pages/signia/mant-base/mant-base.component';
 import { MantResguardoComponent } from 'app/pages/signia/mant-resguardo/mant-resguardo.component';
 import { MantDestinoComponent } from 'app/pages/signia/mant-destino/mant-destino.component';
+import { MantVehiculoComponent } from 'app/pages/signia/mant-vehiculo/mant-vehiculo.component';
 import { ToastrModule } from 'ngx-toastr';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
@@ -78,6 +79,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
     MantResguardoComponent,
     MantDestinoComponent,
     MantEmpleadoComponent,
+    MantVehiculoComponent,
     CambiorutaComponent
   ]
 })

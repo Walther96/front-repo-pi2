@@ -21,7 +21,6 @@ import { LoginComponent } from './pages/signia/login/login.component';
     AppComponent,
     AdminLayoutComponent,
     LoginComponent
-    
   ],
   imports: [
     BrowserAnimationsModule,
