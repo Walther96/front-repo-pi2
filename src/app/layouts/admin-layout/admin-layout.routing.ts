@@ -17,6 +17,8 @@ import { MantResguardoComponent } from 'app/pages/signia/mant-resguardo/mant-res
 import { MantEmpleadoComponent } from '../../pages/signia/mant-empleado/mant-empleado.component';
 import { CambiorutaComponent } from '../../pages/signia/cambioruta/cambioruta.component';
 import { MantVehiculoComponent } from '../../pages/signia/mant-vehiculo/mant-vehiculo.component';
+import { MantClienteComponent } from '../../pages/signia/mant-cliente/mant-cliente.component';
+
 
 
 
@@ -37,7 +39,9 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'mantresguardo', component: MantResguardoComponent },
     { path: 'mantempleado', component: MantEmpleadoComponent },
     { path: 'cambioruta', component: CambiorutaComponent },
-    { path: 'mantvehiculo', component: MantVehiculoComponent }
+    { path: 'mantvehiculo', component: MantVehiculoComponent },
+    { path: 'mantcliente', component: MantClienteComponent }
+
 
 
 

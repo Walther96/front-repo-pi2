@@ -61,7 +61,7 @@ export class CambiorutaComponent implements OnInit {
 
   
   callType(selectedValue: string) {
-    var Nombre = this.placas.filter(x => x.id = this.idPlaca);
+    var Nombre = this.placas.find(x => x.id = this.idPlaca);
     console.log(Nombre[0].ruta);
     this.isrutaactual = true;
     this.rutaActual = Nombre[0].ruta;

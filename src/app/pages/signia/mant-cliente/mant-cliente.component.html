@@ -4,8 +4,8 @@
     <div class="col-md-7">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title"> Vehiculos</h4>
-                <p class="card-category"> Listado de los vehiculos</p>
+                <h4 class="card-title"> Clientes</h4>
+                <p class="card-category"> Listado de Clientes</p>
             </div>
             <div class="card-body">
                 <p-toolbar>
@@ -19,11 +19,11 @@
                     </ng-template>
                 </p-toolbar>
 
-                <p-table #dt [value]="lstVehiculos" [columns]="cols" [rows]="10" [paginator]="true" [globalFilterFields]="['placa']" [(selection)]="vehiculoSelected" [rowHover]="true" dataKey="id" currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+                <p-table #dt [value]="lstClientes" [columns]="cols" [rows]="10" [paginator]="true" [globalFilterFields]="['nombre']" [(selection)]="clienteSelected" [rowHover]="true" dataKey="id" currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
                     [showCurrentPageReport]="true" styleClass="p-datatable-sm">
                     <ng-template pTemplate="caption">
                         <div class="p-d-flex p-ai-center p-jc-between">
-                            <h6 class="p-m-0">Gestionar Vehiculos</h6>
+                            <h6 class="p-m-0">Gestionar Clientes</h6>
                             <span class="p-input-icon-left">
                                 <i class="pi pi-search"></i>
                                 <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
@@ -48,13 +48,9 @@
                                 <p-tableCheckbox [value]="rowData "></p-tableCheckbox>
                             </td>
                             <td *ngFor="let col of columns">
-                                <span *ngIf="col.esobjeto">
-                                    {{rowData[col.field].descripcion}}
-                                </span>
-                                <span *ngIf="!col.esfecha && !col.esobjeto">
+                                <span *ngIf="!col.esfecha">
                                     {{rowData[col.field]}}
                                 </span>
-
                                 <span *ngIf="col.esfecha">
                                     {{rowData[col.field]| date:'dd/MM/yyyy HH:mm'}}
                                 </span>
@@ -76,35 +72,29 @@
     </div>
 </div>
 
-<p-dialog header="Detalle de Vehiculo" [(visible)]="boolShowBaseDialog" [focusOnShow]="false" showEffect="fade" [modal]="true" [style]="{width: '300px'}">
+<p-dialog header="Detalle del Cliente" [(visible)]="boolShowBaseDialog" [focusOnShow]="false" showEffect="fade" [modal]="true" [style]="{width: '300px'}">
     <div class="p-grid p-formgrid ui-fluid">
         <div class="p-field p-col">
             <label for="id">Id</label><br/>
             <span class="p-input-icon-left">
                 <i class="pi pi-key"></i>
-                <input id="id" pInputText type="text" [(ngModel)]="vehiculoSelected && vehiculoSelected.id" [disabled]="true">
+                <input id="id" pInputText type="text" [(ngModel)]="clienteSelected && clienteSelected.id" [disabled]="true">
             </span>
         </div>
         <div class="p-field p-col">
-            <label for="id">Codigo</label><br/>
-            <span class="p-input-icon-left">
-                <i class="pi pi-key"></i>
-                <input id="id" pInputText type="text" [(ngModel)]="vehiculoSelected && vehiculoSelected.codigo" >
-            </span>
-        </div>
-        <div class="p-field p-col">
-            <label for="origen">Placa</label>
+            <label for="origen">Ruc</label>
+            <br>
             <span class="p-input-icon-left">
                 <i class="pi pi-home"></i>
-                <input id="origen" pInputText type="text" [(ngModel)]="vehiculoSelected && vehiculoSelected.placa">
+                <input id="origen" pInputText type="text" [(ngModel)]="clienteSelected && clienteSelected.ruc">
             </span>
         </div>
-        <div class="p-fluid p-formgrid p-grid">
-            <div class="p-field p-col">
-                <label for="id">Tipo Vehiculo</label>
-                <p-dropdown id="id" [options]="lstTipoVehiculos" placeholder="Selecciona un tipo de vehiculo" optionLabel="descripcion" [(ngModel)]="vehiculoSelected && vehiculoSelected.tipovehiculo">
-                </p-dropdown>
-            </div>
+        <div class="p-field p-col">
+            <label for="origen">Razon Social</label>
+            <span class="p-input-icon-left">
+                <i class="pi pi-home"></i>
+                <input id="origen" pInputText type="text" [(ngModel)]="clienteSelected && clienteSelected.razonsocial">
+            </span>
         </div>
     </div>
     <p-footer>

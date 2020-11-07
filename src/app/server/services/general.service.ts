@@ -6,6 +6,7 @@ import { Destino } from '../models/destino';
 import { EmpresaResguardo } from '../models/empresa-resguardo';
 import { Empleado } from '../models/empleado';
 import { Vehiculo } from '../models/vehiculo';
+import { Cliente } from '../models/cliente';
 
 @Injectable({
     providedIn: 'root'
@@ -24,6 +25,9 @@ export class GeneralService {
     findAllVehiculos() {
         return this.http.get<any[]>(environment.apiurl + "general/vehiculo");
     }
+    findAllClientes() {
+        return this.http.get<any[]>(environment.apiurl + "general/cliente");
+    }
     findAllTipoVehiculos() {
         return this.http.get<any[]>(environment.apiurl + "general/tipovehiculo");
     }
@@ -36,6 +40,9 @@ export class GeneralService {
     }
     EliminarVehiculo(id: number) {
         return this.http.get<any[]>(environment.apiurl + "general/vehiculo/"+id+"/desactivar");
+    }
+    EliminarCliente(id: number) {
+        return this.http.get<any[]>(environment.apiurl + "general/cliente/"+id+"/desactivar");
     }
     EliminarEmpleado(id: number) {
         return this.http.get<any[]>(environment.apiurl + "general/empleado/"+id+"/desactivar");
@@ -68,6 +75,13 @@ export class GeneralService {
     }
     saveVehiculo(vehiculo: Vehiculo) {
         return this.http.post<any>(environment.apiurl + "general/vehiculo", vehiculo);
+    }
+    saveCliente(cliente: Cliente) {
+        return this.http.post<any>(environment.apiurl + "general/cliente", cliente);
+    }
+
+    editarCliente(cliente: Cliente) {
+        return this.http.post<any>(environment.apiurl + "general/cliente/" + cliente.id, cliente);
     }
     editarVehiculo(vehiculo: Vehiculo) {
         return this.http.post<any>(environment.apiurl + "general/vehiculo/" + vehiculo.id, vehiculo);

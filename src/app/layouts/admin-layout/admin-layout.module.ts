@@ -33,6 +33,7 @@ import { MantBaseComponent } from 'app/pages/signia/mant-base/mant-base.componen
 import { MantResguardoComponent } from 'app/pages/signia/mant-resguardo/mant-resguardo.component';
 import { MantDestinoComponent } from 'app/pages/signia/mant-destino/mant-destino.component';
 import { MantVehiculoComponent } from 'app/pages/signia/mant-vehiculo/mant-vehiculo.component';
+import { MantClienteComponent } from 'app/pages/signia/mant-cliente/mant-cliente.component';
 import { ToastrModule } from 'ngx-toastr';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
@@ -80,7 +81,8 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
     MantDestinoComponent,
     MantEmpleadoComponent,
     MantVehiculoComponent,
-    CambiorutaComponent
+    CambiorutaComponent,
+    MantClienteComponent
   ]
 })
 

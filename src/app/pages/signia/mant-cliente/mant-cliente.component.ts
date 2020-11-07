@@ -6,22 +6,24 @@ import { screenConstant } from 'app/constants/screenConstant';
 import { notifyConstant } from 'app/constants/notifyconstant';
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
-import { Vehiculo } from 'app/server/models/vehiculo';
+import { Cliente } from 'app/server/models/cliente';
+
+
 @Component({
-  selector: 'app-mant-vehiculo',
-  templateUrl: './mant-vehiculo.component.html',
-  styleUrls: ['./mant-vehiculo.component.css'],
+  selector: 'app-mant-cliente',
+  templateUrl: './mant-cliente.component.html',
+  styleUrls: ['./mant-cliente.component.css'],
   providers: [MessageService, ConfirmationService]
 
 })
-export class MantVehiculoComponent implements OnInit {
+export class MantClienteComponent implements OnInit {
+
   cols: any[];
-  vehiculoSelected: Vehiculo;
+  clienteSelected: Cliente;
   boolShowBaseDialog: boolean;
   boolNuevo: boolean;
 
-  lstVehiculos: any[];
-  lstTipoVehiculos: any[];
+  lstClientes: any[];
 
   constructor(
     private generalservice: GeneralService,
@@ -34,26 +36,23 @@ export class MantVehiculoComponent implements OnInit {
     this.boolShowBaseDialog = false;
 
     this.cols = [
-      { field: 'id', header: 'Id', esfecha: false, esobjeto: false },
-      { field: 'codigo', header: 'Codigo', esfecha: false, esobjeto: false },
-      { field: 'placa', header: 'Placa', esfecha: false, esobjeto: false },
-      { field: 'tipovehiculo', header: 'Tipo Vehiculo', esfecha: false, esobjeto: true}
-
+      { field: 'id', header: 'Id', esfecha: false },
+      { field: 'ruc', header: 'Ruc', esfecha: false },
+      { field: 'razonsocial', header: 'Razon Social', esfecha: false }
     ];
 
-    this.cargarVehiculos();
-    this.cargarTipoVehiculos();
+    this.cargarClientes();
 
   }
 
-  cargarVehiculos() {
+  cargarClientes() {
     Swal.fire(screenConstant.loading);
-    this.lstVehiculos = [];
-    this.generalservice.findAllVehiculos().subscribe(
+    this.lstClientes = [];
+    this.generalservice.findAllClientes().subscribe(
       (data: any) => {
         data.forEach(element =>{
           if(element.estado){
-            this.lstVehiculos.push(element);
+            this.lstClientes.push(element);
 
           }
         })
@@ -64,31 +63,17 @@ export class MantVehiculoComponent implements OnInit {
       }, () => Swal.close()
     );
   }
-  cargarTipoVehiculos() {
-    Swal.fire(screenConstant.loading);
-    this.lstTipoVehiculos = [];
-    this.generalservice.findAllTipoVehiculos().subscribe(
-      (data: any) => {
-            this.lstTipoVehiculos = data;
 
-          
-        Swal.close();
-      }, (err) => {
-        Swal.close();
-        this.messageService.add({ severity: 'error', summary: 'Ups! Error!', detail: 'Por favor, comuníquese con el administrador', life: 3000 });
-      }, () => Swal.close()
-    );
-  }
-  click_btnEditarBase(vehiculo: Vehiculo) {
+  click_btnEditarBase(cliente: Cliente) {
     this.boolNuevo = false;
-    this.vehiculoSelected = vehiculo;
+    this.clienteSelected = cliente;
     this.boolShowBaseDialog = true;
   }
 
-  click_btnEliminarBase(vehiculo: Vehiculo) {
+  click_btnEliminarBase(cliente :Cliente) {
     Swal.fire({
-      title: '¿Deseas eliminar a este vehiculo?',
-      text: "Se eliminará el vehiculo",
+      title: '¿Deseas eliminar a este cliente?',
+      text: "Se eliminará el cliente",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -96,12 +81,11 @@ export class MantVehiculoComponent implements OnInit {
       confirmButtonText: 'Eliminar'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.generalservice.EliminarVehiculo(vehiculo.id).subscribe(
+        this.generalservice.EliminarCliente(cliente.id).subscribe(
           (data: any[]) => {
         
-            this.cargarVehiculos();
-            this.messageService.add({ severity: 'success', summary: 'Ok!', detail: 'Proceso culminado satisfactoriamente', life: 3000 });
-
+            this.cargarClientes();
+        
           }, (err) => {
             Swal.close();
             this.messageService.add({ severity: 'error', summary: 'Ups! Error!', detail: 'Por favor, comuníquese con el administrador', life: 3000 });
@@ -113,24 +97,24 @@ export class MantVehiculoComponent implements OnInit {
   }
 
   click_btnNuevo() {
-    this.vehiculoSelected = new Vehiculo();
+    this.clienteSelected = new Cliente();
     this.boolShowBaseDialog = true;
     this.boolNuevo = true;
   }
 
   click_btnCancelarGrabarBase() {
-    this.vehiculoSelected = new Vehiculo();
+    this.clienteSelected = new Cliente();
     this.boolShowBaseDialog = false;
   }
 
   click_btnGrabarBase() {
     Swal.fire(screenConstant.loading);
     if (this.boolNuevo) {
-      this.generalservice.saveVehiculo(this.vehiculoSelected).subscribe(
+      this.generalservice.saveCliente(this.clienteSelected).subscribe(
         (data: any) => {
           this.boolShowBaseDialog = false;
           this.messageService.add({ severity: 'success', summary: 'Ok!', detail: 'Proceso culminado satisfactoriamente', life: 3000 });
-          this.cargarVehiculos();
+          this.cargarClientes();
           Swal.close();
         }, (err) => {
           console.log(err);
@@ -140,11 +124,11 @@ export class MantVehiculoComponent implements OnInit {
       );
 
     } else {
-      this.generalservice.editarVehiculo(this.vehiculoSelected).subscribe(
+      this.generalservice.editarCliente(this.clienteSelected).subscribe(
         (data: any) => {
           this.boolShowBaseDialog = false;
           this.messageService.add({ severity: 'success', summary: 'Ok!', detail: 'Proceso culminado satisfactoriamente', life: 3000 });
-          this.cargarVehiculos();
+          this.cargarClientes();
           Swal.close();
         }, (err) => {
           Swal.close();
@@ -153,6 +137,5 @@ export class MantVehiculoComponent implements OnInit {
       );
     }
   }
-
 
 }
