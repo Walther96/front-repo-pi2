@@ -35,8 +35,7 @@ export class MantBaseComponent implements OnInit {
 
     this.cols = [
       { field: 'id', header: 'Id', esfecha: false },
-      { field: 'nombre', header: 'Nombre Base', esfecha: false },
-      { field: 'fechacreacion', header: 'Fecha creación', esfecha: true }
+      { field: 'descripcion', header: 'Nombre Base', esfecha: false }
     ];
 
     this.cargarBases();
@@ -48,12 +47,7 @@ export class MantBaseComponent implements OnInit {
     this.lstBases = [];
     this.generalservice.findAllBases().subscribe(
       (data: any) => {
-        data.forEach(element =>{
-          if(element.estado){
-            this.lstBases.push(element);
-
-          }
-        })
+          this.lstBases = data.resultado
         Swal.close();
       }, (err) => {
         Swal.close();
@@ -81,7 +75,8 @@ export class MantBaseComponent implements OnInit {
       if (result.isConfirmed) {
         this.generalservice.EliminarBase(base.id).subscribe(
           (data: any[]) => {
-        
+            this.messageService.add({ severity: 'success', summary: 'Ok!', detail: 'Proceso culminado satisfactoriamente', life: 3000 });
+
             this.cargarBases();
         
           }, (err) => {

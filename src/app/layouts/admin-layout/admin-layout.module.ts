@@ -15,12 +15,9 @@ import { NotificationsComponent } from '../../pages/notifications/notifications.
 import { UpgradeComponent } from '../../pages/upgrade/upgrade.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { UsuarioPerfilComponent } from 'app/pages/signia/usuario-perfil/usuario-perfil.component';
-import { RequerimientoSalidaComponent } from 'app/pages/signia/requerimiento-salida/requerimiento-salida.component';
-import { HistoricoSalidasComponent } from 'app/pages/signia/historico-salidas/historico-salidas.component';
 import { MantEmpleadoComponent } from '../../pages/signia/mant-empleado/mant-empleado.component';
-import { CambiorutaComponent } from '../../pages/signia/cambioruta/cambioruta.component';
-
+import { RutaComponent } from '../../pages/signia/ruta/ruta.component';
+import { BuscarRutaComponent } from '../../pages/signia/buscar-ruta/buscar-ruta.component';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
@@ -30,10 +27,8 @@ import { DialogModule } from 'primeng/dialog';
 import { DropdownModule } from 'primeng/dropdown';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { MantBaseComponent } from 'app/pages/signia/mant-base/mant-base.component';
-import { MantResguardoComponent } from 'app/pages/signia/mant-resguardo/mant-resguardo.component';
 import { MantDestinoComponent } from 'app/pages/signia/mant-destino/mant-destino.component';
 import { MantVehiculoComponent } from 'app/pages/signia/mant-vehiculo/mant-vehiculo.component';
-import { MantClienteComponent } from 'app/pages/signia/mant-cliente/mant-cliente.component';
 import { ToastrModule } from 'ngx-toastr';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
@@ -41,6 +36,12 @@ import { ToastModule } from 'primeng/toast';
 import { ToolbarModule } from 'primeng/toolbar';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { AgmCoreModule } from '@agm/core';
+import { InfraccionesComponent } from 'app/pages/signia/infracciones/infracciones.component';
+import { PapeletaComponent } from 'app/pages/signia/papeleta/papeleta.component';
+import { GrupoInspectoresComponent } from 'app/pages/signia/grupo-inspectores/grupo-inspectores.component';
+import { ReportePapeletasComponent } from 'app/pages/signia/reporte-papeletas/reporte-papeletas.component';
+import { MantUsuarioComponent } from 'app/pages/signia/mant-usuario/mant-usuario.component';
 
 @NgModule({
   imports: [
@@ -62,7 +63,12 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
     ToastModule,
     ToolbarModule,
     CheckboxModule,
-    InputTextareaModule
+    InputTextareaModule,
+    AgmCoreModule.forRoot({
+      // please get your own API key here:
+      // https://developers.google.com/maps/documentation/javascript/get-api-key?hl=en
+
+    })
   ],
   declarations: [
     DashboardComponent,
@@ -73,16 +79,17 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
     IconsComponent,
     MapsComponent,
     NotificationsComponent,
-    UsuarioPerfilComponent,
-    RequerimientoSalidaComponent,
-    HistoricoSalidasComponent,
     MantBaseComponent,
-    MantResguardoComponent,
     MantDestinoComponent,
     MantEmpleadoComponent,
     MantVehiculoComponent,
-    CambiorutaComponent,
-    MantClienteComponent
+    RutaComponent,
+    BuscarRutaComponent,
+    InfraccionesComponent,
+    PapeletaComponent,
+    GrupoInspectoresComponent,
+    ReportePapeletasComponent,
+    MantUsuarioComponent
   ]
 })
 

@@ -20,7 +20,7 @@ export class MantEmpleadoComponent implements OnInit {
   empleadoSelected: Empleado;
   boolShowDialog: boolean;
   boolNuevo: boolean;
-
+  tipodocumentos: any[]= [];
   lstEmpleados: any[];
 
   constructor(
@@ -34,26 +34,28 @@ export class MantEmpleadoComponent implements OnInit {
 
     this.cols = [
       { field: 'id', header: 'Id', esfecha: false },
-      { field: 'dni', header: 'DNI', esfecha: false },
+      { field: 'documento', header: 'N° Documento', esfecha: false },
       { field: 'nombres', header: 'Nombres', esfecha: false },
-      { field: 'apellidos', header: 'Apellidos', esfecha: false },
-      { field: 'fechacreacion', header: 'Fecha creación', esfecha: true }
+      { field: 'apellidos', header: 'Apellidos', esfecha: false }
     ];
-
+    
     this.cargaEmpleados();
+    this.cargarTipoDocumentos();
   }
 
+  cargarTipoDocumentos(){
+this.generalservice.findAllTipoDocumento().subscribe(data=>{
+  this.tipodocumentos = data.resultado;
+})
+  }
   cargaEmpleados() {
     Swal.fire(screenConstant.loading);
     this.lstEmpleados = [];
     this.generalservice.findAllEmpleados().subscribe(
-      (data: any[]) => {
-        data.forEach(element =>{
-          if(element.estado){
-            this.lstEmpleados.push(element);
+      (data) => {
+            this.lstEmpleados = data.resultado;
 
-          }
-        })
+          
         Swal.close();
 
 console.log(this.lstEmpleados)
@@ -88,8 +90,9 @@ console.log(this.lstEmpleados)
     }).then((result) => {
       if (result.isConfirmed) {
         this.generalservice.EliminarEmpleado(empleado.id).subscribe(
-          (data: any[]) => {
-        
+          (data: any) => {
+            this.messageService.add({ severity: 'success', summary: 'Ok!', detail: 'Proceso culminado satisfactoriamente', life: 3000 });
+
             this.cargaEmpleados();
         
           }, (err) => {

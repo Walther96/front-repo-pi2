@@ -83,11 +83,18 @@
                     [disabled]="true">
             </span>
         </div>
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="id">Tipo Documento</label>
+                <p-dropdown id="id" [options]="tipodocumentos" placeholder="Selecciona un tipo de documento" optionLabel="descripcion" [(ngModel)]="empleadoSelected && empleadoSelected.tipodocumento">
+                </p-dropdown>
+            </div>
+        </div>
         <div class="p-field p-col p-md-12">
-            <label for="origen">DNI</label><br />
+            <label for="origen">N° Documento</label><br />
             <span class="p-input-icon-left">
                 <i class="pi pi-id-card"></i>
-                <input id="origen" pInputText type="text" [(ngModel)]="empleadoSelected && empleadoSelected.dni">
+                <input id="origen" pInputText type="text" [(ngModel)]="empleadoSelected && empleadoSelected.documento">
             </span>
         </div>
         <div class="p-field p-col p-md-12">
@@ -104,7 +111,13 @@
                 <input id="origen" pInputText type="text" [(ngModel)]="empleadoSelected && empleadoSelected.apellidos">
             </span>
         </div>
-
+        <div class="p-field p-col p-md-12">
+            <label for="origen">Telefono</label>
+            <span class="p-input-icon-left">
+                <i class="pi pi-home"></i>
+                <input id="origen" pInputText type="text" [(ngModel)]="empleadoSelected && empleadoSelected.telefono">
+            </span>
+        </div>
     </div>
     <p-footer>
         <div class="ui-dialog-buttonpane ui-helper-clearfix">

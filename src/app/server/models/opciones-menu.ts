@@ -1,6 +1,5 @@
 export class OpcionesMenu {
-    "id": number;
-    "path": String;
-    "title": String;
-    "icon": String;
+    id: number;
+    path: String;
+    nombre: String;
 }

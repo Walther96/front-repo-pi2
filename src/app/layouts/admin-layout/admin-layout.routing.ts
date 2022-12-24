@@ -8,40 +8,39 @@ import { IconsComponent } from '../../pages/icons/icons.component';
 import { MapsComponent } from '../../pages/maps/maps.component';
 import { NotificationsComponent } from '../../pages/notifications/notifications.component';
 import { UpgradeComponent } from '../../pages/upgrade/upgrade.component';
-import { UsuarioPerfilComponent } from 'app/pages/signia/usuario-perfil/usuario-perfil.component';
-import { RequerimientoSalidaComponent } from 'app/pages/signia/requerimiento-salida/requerimiento-salida.component';
-import { HistoricoSalidasComponent } from 'app/pages/signia/historico-salidas/historico-salidas.component';
 import { MantBaseComponent } from 'app/pages/signia/mant-base/mant-base.component';
 import { MantDestinoComponent } from 'app/pages/signia/mant-destino/mant-destino.component';
-import { MantResguardoComponent } from 'app/pages/signia/mant-resguardo/mant-resguardo.component';
 import { MantEmpleadoComponent } from '../../pages/signia/mant-empleado/mant-empleado.component';
-import { CambiorutaComponent } from '../../pages/signia/cambioruta/cambioruta.component';
 import { MantVehiculoComponent } from '../../pages/signia/mant-vehiculo/mant-vehiculo.component';
-import { MantClienteComponent } from '../../pages/signia/mant-cliente/mant-cliente.component';
+import { RutaComponent } from '../../pages/signia/ruta/ruta.component';
+import { BuscarRutaComponent } from '../../pages/signia/buscar-ruta/buscar-ruta.component';
+import { InfraccionesComponent } from 'app/pages/signia/infracciones/infracciones.component';
+import { PapeletaComponent } from 'app/pages/signia/papeleta/papeleta.component';
+import { GrupoInspectoresComponent } from 'app/pages/signia/grupo-inspectores/grupo-inspectores.component';
+import { ReportePapeletasComponent } from 'app/pages/signia/reporte-papeletas/reporte-papeletas.component';
+import { MantUsuarioComponent } from 'app/pages/signia/mant-usuario/mant-usuario.component';
 
 
 
 
 export const AdminLayoutRoutes: Routes = [
-    { path: 'dashboard', component: DashboardComponent },
-    { path: 'user', component: UserComponent },
-    { path: 'table', component: TableComponent },
-    { path: 'typography', component: TypographyComponent },
-    { path: 'icons', component: IconsComponent },
-    { path: 'maps', component: MapsComponent },
-    { path: 'notifications', component: NotificationsComponent },
-    { path: 'upgrade', component: UpgradeComponent },
-    { path: 'usuarioperfil', component: UsuarioPerfilComponent },
-    { path: 'requerimientosalida', component: RequerimientoSalidaComponent },
-    { path: 'historicosalidas', component: HistoricoSalidasComponent },
-    { path: 'mantbase', component: MantBaseComponent },
-    { path: 'mantdestino', component: MantDestinoComponent },
-    { path: 'mantresguardo', component: MantResguardoComponent },
-    { path: 'mantempleado', component: MantEmpleadoComponent },
-    { path: 'cambioruta', component: CambiorutaComponent },
-    { path: 'mantvehiculo', component: MantVehiculoComponent },
-    { path: 'mantcliente', component: MantClienteComponent }
+   
+    { path: 'ruta', component: RutaComponent },
+    { path: 'buscaruta', component: BuscarRutaComponent },
+    { path: 'mant-base', component: MantBaseComponent },
+    { path: 'mant-destino', component: MantDestinoComponent },
+    { path: 'mant-empleado', component: MantEmpleadoComponent },
+    { path: 'mant-vehiculo', component: MantVehiculoComponent },
+    { path: 'mant-infracciones', component: InfraccionesComponent },
+    { path: 'mant-papeleta', component: PapeletaComponent },
+    { path: 'mant-grupo-inspectores', component: GrupoInspectoresComponent },
+    { path: 'reporte-papeleta', component: ReportePapeletasComponent },
+    { path: 'mant-usuario', component: MantUsuarioComponent }
 
+
+
+
+    
 
 
 

@@ -15,12 +15,18 @@ import { AppRoutes } from './app.routing';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { LoginComponent } from './pages/signia/login/login.component';
+import { AgmCoreModule } from '@agm/core';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     LoginComponent
+    
+    
+    
+    
     
   ],
   imports: [
@@ -30,6 +36,11 @@ import { LoginComponent } from './pages/signia/login/login.component';
       useHash: true
     }),
     SidebarModule,
+    AgmCoreModule.forRoot({
+      // please get your own API key here:
+      // https://developers.google.com/maps/documentation/javascript/get-api-key?hl=en
+      apiKey: 'AIzaSyCn5ZPaX-0SB42p3R2-zolZBp0-9NMyGv0'
+    }),
     NavbarModule,
     ToastrModule.forRoot(),
     FooterModule,

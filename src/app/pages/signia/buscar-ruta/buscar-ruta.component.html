@@ -1,0 +1,32 @@
+<div class="content">
+    <h3 style="text-align: center;">Buscar ruta</h3>
+    <div class="item" style="margin-bottom: 5%;">
+        <input id="origen" pInputText class="form-control" class="finp" placeholder="nombre de ruta" pInputText type="text" [(ngModel)]="ruta">
+        <button type="button" pButton icon="pi pi-search" (click)="BuscarRuta()" label="Buscar"></button>
+
+
+    </div>
+    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="13" [disableDefaultUI]="false">
+
+        <agm-marker *ngFor="let m of markers; let i = index" [latitude]="m.lat" [longitude]="m.lng" [label]="m.label">
+
+            <agm-info-window>
+                <strong>InfoWindow content</strong>
+            </agm-info-window>
+
+        </agm-marker>
+
+        <agm-circle>
+        </agm-circle>
+        <agm-polyline [strokeColor]="'#28C7A1'" [strokeWeight]="5">
+            <ng-container *ngFor="let i of markers">
+                <agm-polyline-point [latitude]="i.lat" [longitude]="i.lng">
+                </agm-polyline-point>
+            </ng-container>
+
+        </agm-polyline>
+
+    </agm-map>
+
+
+</div>

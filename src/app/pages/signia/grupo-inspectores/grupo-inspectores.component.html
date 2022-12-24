@@ -1,0 +1,170 @@
+<p-toast position="bottom-right"></p-toast>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title"> Grupo de Inspectores</h4>
+                <p class="card-category"> Listado de Grupo de Inspectores registrados</p>
+            </div>
+            <div class="card-body">
+                <p-toolbar>
+                    <ng-template pTemplate="left">
+                        <p-button label="Refrescar" icon="pi pi-refresh" class="p-button-success p-mr-2" styleClass="p-button-sm" (click)="click_btnRefrescar()"></p-button>
+                        <p-button label="Nuevo" icon="pi pi-plus" class="p-button-success p-mr-2" styleClass="p-button-sm" (click)="click_btnNuevo()"></p-button>
+                    </ng-template>
+
+                    <ng-template pTemplate="right">
+
+                        <!--<p-button label="Export" icon="pi pi-upload" class="p-button-help" styleClass="p-button-sm"></p-button>-->
+                    </ng-template>
+                </p-toolbar>
+
+                <p-table #dt [value]="lstGrupoInspectors" [columns]="cols" [rows]="10" [paginator]="true" [globalFilterFields]="['codigo','distrito','turno']" [(selection)]="grupoInspectorSelected" [rowHover]="true" dataKey="id" currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+                    [showCurrentPageReport]="true" styleClass="p-datatable-sm">
+                    <ng-template pTemplate="caption">
+                        <div class="p-d-flex p-ai-center p-jc-between">
+                            <h6 class="p-m-0">Gestionar Grupo de Inspectores</h6>
+                            <span class="p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                                    placeholder="Buscar..." class="p-inputtext-sm" />
+                            </span>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th style="width: 3rem">
+                                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                            </th>
+                            <th *ngFor="let col of columns">
+                                {{col.header}}
+                            </th>
+                            <th></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowData let-columns="columns">
+                        <tr>
+                            <td>
+                                <p-tableCheckbox [value]="rowData "></p-tableCheckbox>
+                            </td>
+                            <td *ngFor="let col of columns">
+                                <span *ngIf="!col.esfecha">
+                                    {{rowData[col.field]}}
+                                </span>
+                                <span *ngIf="col.esfecha">
+                                    {{rowData[col.field]| date:'dd/MM/yyyy HH:mm'}}
+                                </span>
+                            </td>
+                            <td>
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="click_btnEditar(rowData )"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="click_btnEliminar(rowData )"></button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <!--<ng-template pTemplate="summary">
+                        <div class="p-d-flex p-ai-center p-jc-between">
+                            Total de registros {{lstBases ? lstBases.length : 0 }} Registros.
+                        </div>
+                    </ng-template>-->
+                </p-table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-dialog header="Detalle de Grupo Inspector" [(visible)]="boolShowDialog" [focusOnShow]="false" showEffect="fade" [modal]="true" [style]="{width: '400px'}">
+    <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col p-md-12">
+            <label for="id">Id</label><br />
+            <span class="p-input-icon-left">
+                <i class="pi pi-key"></i>
+                <input id="id" pInputText type="text" [(ngModel)]="grupoInspectorSelected && grupoInspectorSelected.id"
+                    [disabled]="true">
+            </span>
+        </div>
+
+        <div class="p-field p-col p-md-12">
+            <label for="codigo">Codigo</label>
+            <span class="p-input-icon-left">
+                <i class="pi pi-home"></i>
+                <input id="codigo" pInputText type="text" [(ngModel)]="grupoInspectorSelected && grupoInspectorSelected.codigo">
+            </span>
+        </div>
+        <div class="p-field p-col p-md-12">
+            <label for="distrito">Distrito</label>
+            <span class="p-input-icon-left">
+                <i class="pi pi-home"></i>
+                <input id="distrito" pInputText type="text" [(ngModel)]="grupoInspectorSelected && grupoInspectorSelected.distrito">
+            </span>
+        </div>
+        <div class="p-field p-col p-md-12">
+            <label for="zona">Zona</label>
+            <span class="p-input-icon-left">
+                <i class="pi pi-home"></i>
+                <input id="zona" pInputText type="text" [(ngModel)]="grupoInspectorSelected && grupoInspectorSelected.zona">
+            </span>
+        </div>
+        <div class="p-field p-col p-md-12">
+            <label for="turno">Turno</label>
+            <span class="p-input-icon-left">
+                <i class="pi pi-home"></i>
+                <input id="turno" pInputText type="text" [(ngModel)]="grupoInspectorSelected && grupoInspectorSelected.turno">
+            </span>
+        </div>
+        <div class="p-field p-col p-md-12">
+            <label for="inspectores">Lista de Inspectores</label>
+            <span class="p-input-icon-left">
+                <i class="pi pi-home"></i>
+                <p-dropdown id="inspectores"  [options]="usuarios" optionLabel="nombre" placeholder="Selecciona un inspector"  [(ngModel)]="inspector">
+                    <ng-template let-fs pTemplate="item">
+                        <div class="option-row">
+                          <div class="">{{fs.value.nombre}} {{fs.value.apellido}}</div>
+                        </div>
+                      </ng-template>
+                </p-dropdown>            
+            </span>
+            <button pButton pRipple icon="pi pi-plus-circle" class="p-button-rounded p-button-success p-mr-2" (click)="btn_AgregarInspector()"></button>
+
+        </div>
+        <div class="p-field p-col p-md-12">
+            <p-table #dt [value]="grupoInspectorSelected.detalleGrupoInspectores" [columns]="colsUsuario" [(selection)]="grupoInspectorSelected" [rowHover]="true" dataKey="id" styleClass="p-datatable-sm">
+
+                <ng-template pTemplate="header" let-columns>
+                    <tr>
+                        <th style="width: 3rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+                        <th *ngFor="let col of columns">
+                            {{col.header}}
+                        </th>
+                        <th></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowData let-columns="columns">
+                    <tr>
+                        <td>
+                            <p-tableCheckbox [value]="rowData "></p-tableCheckbox>
+                        </td>
+                        <td>
+                            <span>
+                                    {{rowData.usuario.nombre }} {{rowData.usuario.apellido}}
+                                </span>
+
+                        </td>
+                        <td>
+                            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="btn_EliminarInspector(rowData.usuario )"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+
+            </p-table>
+        </div>
+    </div>
+    <p-footer>
+        <div class="ui-dialog-buttonpane ui-helper-clearfix">
+            <button type="button" pButton icon="pi pi-times" (click)="click_btnCancelarGrabarBase()" label="Cancelar"></button>
+            <button type="button" pButton icon="pi pi-check" (click)="click_btnGrabarGrupoInspector()" label="Guardar"></button>
+        </div>
+    </p-footer>
+</p-dialog>

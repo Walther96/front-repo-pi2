@@ -1,0 +1,52 @@
+<div class="content">
+    <h1 style="text-align: center;">Crea tu ruta</h1>
+
+    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="13" [disableDefaultUI]="false" (mapClick)="mapClicked($event)">
+
+        <agm-marker *ngFor="let m of markers; let i = index" (markerClick)="clickedMarker(m)" [latitude]="m.lat" [longitude]="m.lng" [label]="m.label" [markerDraggable]="m.draggable">
+
+
+
+        </agm-marker>
+
+        <agm-circle>
+        </agm-circle>
+        <agm-polyline [strokeColor]="'#28C7A1'" [strokeWeight]="5">
+            <ng-container *ngFor="let i of markers">
+                <agm-polyline-point [latitude]="i.lat" [longitude]="i.lng">
+                </agm-polyline-point>
+            </ng-container>
+
+        </agm-polyline>
+
+    </agm-map>
+
+    <div class="p-fluid p-formgrid p-grid" style="margin-top: 3%;">
+        <div class="p-field p-col">
+            <label for="id">Origen</label>
+            <p-dropdown id="id" [options]="origenes" placeholder="Selecciona un origen" optionLabel="descripcion" [(ngModel)]="ruta && ruta.origen">
+            </p-dropdown>
+        </div>
+    </div>
+    <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col">
+            <label for="id">Destino</label>
+            <p-dropdown id="id" [options]="destinos" placeholder="Selecciona un destino" optionLabel="descripcion" [(ngModel)]="ruta && ruta.destino">
+            </p-dropdown>
+        </div>
+    </div>
+    <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col">
+            <label for="id">Grupo Inspector</label>
+            <p-dropdown id="id" [options]="grupoInspector" placeholder="Selecciona un grupo inspector" optionLabel="codigo" [(ngModel)]="ruta && ruta.grupoInspectores">
+            </p-dropdown>
+        </div>
+    </div>
+    <div class="p-field p-col p-md-12">
+        <label for="origen">Nombre de la Ruta</label>
+        <input id="origen" class="form-control" pInputText type="text" [(ngModel)]="ruta && ruta.nombreruta">
+    </div>
+    <div style="text-align: center;">
+        <button type="button" pButton icon="pi pi-check" (click)="GuardarRuta()" label="Guardar"></button>
+    </div>
+</div>

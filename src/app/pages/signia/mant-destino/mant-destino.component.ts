@@ -33,10 +33,8 @@ export class MantDestinoComponent implements OnInit {
 
     this.cols = [
       { field: 'id', header: 'Id', esfecha: false },
-      { field: 'ruc', header: 'RUC', esfecha: false },
-      { field: 'nombre', header: 'Nombre Base', esfecha: false },
-      { field: 'fechacreacion', header: 'Fecha creación', esfecha: true },
-      { field: 'flagvalidaws', header: 'Valida WS', esfecha: false }
+      { field: 'descripcion', header: 'Nombre Base', esfecha: false },
+
     ];
 
     this.cargaDestinos();
@@ -47,12 +45,8 @@ export class MantDestinoComponent implements OnInit {
     this.lstDestinos = [];
     this.generalservice.findAllDestinos().subscribe(
       (data: any) => {
-        data.forEach(element =>{
-          if(element.estado){
-            this.lstDestinos.push(element);
+            this.lstDestinos= data.resultado;
 
-          }
-        })
         Swal.close();
       }, (err) => {
         Swal.close();
@@ -84,7 +78,8 @@ export class MantDestinoComponent implements OnInit {
       if (result.isConfirmed) {
         this.generalservice.EliminarDestino(destino.id).subscribe(
           (data: any[]) => {
-        
+            this.messageService.add({ severity: 'success', summary: 'Ok!', detail: 'Proceso culminado satisfactoriamente', life: 3000 });
+
             this.cargaDestinos();
         
           }, (err) => {

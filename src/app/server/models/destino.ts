@@ -1,6 +1,5 @@
 export class Destino {
     id: number;
-    ruc: string;
-    nombre: string;
-    flagvalidaws: boolean;
+    descripcion: string;
+    estado: string;
 }

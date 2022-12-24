@@ -1,9 +1,11 @@
 import { Tipovehiculo } from './tipovehiculo';
+import { Empleado } from './empleado';
+import { Ruta } from './ruta';
 
 export class Vehiculo {
     id: number;
-    codigo: number;
+    modelo: string;
     placa: string;
-    tipovehiculo: Tipovehiculo;
+    marca: string;
     estado: boolean;
 }

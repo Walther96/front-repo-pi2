@@ -39,15 +39,57 @@ export class SidebarComponent implements OnInit {
     rutas: RouteInfo[];
 
     ngOnInit() {
+/*
+        var data = JSON.parse(localStorage.getItem("usuario"));
 
-        this.usuario = JSON.parse(localStorage.getItem("usuario"));
+        this.menuItems = data.rol.detalleRol;
+        this.menuItems.push({
+            path: "/ruta",
+            title: "Crear ruta",
+            icon: "pi pi-map-marker",
+            class: ''
+        });
+        this.menuItems.push({
+            path: "/buscaruta",
+            title: "Buscar ruta",
+            icon: "pi pi-map-marker",
+            class: ''
+        });
+        this.menuItems.push({
+            path: "/mant-base",
+            title: "Mant - Base",
+            icon: "pi pi-briefcase",
+            class: ''
+        });
+        this.menuItems.push({
+            path: "/mant-destino",
+            title: "Mant - Destino",
+            icon: "pi pi-briefcase",
+            class: ''
+        });
+        this.menuItems.push({
+            path: "/mant-empleado",
+            title: "Mant - Empleado",
+            icon: "pi pi-briefcase",
+            class: ''
+        });
+        
+        this.menuItems.push({
+            path: "/mant-vehiculo",
+            title: "Mant - Vehiculo",
+            icon: "pi pi-briefcase",
+            class: ''
+        });
+        */
+
+        var data = JSON.parse(localStorage.getItem("usuario"));
         this.rutas = [];
         
-        this.usuario.perfil.opcionesmenu.forEach(element => {
+        data.rol.detalleRol.forEach(element => {
             this.rutas.push({
-                path: element.path.toString(),
-                title: element.title.toString(),
-                icon: element.icon.toString(),
+                path: "/"+element.menu.path.toString(),
+                title: element.menu.nombre.toString(),
+                icon: "pi pi-briefcase",
                 class: ''
             });
         });

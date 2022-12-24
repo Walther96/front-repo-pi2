@@ -10,10 +10,8 @@
             <div class="card-body">
                 <p-toolbar>
                     <ng-template pTemplate="left">
-                        <p-button label="Refrescar" icon="pi pi-refresh" class="p-button-success p-mr-2"
-                            styleClass="p-button-sm" (click)="click_btnRefrescar()"></p-button>
-                        <p-button label="Nuevo" icon="pi pi-plus" class="p-button-success p-mr-2"
-                            styleClass="p-button-sm" (click)="click_btnNuevo()"></p-button>
+                        <p-button label="Refrescar" icon="pi pi-refresh" class="p-button-success p-mr-2" styleClass="p-button-sm" (click)="click_btnRefrescar()"></p-button>
+                        <p-button label="Nuevo" icon="pi pi-plus" class="p-button-success p-mr-2" styleClass="p-button-sm" (click)="click_btnNuevo()"></p-button>
                     </ng-template>
 
                     <ng-template pTemplate="right">
@@ -22,9 +20,7 @@
                     </ng-template>
                 </p-toolbar>
 
-                <p-table #dt [value]="lstDestinos" [columns]="cols" [rows]="10" [paginator]="true"
-                    [globalFilterFields]="['nombre']" [(selection)]="destinoSelected" [rowHover]="true" dataKey="id"
-                    currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+                <p-table #dt [value]="lstDestinos" [columns]="cols" [rows]="10" [paginator]="true" [globalFilterFields]="['nombre']" [(selection)]="destinoSelected" [rowHover]="true" dataKey="id" currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
                     [showCurrentPageReport]="true" styleClass="p-datatable-sm">
                     <ng-template pTemplate="caption">
                         <div class="p-d-flex p-ai-center p-jc-between">
@@ -61,11 +57,8 @@
                                 </span>
                             </td>
                             <td>
-                                <button pButton pRipple icon="pi pi-pencil"
-                                    class="p-button-rounded p-button-success p-mr-2"
-                                    (click)="click_btnEditar(rowData )"></button>
-                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
-                                    (click)="click_btnEliminar(rowData )"></button>
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="click_btnEditar(rowData )"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="click_btnEliminar(rowData )"></button>
                             </td>
                         </tr>
                     </ng-template>
@@ -80,8 +73,7 @@
     </div>
 </div>
 
-<p-dialog header="Detalle de Base" [(visible)]="boolShowDialog" [focusOnShow]="false" showEffect="fade" [modal]="true"
-    [style]="{width: '400px'}">
+<p-dialog header="Detalle de Base" [(visible)]="boolShowDialog" [focusOnShow]="false" showEffect="fade" [modal]="true" [style]="{width: '400px'}">
     <div class="p-fluid p-formgrid p-grid">
         <div class="p-field p-col p-md-12">
             <label for="id">Id</label><br />
@@ -91,29 +83,19 @@
                     [disabled]="true">
             </span>
         </div>
+
         <div class="p-field p-col p-md-12">
-            <label for="origen">RUC</label><br />
-            <span class="p-input-icon-left">
-                <i class="pi pi-id-card"></i>
-                <input id="origen" pInputText type="text" [(ngModel)]="destinoSelected && destinoSelected.ruc">
-            </span>
-        </div>
-        <div class="p-field p-col p-md-12">
-            <label for="origen">Nombre Base</label>
+            <label for="origen">Nombre Destino</label>
             <span class="p-input-icon-left">
                 <i class="pi pi-home"></i>
-                <input id="origen" pInputText type="text" [(ngModel)]="destinoSelected && destinoSelected.nombre">
+                <input id="origen" pInputText type="text" [(ngModel)]="destinoSelected && destinoSelected.descripcion">
             </span>
         </div>
-        <div class="p-field p-col p-md-12">
-            <label for="origen">Validar WS</label>
-            <p-checkbox [(ngModel)]="destinoSelected && destinoSelected.flagvalidaws" binary="true" inputId="binary"></p-checkbox>
-        </div>
+
     </div>
     <p-footer>
         <div class="ui-dialog-buttonpane ui-helper-clearfix">
-            <button type="button" pButton icon="pi pi-times" (click)="click_btnCancelarGrabarBase()"
-                label="Cancelar"></button>
+            <button type="button" pButton icon="pi pi-times" (click)="click_btnCancelarGrabarBase()" label="Cancelar"></button>
             <button type="button" pButton icon="pi pi-check" (click)="click_btnGrabarBase()" label="Guardar"></button>
         </div>
     </p-footer>

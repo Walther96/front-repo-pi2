@@ -1,0 +1,116 @@
+<p-toast position="bottom-right"></p-toast>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title"> Papeletas</h4>
+                <p class="card-category"> Listado de Papeletas registrados</p>
+            </div>
+            <div class="card-body">
+                <div class="p-fluid p-grid p-formgrid">
+                    <div class="p-field p-col-6 p-md-6">
+                        <label for="range">Seleccione un rango de fechas</label>
+                        <p-calendar [(ngModel)]="rangeDates" selectionMode="range" [readonlyInput]="true" inputId="range">
+                        </p-calendar>
+                    </div>
+                    <div class="p-field p-col-6 p-md-6">
+                        <label for="range">&nbsp;</label>
+                        <button pButton pRipple type="button" label="Actualizar búsqueda" class="p-button-rounded" icon="pi pi-refresh" (click)="cargarPaletasPorFecha()"></button>
+                    </div>
+                </div>
+
+                <p-table #dt [value]="lstPapeletas" [columns]="cols" [rows]="10" [paginator]="true" [(selection)]="papeletaSelected" [rowHover]="true" dataKey="id" currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros" [showCurrentPageReport]="true"
+                    styleClass="p-datatable-sm">
+                    <ng-template pTemplate="caption" styleClass="cssEncabezado">
+                        <div class="ui-table-globalfilter-container">
+
+                            <div class="p-fluid p-grid p-formgrid">
+                                <div class="p-field p-col-12 p-md-10" style="padding-top: 1px !important;
+                                padding-bottom: 1px !important;">
+                                    <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success p-mr-2" pTooltip="XLS" tooltipPosition="bottom" style="height: 30px; width: 70px;">Excel</button>
+                                    <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning p-mr-2" pTooltip="PDF" tooltipPosition="bottom" style="height: 30px; width: 70px;">PDF</button>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th style="width: 3rem">
+                                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                            </th>
+                            <th pSortableColumn="rowData.vehiculo.placa">
+                                Placa
+                                <p-sortIcon field="rowData.vehiculo.placa">
+                                </p-sortIcon>
+                            </th>
+                            <th pSortableColumn="rowData.vehiculo.modelo">
+                                Modelo
+                                <p-sortIcon field="rowData.vehiculo.modelo">
+                                </p-sortIcon>
+                            </th>
+                            <th pSortableColumn="rowData.vehiculo.marca">
+                                Marca
+                                <p-sortIcon field="rowData.vehiculo.marca">
+                                </p-sortIcon>
+                            </th>
+                            <th pSortableColumn="rowData.infraccion.codigo">
+                                Infracción
+                                <p-sortIcon field="rowData.infraccion.codigo">
+                                </p-sortIcon>
+                            </th>
+                            <th pSortableColumn="rowData.fecha">
+                                Fecha
+                                <p-sortIcon field="rowData.fecha">
+                                </p-sortIcon>
+                            </th>
+                            <th></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowData let-columns="columns">
+                        <tr>
+                            <td>
+                                <p-tableCheckbox [value]="rowData "></p-tableCheckbox>
+                            </td>
+                            <td>{{rowData.vehiculo.placa}}</td>
+                            <td>{{rowData.vehiculo.modelo}}</td>
+                            <td>{{rowData.vehiculo.marca}}</td>
+                            <td>{{rowData.infraccion.codigo}}</td>
+                            <td>{{rowData.fecha | date:'dd/MM/yyyy'}}</td>
+
+
+                            <td>
+                                <button pButton pRipple icon="pi pi-eye" class="p-button-rounded p-button-success p-mr-2" (click)="click_btnMasInformacion(rowData )"></button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <!--<ng-template pTemplate="summary">
+                        <div class="p-d-flex p-ai-center p-jc-between">
+                            Total de registros {{lstBases ? lstBases.length : 0 }} Registros.
+                        </div>
+                    </ng-template>-->
+                </p-table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<p-dialog header="Detalle de la Papeleta" [(visible)]="boolShowDialog" [focusOnShow]="false" showEffect="fade" [modal]="true" [style]="{width: '400px'}">
+    <div class="p-fluid p-formgrid p-grid">
+
+        <div class="p-field p-col p-md-12">
+            <label for="descripcion">Descripcion</label>
+            <textarea rows="5" cols="30" pInputTextarea [(ngModel)]="papeletaSelected && papeletaSelected.descripcion"></textarea>
+
+        </div>
+
+    </div>
+    <p-footer>
+        <div class="ui-dialog-buttonpane ui-helper-clearfix">
+            <button type="button" pButton icon="pi pi-times" (click)="click_btnCerrar()" label="Cerrar"></button>
+        </div>
+    </p-footer>
+</p-dialog>

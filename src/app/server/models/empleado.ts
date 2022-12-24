@@ -1,9 +1,11 @@
+import { Tipodocumento } from "./tipodocumento";
+
 export class Empleado {
     id: number;
-    dni: string;
+    documento: string;
     nombres: string;
     apellidos: string;
-    telefonoconductor: string;
-    telefonoauxiliar1: string;
-    telefonoauxiliar2: string;
+    telefono: string;
+
+    tipodocumento: Tipodocumento;
 }

@@ -3,100 +3,101 @@ import { HttpClient } from '@angular/common/http';
 import { BasePartida } from '../models/base-partida';
 import { environment } from 'environments/environment';
 import { Destino } from '../models/destino';
-import { EmpresaResguardo } from '../models/empresa-resguardo';
 import { Empleado } from '../models/empleado';
 import { Vehiculo } from '../models/vehiculo';
-import { Cliente } from '../models/cliente';
+import { GenericoserviceService } from './genericoservice.service';
 
 @Injectable({
     providedIn: 'root'
 })
-export class GeneralService {
+export class GeneralService extends GenericoserviceService {
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) {
+        super();
+     }
 
     findAllBases() {
-        return this.http.get<BasePartida[]>(environment.apiurl + "general/base");
+        return this.http.get<any>(environment.apiurl + "origen/v1",this.options);
     }
 
     findAllDestinos() {
-        return this.http.get<BasePartida[]>(environment.apiurl + "general/destino");
+        return this.http.get<any>(environment.apiurl + "destino/v1",this.options);
     }
+    findRuta(ruta: any){
+        return this.http.get<any>(environment.apiurl + "ruta/v1/nombreruta/"+ruta,this.options);
+
+    }
+
+    findAllTipoDocumento(){
+        return this.http.get<any>(environment.apiurl + "tipodocumento/v1",this.options);
+
+    }
+    saveRuta(ruta: any) {
+        return this.http.post<any>(environment.apiurl + "ruta/v1", ruta,this.options);
+    }
+    findAllRutas(){
+        return this.http.get<any>(environment.apiurl + "ruta/v1",this.options);
+
+    }
+
+
+
+
     findAllVehiculos() {
-        return this.http.get<any[]>(environment.apiurl + "general/vehiculo");
+        return this.http.get<any[]>(environment.apiurl + "vehiculo/v1",this.options);
     }
-    findAllClientes() {
-        return this.http.get<any[]>(environment.apiurl + "general/cliente");
-    }
+   
     findAllTipoVehiculos() {
-        return this.http.get<any[]>(environment.apiurl + "general/tipovehiculo");
+        return this.http.get<any>(environment.apiurl + "tipovehiculo/v1",this.options);
     }
-    findAllResguardos() {
-        return this.http.get<any[]>(environment.apiurl + "general/resguardo");
+    findAllEmpleadosLibres() {
+        return this.http.get<any>(environment.apiurl + "empleado/v1/empleadoslibres",this.options);
     }
     
     findAllEmpleados() {
-        return this.http.get<any[]>(environment.apiurl + "general/empleado");
+        return this.http.get<any>(environment.apiurl + "empleado/v1",this.options);
     }
     EliminarVehiculo(id: number) {
-        return this.http.get<any[]>(environment.apiurl + "general/vehiculo/"+id+"/desactivar");
+        return this.http.delete<any>(environment.apiurl + "vehiculo/v1/"+id,this.options);
     }
-    EliminarCliente(id: number) {
-        return this.http.get<any[]>(environment.apiurl + "general/cliente/"+id+"/desactivar");
-    }
+ 
     EliminarEmpleado(id: number) {
-        return this.http.get<any[]>(environment.apiurl + "general/empleado/"+id+"/desactivar");
+        return this.http.delete<any>(environment.apiurl + "empleado/v1/"+id,this.options);
     }
     EliminarBase(id: number) {
-        return this.http.get<any[]>(environment.apiurl + "general/base/"+id+"/desactivar");
+        return this.http.delete<any[]>(environment.apiurl + "origen/v1/"+id,this.options);
     }
     EliminarDestino(id: number) {
-        return this.http.get<any[]>(environment.apiurl + "general/destino/"+id+"/desactivar");
+        return this.http.delete<any[]>(environment.apiurl + "destino/v1/"+id,this.options);
     }
-    EliminarEmpresaResguardo(id: number) {
-        return this.http.get<any[]>(environment.apiurl + "general/resguardo/"+id+"/desactivar");
-    }
+   
     saveEmpleado(empleado: Empleado) {
-        return this.http.post<any>(environment.apiurl + "general/empleado", empleado);
+        return this.http.post<any>(environment.apiurl + "empleado/v1", empleado,this.options);
     }
     editarEmpleado(empleado: Empleado) {
-        return this.http.post<any>(environment.apiurl + "general/empleado/"+empleado.id, empleado);
+        return this.http.put<any>(environment.apiurl + "empleado/v1/"+empleado.id, empleado,this.options);
     }
     saveBase(base: BasePartida) {
-        return this.http.post<any>(environment.apiurl + "general/base", base);
+        return this.http.post<any>(environment.apiurl + "origen/v1", base,this.options);
     }
 
     editarBase(base: BasePartida) {
-        return this.http.post<any>(environment.apiurl + "general/base/" + base.id, base);
+        return this.http.put<any>(environment.apiurl + "origen/v1/" + base.id, base,this.options);
     }
 
     saveDestino(destino: Destino) {
-        return this.http.post<any>(environment.apiurl + "general/destino", destino);
+        return this.http.post<any>(environment.apiurl + "destino/v1/", destino,this.options);
     }
     saveVehiculo(vehiculo: Vehiculo) {
-        return this.http.post<any>(environment.apiurl + "general/vehiculo", vehiculo);
+        return this.http.post<any>(environment.apiurl + "vehiculo/v1", vehiculo,this.options);
     }
-    saveCliente(cliente: Cliente) {
-        return this.http.post<any>(environment.apiurl + "general/cliente", cliente);
-    }
-
-    editarCliente(cliente: Cliente) {
-        return this.http.post<any>(environment.apiurl + "general/cliente/" + cliente.id, cliente);
-    }
+  
     editarVehiculo(vehiculo: Vehiculo) {
-        return this.http.post<any>(environment.apiurl + "general/vehiculo/" + vehiculo.id, vehiculo);
+        return this.http.put<any>(environment.apiurl + "vehiculo/v1/" + vehiculo.id, vehiculo,this.options);
     }
     editarDestino(destino: Destino) {
-        return this.http.post<any>(environment.apiurl + "general/destino/" + destino.id, destino);
+        return this.http.put<any>(environment.apiurl + "destino/v1/" + destino.id, destino,this.options);
     }
 
     
-    saveResguardo(resguardo: EmpresaResguardo) {
-        return this.http.post<any>(environment.apiurl + "general/resguardo", resguardo);
-    }
-
-    editarResguardo(resguardo: EmpresaResguardo) {
-        return this.http.post<any>(environment.apiurl + "general/resguardo/" + resguardo.id, resguardo);
-    }
-
 }

@@ -1,19 +1,34 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Login } from '../models/login';
+import { GenericoserviceService } from './genericoservice.service';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class LoginService extends GenericoserviceService {
   public logueado = false;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    super();
 
-  logueo(data: Login): Promise<any>{
-    return new Promise((resolver, rechazar) => {
-    // tslint:disable-next-line: max-line-length
-    return this.http.post(environment.apiurl + 'usuarios/validar', data).subscribe((r) => resolver(r),error => rechazar(error))
-  });
+   }
+
+  public login(login: Login): any {
+    const body = JSON.stringify(login);
+    console.log(body);
+    this.options.params = new HttpParams();
+    return this.http.post(environment.apiurl + 'login', body, {observe: 'response'})
+    .pipe(map(res => {
+
+      const token = res.headers.get('authorization');
+      console.log('authorization token -> ' + token);
+
+      sessionStorage.setItem('token', token);
+
+      return res;
+    }));
+  }
 }
-}
+

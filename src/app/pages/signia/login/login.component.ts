@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import swal from 'sweetalert2';
 import { Login } from 'app/server/models/login';
 import { Usuario } from 'app/server/models/usuario';
+import { UsuarioService } from '../../../server/services/usuario.service';
 
 declare var $: any;
 @Component({
@@ -29,7 +30,8 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
 
-  constructor(private loginservice: LoginService, private fb: FormBuilder, private router: Router) {
+  constructor(private loginservice: LoginService, private fb: FormBuilder, private router: Router,
+    private usuarioService: UsuarioService) {
 
     this.loginForm = this.fb.group({
       user: ['', Validators.compose([])],
@@ -54,16 +56,25 @@ export class LoginComponent implements OnInit {
 
       this.login = {
         usuario: this.loginForm.get('user').value,
-        contrasena: this.loginForm.get('password').value
+        clave: this.loginForm.get('password').value
       };
-      this.loginservice.logueo(this.login).then((data: any) => {
+
+      this.loginservice.logueado = true;
+        this.usuario = this.loginForm.get('user').value;
+
+       this.loginservice.login(this.login).subscribe((data: any) => {
 
         this.loginservice.logueado = true;
         this.usuario = data;
-        localStorage.setItem("usuario", JSON.stringify(data));
+       
 
-        console.log(JSON.parse(localStorage.getItem("usuario")));
-        this.router.navigate(['/requerimientosalida'])
+        this.usuarioService.findUser(this.loginForm.get('user').value).subscribe(data=>{
+
+          localStorage.setItem("usuario", JSON.stringify(data.resultado));
+
+          console.log(JSON.parse(localStorage.getItem("usuario")));
+          this.router.navigate(['/ruta'])
+        })
 
       }, (error) => {
         console.log(JSON.stringify(error));
@@ -72,7 +83,7 @@ export class LoginComponent implements OnInit {
           title: 'Ocurrió un problema',
           text: JSON.stringify(error.error)
         }));
-      });
+      }); 
     } else {
       Object.keys(this.loginForm.controls).map((controlName) => {
         this.loginForm.get(controlName).markAsTouched({ onlySelf: true });

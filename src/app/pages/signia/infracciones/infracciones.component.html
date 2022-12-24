@@ -1,0 +1,112 @@
+<p-toast position="bottom-right"></p-toast>
+
+<div class="row">
+    <div class="col-md-7">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title"> Infracciones</h4>
+                <p class="card-category"> Listado de Infracciones</p>
+            </div>
+            <div class="card-body">
+                <p-toolbar>
+                    <ng-template pTemplate="left">
+                        <p-button label="Nuevo" icon="pi pi-plus" class="p-button-success p-mr-2" styleClass="p-button-sm" (click)="click_btnNuevo()"></p-button>
+                    </ng-template>
+
+                    <ng-template pTemplate="right">
+
+                        <!--<p-button label="Export" icon="pi pi-upload" class="p-button-help" styleClass="p-button-sm"></p-button>-->
+                    </ng-template>
+                </p-toolbar>
+
+                <p-table #dt [value]="lstinfraccions" [columns]="cols" [rows]="10" [paginator]="true" [globalFilterFields]="['codigo']" [(selection)]="infraccionSelected" [rowHover]="true" dataKey="id" currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+                    [showCurrentPageReport]="true" styleClass="p-datatable-sm">
+                    <ng-template pTemplate="caption">
+                        <div class="p-d-flex p-ai-center p-jc-between">
+                            <h6 class="p-m-0">Gestionar Infraccion</h6>
+                            <span class="p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                                    placeholder="Buscar..." class="p-inputtext-sm" />
+                            </span>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th style="width: 3rem">
+                                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                            </th>
+                            <th *ngFor="let col of columns">
+                                {{col.header}}
+                            </th>
+                            <th></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowData let-columns="columns">
+                        <tr>
+                            <td>
+                                <p-tableCheckbox [value]="rowData "></p-tableCheckbox>
+                            </td>
+                            <td *ngFor="let col of columns">
+                                <span *ngIf="!col.esfecha">
+                                    {{rowData[col.field]}}
+                                </span>
+                                <span *ngIf="col.esfecha">
+                                    {{rowData[col.field]| date:'dd/MM/yyyy HH:mm'}}
+                                </span>
+                            </td>
+                            <td>
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="click_btnEditarInfraccion(rowData )"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="click_btnEliminarInfraccion(rowData )"></button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <!--<ng-template pTemplate="summary">
+                        <div class="p-d-flex p-ai-center p-jc-between">
+                            Total de registros {{lstBases ? lstBases.length : 0 }} Registros.
+                        </div>
+                    </ng-template>-->
+                </p-table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-dialog header="Detalle de Base" [(visible)]="boolShowInfraccionDialog" [focusOnShow]="false" showEffect="fade" [modal]="true" [style]="{width: '300px'}">
+    <div class="p-grid p-formgrid ui-fluid">
+        <div class="p-field p-col">
+            <label for="id">Id</label><br/>
+            <span class="p-input-icon-left">
+                <i class="pi pi-key"></i>
+                <input id="id" pInputText type="text" [(ngModel)]="infraccionSelected && infraccionSelected.id" [disabled]="true">
+            </span>
+        </div>
+        <div class="p-field p-col">
+            <label for="origen">Codigo</label>
+            <span class="p-input-icon-left">
+                <i class="pi pi-home"></i>
+                <input id="origen" pInputText type="text" [(ngModel)]="infraccionSelected && infraccionSelected.codigo">
+            </span>
+        </div>
+        <div class="p-field p-col">
+            <label for="origen">Nivel</label>
+            <span class="p-input-icon-left">
+                <i class="pi pi-home"></i>
+                <input id="origen" pInputText type="text" [(ngModel)]="infraccionSelected && infraccionSelected.nivel">
+            </span>
+        </div>
+        <div class="p-field p-col">
+            <label for="origen">Descripcion</label>
+            <span class="p-input-icon-left">
+                <i class="pi pi-home"></i>
+                <input id="origen" pInputText type="text" [(ngModel)]="infraccionSelected && infraccionSelected.descripcion">
+            </span>
+        </div>
+    </div>
+    <p-footer>
+        <div class="ui-dialog-buttonpane ui-helper-clearfix">
+            <button type="button" pButton icon="pi pi-times" (click)="click_btnCancelarGrabarInfraccion()" label="Cancelar"></button>
+            <button type="button" pButton icon="pi pi-check" (click)="click_btnGrabarInfraccion()" label="Guardar"></button>
+        </div>
+    </p-footer>
+</p-dialog>

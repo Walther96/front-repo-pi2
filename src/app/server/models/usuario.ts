@@ -5,10 +5,10 @@ export class Usuario {
     id: number;
     usuario: string;
     dni: string;
-    nombres: string;
-    apellidos: string;
-    contrasena: string;
+    nombre: string;
+    apellido: string;
+    email: string;
+    clave: string;
 
-    perfil: Perfil;
-    base: BasePartida;
+    rol: Perfil;
 }

@@ -1,0 +1,186 @@
+<p-toast position="bottom-right"></p-toast>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title"> Papeletas</h4>
+                <p class="card-category"> Listado de Papeletas registrados</p>
+            </div>
+            <div class="card-body">
+                <p-toolbar>
+                    <ng-template pTemplate="left">
+                        <p-button label="Refrescar" icon="pi pi-refresh" class="p-button-success p-mr-2" styleClass="p-button-sm" (click)="click_btnRefrescar()"></p-button>
+                        <p-button label="Nuevo" icon="pi pi-plus" class="p-button-success p-mr-2" styleClass="p-button-sm" (click)="click_btnNuevo()"></p-button>
+                    </ng-template>
+
+                    <ng-template pTemplate="right">
+
+                        <!--<p-button label="Export" icon="pi pi-upload" class="p-button-help" styleClass="p-button-sm"></p-button>-->
+                    </ng-template>
+                </p-toolbar>
+
+                <p-table #dt [value]="lstPapeletas" [columns]="cols" [rows]="10" [paginator]="true" [globalFilterFields]="['vehiculo.placa']" [(selection)]="papeletaSelected" [rowHover]="true" dataKey="id" currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+                    [showCurrentPageReport]="true" styleClass="p-datatable-sm">
+                    <ng-template pTemplate="caption">
+                        <div class="p-d-flex p-ai-center p-jc-between">
+                            <h6 class="p-m-0">Gestionar Papeletas</h6>
+                            <span class="p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                                    placeholder="Buscar..." class="p-inputtext-sm" />
+                            </span>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th style="width: 3rem">
+                                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                            </th>
+                            <th pSortableColumn="rowData.id">
+                                Id
+                                <p-sortIcon field="rowData.id">
+                                </p-sortIcon>
+                            </th>
+                            <th pSortableColumn="rowData.infraccion.descripcion">
+                                Infraccion
+                                <p-sortIcon field="rowData.infraccion.descripcion">
+                                </p-sortIcon>
+                            </th>
+                            <th pSortableColumn="rowData.vehiculo.placa">
+                                Placa
+                                <p-sortIcon field="rowData.vehiculo.placa">
+                                </p-sortIcon>
+                            </th>
+                            <th pSortableColumn="rowData.fecha">
+                                Fecha
+                                <p-sortIcon field="rowData.fecha">
+                                </p-sortIcon>
+                            </th>
+                            <th></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowData let-columns="columns">
+                        <tr>
+                            <td>
+                                <p-tableCheckbox [value]="rowData "></p-tableCheckbox>
+                            </td>
+                            <td>{{rowData.id}}</td>
+                            <td>{{rowData.infraccion.descripcion}}</td>
+                            <td>{{rowData.vehiculo.placa}}</td>
+                            <td>{{rowData.fecha | date:'dd/MM/yyyy'}}</td>
+
+
+                            <td>
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="click_btnEditar(rowData )"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="click_btnEliminar(rowData )"></button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <!--<ng-template pTemplate="summary">
+                        <div class="p-d-flex p-ai-center p-jc-between">
+                            Total de registros {{lstBases ? lstBases.length : 0 }} Registros.
+                        </div>
+                    </ng-template>-->
+                </p-table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-dialog header="Registrar Papeleta" [(visible)]="boolShowNuevoDialog" [focusOnShow]="false" showEffect="fade" [modal]="true" [style]="{width: '400px'}">
+    <div class="p-fluid p-formgrid p-grid">
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="id">Infracción</label>
+                <p-dropdown id="infraccion" [options]="infracciones" placeholder="Selecciona una infraccion" optionLabel="descripcion" [(ngModel)]="papeletaRequest && papeletaRequest.infraccion">
+                </p-dropdown>
+            </div>
+        </div>
+        <div class="p-field p-col p-md-12">
+            <label for="origen">Placa</label>
+            <span class="p-input-icon-left">
+                <i class="pi pi-home"></i>
+                <input id="placa" pInputText type="text" [(ngModel)]="papeletaRequest && papeletaRequest.placa">
+            </span>
+        </div>
+        <div class="p-field p-col p-md-12">
+            <label for="origen">Modelo</label>
+            <span class="p-input-icon-left">
+                <i class="pi pi-home"></i>
+                <input id="modelo" pInputText type="text" [(ngModel)]="papeletaRequest && papeletaRequest.modelo">
+            </span>
+        </div>
+        <div class="p-field p-col p-md-12">
+            <label for="origen">Marca</label>
+            <span class="p-input-icon-left">
+                <i class="pi pi-home"></i>
+                <input id="marca" pInputText type="text" [(ngModel)]="papeletaRequest && papeletaRequest.marca">
+            </span>
+        </div>
+        <div class="p-field p-col p-md-12">
+            <label for="origen">Camara</label>
+            <span class="p-input-icon-left">
+                <i class="pi pi-home"></i>
+                <input id="camara" pInputText type="text" [(ngModel)]="papeletaRequest && papeletaRequest.camara">
+            </span>
+        </div>
+        <div class="p-field p-col p-md-12">
+            <label for="descripcion">Descripcion</label>
+            <textarea rows="5" cols="30" pInputTextarea [(ngModel)]="papeletaRequest && papeletaRequest.descripcion"></textarea>
+
+        </div>
+    </div>
+    <p-footer>
+        <div class="ui-dialog-buttonpane ui-helper-clearfix">
+            <button type="button" pButton icon="pi pi-times" (click)="click_btnCancelarGrabarBase()" label="Cancelar"></button>
+            <button type="button" pButton icon="pi pi-check" (click)="click_btnGrabarBase()" label="Guardar"></button>
+        </div>
+    </p-footer>
+</p-dialog>
+
+<p-dialog header="Detalle de la Papeleta" [(visible)]="boolShowDialog" [focusOnShow]="false" showEffect="fade" [modal]="true" [style]="{width: '400px'}">
+    <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col p-md-12">
+            <label for="id">Id</label><br />
+            <span class="p-input-icon-left">
+                <i class="pi pi-key"></i>
+                <input id="id" pInputText type="text" [(ngModel)]="papeletaSelected && papeletaSelected.id"
+                    [disabled]="true">
+            </span>
+        </div>
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="infraccion">Infracción</label>
+                <p-dropdown id="infraccion" [options]="infracciones" placeholder="Selecciona una infraccion" optionLabel="descripcion" [(ngModel)]="papeletaSelected && papeletaSelected.infraccion">
+                </p-dropdown>
+            </div>
+        </div>
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="vehiculo">Vehiculo</label>
+                <p-dropdown id="vehiculo" [options]="vehiculos" placeholder="Selecciona un vehiculo" optionLabel="placa" [(ngModel)]="papeletaSelected && papeletaSelected.vehiculo">
+                </p-dropdown>
+            </div>
+        </div>
+        <div class="p-field p-col p-md-12">
+            <label for="origen">Camara</label>
+            <span class="p-input-icon-left">
+                <i class="pi pi-home"></i>
+                <input id="camara" pInputText type="text" [(ngModel)]="papeletaSelected && papeletaSelected.camara">
+            </span>
+        </div>
+        <div class="p-field p-col p-md-12">
+            <label for="descripcion">Descripcion</label>
+            <textarea rows="5" cols="30" pInputTextarea [(ngModel)]="papeletaSelected && papeletaSelected.descripcion"></textarea>
+
+        </div>
+
+    </div>
+    <p-footer>
+        <div class="ui-dialog-buttonpane ui-helper-clearfix">
+            <button type="button" pButton icon="pi pi-times" (click)="click_btnCancelarGrabarBase()" label="Cancelar"></button>
+            <button type="button" pButton icon="pi pi-check" (click)="click_btnGrabarBase()" label="Guardar"></button>
+        </div>
+    </p-footer>
+</p-dialog>

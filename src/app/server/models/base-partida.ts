@@ -1,4 +1,5 @@
 export class BasePartida {
     id: number;
-    nombre: string;
+    descripcion: string;
+    estado : string;
 }
